@@ -1,0 +1,12 @@
+Changelog:
+
+Key:
+  + Addition
+  = Fix
+  ! Change
+  - Removal
+
+Version 1.0.0 | Tested on CB 1.5.1-R0.1
+ + First release
+ + Added Metrics for stats
+ + Added an update check

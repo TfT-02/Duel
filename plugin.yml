@@ -1,0 +1,14 @@
+name: Duel
+author: TfT_02
+main: com.me.tft_02.duel.Duel
+description: Challenge other players to a duel!
+version: 1.0.0
+softdepend: [WorldGuard]
+commands:
+   duel:
+      description: Usage /duel
+      permission-message: You don't have <permission>
+permissions:
+    duel.updatecheck:
+        description: Users with this permission will receive a notification when there is a new version available.
+        default: op
