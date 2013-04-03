@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.runnables.DuelEndTask;
 import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.PlayerData;
 
@@ -37,16 +38,26 @@ public class PlayerListener implements Listener {
 
             if (ItemUtils.isSword(inHand)) {
 
+                if (PlayerData.areDueling(player, target)) {
+                    player.sendMessage("Dualing..");
+                    return;
+                }
+
                 if (playerData.isInDuel(target)) {
                     player.sendMessage("Player is occupied");
                 }
-                    
-                if (playerData.getDuelInvite(target).equals(player.getName())) {
+
+                if (playerData.getDuelInvite(player).equals(target.getName())) {
                     player.sendMessage("This is where normally a duel would start! :D");
+                    playerData.removeDuelInvite(player);
+                    playerData.removeDuelInvite(target);
+                    playerData.setDuel(player, target);
+                    int duelLength = 60;
+                    new DuelEndTask(player, target).runTaskLater(Duel.getInstance(), duelLength * 20);
                 } else {
                     playerData.setDuelInvite(player, target);
                 }
-                //                new DuelCommenceTask(player).runTaskLater(Duel.getInstance(), 2);
+                // new DuelCommenceTask(player).runTaskLater(Duel.getInstance(), 2);
             }
         }
     }

@@ -35,10 +35,7 @@ public class Duel extends JavaPlugin {
         getCommand("duel").setExecutor(new Commands(this));
 
         BukkitScheduler scheduler = getServer().getScheduler();
-        if (worldGuardEnabled) {
-            //Region check timer (Runs every five seconds)
-            scheduler.scheduleSyncRepeatingTask(this, new DuelRangeTask(), 0, 5 * 20);
-        }
+        scheduler.scheduleSyncRepeatingTask(this, new DuelRangeTask(), 0, 5 * 20);
     }
 
     private void setupConfiguration() {
