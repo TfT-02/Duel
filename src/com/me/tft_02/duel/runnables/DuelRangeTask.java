@@ -34,7 +34,9 @@ public class DuelRangeTask extends BukkitRunnable {
             Location arenaCenter = ArenaManager.getArenaLocation(player);
             double arenaSize = 20.0;
 
-            drawArenaCircle(arenaCenter, (int) arenaSize, Effect.MOBSPAWNER_FLAMES);
+            if (Config.getBorderParticleEffectsEnabled()) {
+                drawArenaCircle(arenaCenter, (int) arenaSize, Effect.MOBSPAWNER_FLAMES);
+            }
 
             if (!Misc.isNear(playerLocation, arenaCenter, arenaSize)) {
                 if (!Config.getBorderKnockBack()) {
@@ -80,30 +82,12 @@ public class DuelRangeTask extends BukkitRunnable {
     }
 
     private void drawArenaCircle(Location loc, int r, Effect effect) {
-        List<Location> circleBlocks = sphere(loc, r, 1, true, false, 1);
+        List<Location> circleBlocks = sphere(loc, r, 1, true, false, 0);
         World world = loc.getWorld();
 
         for (Location location : circleBlocks) {
             world.playEffect(location, effect, 1);
         }
-    }
-
-    public static List<Location> circle(Location loc, Integer r, Boolean hollow) {
-        List<Location> circleblocks = new ArrayList<Location>();
-        int cx = loc.getBlockX();
-        int cy = loc.getBlockY();
-        int cz = loc.getBlockZ();
-        for (int x = cx - r; x <= cx + r; x++)
-            for (int z = cz - r; z <= cz + r; z++)
-                for (int y = cy; y < cy; y++) {
-                    double dist = (cx - x) * (cx - x) + (cz - z) * (cz - z);
-                    if (dist < r * r && !(hollow && dist < (r - 1) * (r - 1))) {
-                        Location l = new Location(loc.getWorld(), x, y, z);
-                        circleblocks.add(l);
-                    }
-                }
-
-        return circleblocks;
     }
 
     public static List<Location> sphere(Location loc, Integer r, Integer h, Boolean hollow, Boolean sphere, int plus_y) {
