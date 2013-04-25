@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.UnknownHostException;
 
+import org.bukkit.ChatColor;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -63,5 +64,17 @@ public class UpdateChecker {
             isr.close();
             return false;
         }
+    }
+
+    public static String updateStatus() {
+        String status;
+
+        if (Duel.getInstance().updateAvailable) {
+            status = ChatColor.DARK_RED + "OUTDATED";
+        } else {
+            status = ChatColor.GREEN + "UP TO DATE";
+        }
+
+        return status;
     }
 }

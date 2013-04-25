@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import com.me.tft_02.duel.Duel;
 
@@ -26,6 +27,24 @@ public class Misc {
         return first.distanceSquared(second) < (maxDistance * maxDistance);
 
     }
+    
+    public static Vector getKnockbackVector(Location first, Location second) {
+        double dX = first.getX() - second.getX();
+        double dY = first.getY() - second.getY();
+        double dZ = first.getZ() - second.getZ();
+        
+        double yaw = Math.atan2(dZ, dX);
+
+        double pitch = Math.atan2(Math.sqrt(dZ * dZ + dX * dX), dY) + Math.PI;
+
+        double X = Math.sin(pitch) * Math.cos(yaw);
+        double Y = Math.sin(pitch) * Math.sin(yaw);
+        double Z = Math.cos(pitch);
+         
+        Vector vector = new Vector(X, Z, Y);
+        return vector;
+    }
+    
     
     public static List<Player> getNearbyPlayers(Location location) {
         List<Player> nearbyPlayers = new ArrayList<Player>();

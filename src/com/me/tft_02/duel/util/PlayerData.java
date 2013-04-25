@@ -40,7 +40,7 @@ public class PlayerData {
         return false;
     }
 
-    public boolean isInDuel(Player player) {
+    public static boolean isInDuel(Player player) {
         if (getDuelTarget(player) == null || getDuelTarget(player).equals("null")) {
             return false;
         }
@@ -48,7 +48,14 @@ public class PlayerData {
     }
 
     public static boolean areDueling(Player player, Player target) {
-        if (player.getName().equals(getDuelTarget(target)) && target.getName().equals(getDuelTarget(player))) {
+        Player duelTargetPlayer = getDuelTarget(target);
+        Player duelTargetTarget = getDuelTarget(player);
+        
+        if (duelTargetPlayer == null || duelTargetTarget == null) {
+            return false;
+        }
+        
+        if (player.getName().equals(duelTargetPlayer.getName()) && target.getName().equals(duelTargetTarget.getName())) {
             return true;
 
         }
@@ -79,7 +86,7 @@ public class PlayerData {
 
         player.sendMessage(ChatColor.GREEN + "You have challenged " + ChatColor.GOLD + target.getName() + ChatColor.GREEN + " to a duel!");
         duelInvitations.put(target.getName(), player.getName());
-        target.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " has just challenge you to a duel!");
+        target.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " has just challenged you to a duel!");
         target.sendMessage(ChatColor.GREEN + "To accept right-click " + ChatColor.GOLD + player.getName()); 
     }
 
