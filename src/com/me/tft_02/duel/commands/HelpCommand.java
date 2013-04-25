@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class HelpCommand  implements CommandExecutor {
+public class HelpCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -20,7 +20,7 @@ public class HelpCommand  implements CommandExecutor {
                     return true;
                 }
 
-            default: 
+            default:
                 getHelpPage(1, sender);
                 return true;
         }

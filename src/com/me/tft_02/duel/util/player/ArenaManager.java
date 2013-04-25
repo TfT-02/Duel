@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class ArenaManager {
 
     public static HashMap<String, Location> arenas = new HashMap<String, Location>();
-    
+
     public static void setArena(Player player) {
         Location location = player.getLocation();
         location.setY(location.getY() + 0.5);

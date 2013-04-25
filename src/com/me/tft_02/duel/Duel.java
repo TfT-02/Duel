@@ -47,7 +47,7 @@ public class Duel extends JavaPlugin {
         pm.registerEvents(entityListener, this);
         pm.registerEvents(blockListener, this);
         setupConfiguration();
-        
+
         setupWorldGuard();
 
         getCommand("duel").setExecutor(new DuelCommand());

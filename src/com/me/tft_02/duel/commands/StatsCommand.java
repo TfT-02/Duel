@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 import com.me.tft_02.duel.database.DatabaseManager;
 
-public class StatsCommand  implements CommandExecutor {
+public class StatsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

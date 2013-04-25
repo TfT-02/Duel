@@ -52,7 +52,8 @@ public class PlayerListener implements Listener {
                     DuelManager.prepareDuel(player, target);
                     new CountdownTask(player.getLocation(), 4).runTaskTimer(Duel.getInstance(), 0, 1 * 20);
                     new DuelCommenceTask(player, target).runTaskLater(Duel.getInstance(), 5 * 20);
-                } else {
+                }
+                else {
                     playerData.setDuelInvite(player, target);
                 }
             }

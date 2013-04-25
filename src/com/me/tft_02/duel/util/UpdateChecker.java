@@ -71,7 +71,8 @@ public class UpdateChecker {
 
         if (Duel.getInstance().updateAvailable) {
             status = ChatColor.DARK_RED + "OUTDATED";
-        } else {
+        }
+        else {
             status = ChatColor.GREEN + "UP TO DATE";
         }
 

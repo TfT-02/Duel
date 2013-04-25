@@ -18,7 +18,7 @@ public class DatabaseManager {
 
         return count;
     }
-    
+
     public static void setWinCount(Player player, int count) {
         wins.put(player.getName(), count);
     }
@@ -37,7 +37,7 @@ public class DatabaseManager {
 
         return count;
     }
-    
+
     public static void setLossCount(Player player, int count) {
         losses.put(player.getName(), count);
     }
@@ -56,7 +56,7 @@ public class DatabaseManager {
 
         return count;
     }
-    
+
     public static void setTieCount(Player player, int count) {
         ties.put(player.getName(), count);
     }

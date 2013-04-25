@@ -66,7 +66,7 @@ public class EntityListener implements Listener {
                 if (Config.getPreventPVP() && !PlayerData.areDueling((Player) attacker, defendingPlayer)) {
                     event.setCancelled(true);
                 }
-                
+
                 // Override other plugins which prevent PVP?
                 else if (Config.getOverridePVP() && PlayerData.areDueling((Player) attacker, defendingPlayer)) {
                     event.setCancelled(false);
@@ -99,7 +99,8 @@ public class EntityListener implements Listener {
                         if (!PlayerData.areDueling(player, target)) {
                             event.setIntensity(target, 0);
                         }
-                    } else if (Config.getPreventPVP()) {
+                    }
+                    else if (Config.getPreventPVP()) {
                         event.setIntensity(target, 0);
                     }
                 }

@@ -51,7 +51,8 @@ public class DuelRangeTask extends BukkitRunnable {
                     player.getWorld().playSound(playerLocation, Sound.FIZZ, 1F, 1F);
                     player.setVelocity(knockback.multiply(2));
                     player.sendMessage(ChatColor.DARK_RED + "WARNING - YOU CAN'T LEAVE THE ARENA!");
-                } else {
+                }
+                else {
                     player.sendMessage(ChatColor.DARK_RED + "TELEPORTING " + ChatColor.GOLD + player.getName() + ChatColor.DARK_RED + " BACK TO ARENA");
                     player.teleport(arenaCenter);
                 }
