@@ -41,11 +41,9 @@ public class HelpCommand implements CommandExecutor {
         switch (page) {
             case 1:
                 sender.sendMessage(ChatColor.GOLD + "How does it work?");
-                sender.sendMessage(dot + ChatColor.GRAY + "When in Assassin mode, you can PVP.");
-                sender.sendMessage(dot + ChatColor.GRAY + "Your skin and name will be hidden, even in chat.");
-                sender.sendMessage(dot + ChatColor.GRAY + "You can chat with other Assassins in 'Assassin Chat'.");
-                sender.sendMessage(dot + ChatColor.GRAY + "When the timer expires, you will be teleported back to where you put on your mask.");
-                sender.sendMessage(dot + ChatColor.GRAY + "Nobody will ever know that you were an Assassin.");
+                sender.sendMessage(dot + ChatColor.GRAY + "Duel allows players to challenge eachother for a battle.");
+                sender.sendMessage(dot + ChatColor.GRAY + "Right-click another player while holding a sword to challenge him.");
+                sender.sendMessage(dot + ChatColor.GRAY + "The challengee wil have to right-click the challenger to accept the duel.");
 
             case 2:
                 sender.sendMessage(ChatColor.GOLD + "Commands:");
