@@ -15,4 +15,9 @@ public class Config {
         // TODO Auto-generated method stub
         return true;
     }
+
+    public static boolean getOverridePVP() {
+        // TODO Auto-generated method stub
+        return true;
+    }
 }

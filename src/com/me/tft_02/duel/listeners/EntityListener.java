@@ -30,7 +30,7 @@ public class EntityListener implements Listener {
      *
      * @param event The event to modify
      */
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getDamage() <= 0) {
             return;
@@ -39,8 +39,9 @@ public class EntityListener implements Listener {
         Entity attacker = event.getDamager();
         Entity defender = event.getEntity();
 
+        // Check if either players is are Citizens NPCs
         if (attacker.hasMetadata("NPC") || defender.hasMetadata("NPC")) {
-            return; // Check if either players is are Citizens NPCs
+            return;
         }
 
         if (attacker instanceof Projectile) {
@@ -64,6 +65,11 @@ public class EntityListener implements Listener {
             if (attacker instanceof Player) {
                 if (Config.getPreventPVP() && !PlayerData.areDueling((Player) attacker, defendingPlayer)) {
                     event.setCancelled(true);
+                }
+                
+                // Override other plugins which prevent PVP?
+                else if (Config.getOverridePVP() && PlayerData.areDueling((Player) attacker, defendingPlayer)) {
+                    event.setCancelled(false);
                 }
             }
         }
