@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.duel.Duel;
 
@@ -13,6 +14,8 @@ public class PlayerData {
 
     public static HashMap<String, String> duels = new HashMap<String, String>();
     public static HashMap<String, String> duelInvitations = new HashMap<String, String>();
+    public static HashMap<String, List<ItemStack>> savedItems = new HashMap<String, List<ItemStack>>();
+    public static HashMap<String, Boolean> duelRespawn = new HashMap<String, Boolean>();
 
     public void setDuel(Player player, Player target) {
         duels.put(player.getName(), target.getName());
@@ -45,6 +48,13 @@ public class PlayerData {
             return false;
         }
         return true;
+    }
+
+    public static boolean wasInDuel(Player player) {
+        if (duelRespawn.containsKey(player.getName())) {
+            return duelRespawn.get(player.getName());
+        }
+        return false;
     }
 
     public static boolean areDueling(Player player, Player target) {
@@ -100,5 +110,26 @@ public class PlayerData {
             }
         }
         return duelingPlayers;
+    }
+
+    public static void storeItemsDeath(Player player, List<ItemStack> items) {
+        String playerName = player.getName();
+
+        if (savedItems.containsKey(playerName)) {
+            savedItems.put(playerName, null);
+        }
+
+        savedItems.put(playerName, items);
+    }
+
+    public static List<ItemStack> retrieveItemsDeath(Player player) {
+        String playerName = player.getName();
+
+        if (savedItems.containsKey(playerName)) {
+            return savedItems.get(playerName);
+        }
+        else {
+            return null;
+        }
     }
 }
