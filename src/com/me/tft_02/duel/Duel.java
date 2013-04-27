@@ -59,7 +59,7 @@ public class Duel extends JavaPlugin {
 
         checkForUpdates();
 
-        if (getConfig().getBoolean("General.stats_tracking_enabled")) {
+        if (Config.getStatsTrackingEnabled()) {
             try {
                 Metrics metrics = new Metrics(this);
                 metrics.start();
@@ -72,8 +72,17 @@ public class Duel extends JavaPlugin {
 
     private void setupConfiguration() {
         final FileConfiguration config = this.getConfig();
+
+        /* GENERAL SETTINGS */
         config.addDefault("General.stats_tracking_enabled", true);
         config.addDefault("General.update_check_enabled", true);
+
+        /* ARENA SETTINGS */
+        config.addDefault("Duel.Knockback_Enabled", true);
+        config.addDefault("Duel.Prevent_PVP", false);
+        config.addDefault("Duel.Override_PVP", true);
+        config.addDefault("Duel.Arena_Size", 20.0);
+        config.addDefault("Duel.Save_Inventory", true);
 
         config.options().copyDefaults(true);
         saveConfig();
@@ -106,7 +115,7 @@ public class Duel extends JavaPlugin {
     }
 
     private void checkForUpdates() {
-        if (getConfig().getBoolean("General.update_check_enabled")) {
+        if (Config.getUpdateCheckEnabled()) {
             try {
                 updateAvailable = UpdateChecker.updateAvailable();
             }
