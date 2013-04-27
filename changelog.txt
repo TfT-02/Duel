@@ -6,7 +6,12 @@ Key:
   ! Change
   - Removal
 
-Version 1.0.0 | Tested on CB 1.5.1-R0.1
- + First release
+Version 0.0.1 | Tested on CB 1.5.1-R0.2
+ + First alpha release
  + Added Metrics for stats
  + Added an update check
+ + Added commandless duel challenge mechanism
+ + Added arena border knockback and teleport
+ + Added config option to save a players inventory if he dies in a duel
+ + Added timelimit to duels, will result in a tie
+ + Added stats tracking, use /duel stats to check your stats
