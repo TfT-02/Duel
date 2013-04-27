@@ -10,8 +10,7 @@ import org.bukkit.util.Vector;
 import com.me.tft_02.duel.Duel;
 
 public class Misc {
-    
-    
+
     public static int getSystemTime() {
         return (int) System.currentTimeMillis() / 1000;
     }
