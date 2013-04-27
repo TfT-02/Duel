@@ -1,5 +1,6 @@
 package com.me.tft_02.duel.util.player;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -20,10 +21,10 @@ public class DuelManager {
         String message = "";
         switch (messageType) {
             case END:
-                message = "Duel has ended!";
+                message = ChatColor.GOLD + "Duel has ended!";
                 break;
             case START:
-                message = "Duel has started!";
+                message = ChatColor.GOLD + "Duel has started!";
                 break;
             default:
                 break;
@@ -58,8 +59,10 @@ public class DuelManager {
         PlayerData playerData = new PlayerData();
         playerData.setDuel(player, target);
         notifyPlayers(player.getLocation(), DuelMessageType.START);
+        player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
+
         int duelLength = 60;
-        new DuelEndTask(player, target).runTaskLater(Duel.getInstance(), duelLength * 20);
+        new DuelEndTask(player).runTaskLater(Duel.getInstance(), duelLength * 20);
     }
 
     public static void endDuel(Player winner, Player loser) {
@@ -76,6 +79,7 @@ public class DuelManager {
 
     public static void endDuelInTie(Player player) {
         Player target = PlayerData.getDuelTarget(player);
+
         PlayerData.removeDuelTarget(player);
         PlayerData.removeDuelTarget(target);
         notifyPlayers(player.getLocation(), DuelMessageType.END);

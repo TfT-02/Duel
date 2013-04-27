@@ -25,15 +25,13 @@ public class CountdownTask extends BukkitRunnable {
         if (number > 0) {
             String message = ChatColor.GOLD + "DUEL STARTING IN: (" + ChatColor.RED + number + ChatColor.GOLD + ")";
             DuelManager.notifyPlayers(location, message);
-            number--;
+            location.getWorld().playSound(location, Sound.NOTE_PLING, 1F, 0F);
 
-            if (number < 0) {
-                location.getWorld().playSound(location, Sound.NOTE_PLING, 1F, 1F);
+            if (number <= 1) {
                 this.cancel();
             }
-            else {
-                location.getWorld().playSound(location, Sound.NOTE_PLING, 1F, 0F);
-            }
+
+            number--;
         }
     }
 }

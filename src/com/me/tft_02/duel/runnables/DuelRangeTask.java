@@ -32,7 +32,7 @@ public class DuelRangeTask extends BukkitRunnable {
         for (Player player : PlayerData.getDuelingPlayers()) {
             Location playerLocation = player.getLocation();
             Location arenaCenter = ArenaManager.getArenaLocation(player);
-            double arenaSize = 20.0;
+            double arenaSize = Config.getArenaSize();
 
             if (Config.getBorderParticleEffectsEnabled()) {
                 drawArenaCircle(arenaCenter, (int) arenaSize, Effect.MOBSPAWNER_FLAMES);
@@ -48,15 +48,17 @@ public class DuelRangeTask extends BukkitRunnable {
                     playerLocation.setY(playerLocation.getY() - 8);
                     Vector knockback = Misc.getKnockbackVector(playerLocation, arenaCenter);
 
-                    player.getWorld().playEffect(playerLocation, Effect.MOBSPAWNER_FLAMES, 1);
-                    //                    volume, pitch
                     player.getWorld().playSound(playerLocation, Sound.FIZZ, 1F, 1F);
                     player.setVelocity(knockback.multiply(2));
                     player.sendMessage(ChatColor.DARK_RED + "WARNING - YOU CAN'T LEAVE THE ARENA!");
                 }
                 else {
+                    Player target = PlayerData.getDuelTarget(player);
                     player.sendMessage(ChatColor.DARK_RED + "TELEPORTING " + ChatColor.GOLD + player.getName() + ChatColor.DARK_RED + " BACK TO ARENA");
+                    target.sendMessage(ChatColor.DARK_RED + "TELEPORTING " + ChatColor.GOLD + player.getName() + ChatColor.DARK_RED + " BACK TO ARENA");
+
                     player.teleport(arenaCenter);
+                    player.getWorld().playSound(playerLocation, Sound.ENDERMAN_TELEPORT, 1F, 0.5F);
                 }
             }
         }
