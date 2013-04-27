@@ -60,9 +60,8 @@ public class PlayerListener implements Listener {
                 if (playerData.getDuelInvite(player).equals(target.getName())) {
                     DuelManager.prepareDuel(player, target);
                     new CountdownTask(player.getLocation(), 4).runTaskTimer(Duel.getInstance(), 0, 1 * 20);
-                    new DuelCommenceTask(player, target).runTaskLater(Duel.getInstance(), 5 * 20);
-                }
-                else {
+                    new DuelCommenceTask(player, target).runTaskLater(Duel.getInstance(), 4 * 20);
+                } else {
                     playerData.setDuelInvite(player, target);
                 }
             }

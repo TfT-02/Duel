@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.database.DatabaseManager;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
@@ -61,7 +62,7 @@ public class DuelManager {
         notifyPlayers(player.getLocation(), DuelMessageType.START);
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
 
-        int duelLength = 60;
+        int duelLength = Config.getDuelLength();
         new DuelEndTask(player).runTaskLater(Duel.getInstance(), duelLength * 20);
     }
 

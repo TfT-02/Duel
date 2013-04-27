@@ -76,7 +76,7 @@ public class PlayerData {
     }
 
     public String getDuelInvite(Player player) {
-        String target = null;
+        String target = "null";
 
         if (!duelInvitations.containsKey(player.getName())) {
             return target;
@@ -103,6 +103,7 @@ public class PlayerData {
         if (getDuelInvite(target).equals(player.getName())) {
             return;
         }
+
         int timestamp = (int) (System.currentTimeMillis() / 1000);
 
         player.sendMessage(ChatColor.GREEN + "You have challenged " + ChatColor.GOLD + target.getName() + ChatColor.GREEN + " to a duel!");

@@ -2,8 +2,11 @@ General:
   Stats_Tracking_Enabled: true
   Update_Check_Enabled: true
 Duel:
-  Knockback_Enabled: true
   Prevent_PVP: false
   Override_PVP: true
-  Arena_Size: 20.0
   Save_Inventory: true
+  Invitation_Timeout: 30
+  Duel_Length: 120
+Arena:
+  Knockback_Enabled: true
+  Radius: 20.0

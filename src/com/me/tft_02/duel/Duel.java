@@ -12,7 +12,6 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import com.me.tft_02.duel.commands.DuelCommand;
 import com.me.tft_02.duel.database.Data;
-import com.me.tft_02.duel.listeners.BlockListener;
 import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
 import com.me.tft_02.duel.runnables.DuelRangeTask;
@@ -25,7 +24,6 @@ public class Duel extends JavaPlugin {
 
     private final PlayerListener playerListener = new PlayerListener(this);
     private final EntityListener entityListener = new EntityListener(this);
-    private final BlockListener blockListener = new BlockListener(this);
 
     public boolean worldGuardEnabled = false;
 
@@ -45,7 +43,7 @@ public class Duel extends JavaPlugin {
         final PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
         pm.registerEvents(entityListener, this);
-        pm.registerEvents(blockListener, this);
+
         setupConfiguration();
 
         setupWorldGuard();
@@ -77,12 +75,16 @@ public class Duel extends JavaPlugin {
         config.addDefault("General.Stats_Tracking_Enabled", true);
         config.addDefault("General.Update_Check_Enabled", true);
 
-        /* ARENA SETTINGS */
-        config.addDefault("Duel.Knockback_Enabled", true);
+        /* DUEL SETTINGS */
         config.addDefault("Duel.Prevent_PVP", false);
         config.addDefault("Duel.Override_PVP", true);
-        config.addDefault("Duel.Arena_Size", 20.0);
         config.addDefault("Duel.Save_Inventory", true);
+        config.addDefault("Duel.Invitation_Timeout", 30);
+        config.addDefault("Duel.Duel_Length", 120);
+
+        /* ARENA SETTINGS */
+        config.addDefault("Arena.Knockback_Enabled", true);
+        config.addDefault("Arena.Radius", 20.0);
 
         config.options().copyDefaults(true);
         saveConfig();
