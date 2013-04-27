@@ -61,13 +61,15 @@ public class PlayerListener implements Listener {
                 if (playerData.getDuelInvite(player).equals(target.getName())) {
                     if (playerData.duelInviteIsTimedout(player)) {
                         player.sendMessage(ChatColor.RED + "The Duel invitation has expired.");
+                        playerData.removeDuelInvite(player);
                         return;
                     }
-                    
+
                     DuelManager.prepareDuel(player, target);
                     new CountdownTask(player.getLocation(), 4).runTaskTimer(Duel.getInstance(), 0, 1 * 20);
                     new DuelCommenceTask(player, target).runTaskLater(Duel.getInstance(), 4 * 20);
-                } else {
+                }
+                else {
                     playerData.setDuelInvite(player, target);
                 }
             }

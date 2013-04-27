@@ -45,8 +45,8 @@ public class DuelManager {
 
     public static void prepareDuel(Player player, Player target) {
         PlayerData playerData = new PlayerData();
-        playerData.removeDuelInvite(player);
-        playerData.removeDuelInvite(target);
+        playerData.setDuelInviteNone(player);
+        playerData.setDuelInviteNone(target);
 
         ArenaManager.setArena(player);
         ArenaManager.setArena(target);
@@ -58,6 +58,8 @@ public class DuelManager {
         }
 
         PlayerData playerData = new PlayerData();
+        playerData.removeDuelInvite(player);
+        playerData.removeDuelInvite(target);
         playerData.setDuel(player, target);
         notifyPlayers(player.getLocation(), DuelMessageType.START);
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
