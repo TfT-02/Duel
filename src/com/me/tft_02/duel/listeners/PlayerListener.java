@@ -3,6 +3,7 @@ package com.me.tft_02.duel.listeners;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -58,6 +59,11 @@ public class PlayerListener implements Listener {
                 event.setCancelled(true);
 
                 if (playerData.getDuelInvite(player).equals(target.getName())) {
+                    if (playerData.duelInviteIsTimedout(player)) {
+                        player.sendMessage(ChatColor.RED + "The Duel invitation has expired.");
+                        return;
+                    }
+                    
                     DuelManager.prepareDuel(player, target);
                     new CountdownTask(player.getLocation(), 4).runTaskTimer(Duel.getInstance(), 0, 1 * 20);
                     new DuelCommenceTask(player, target).runTaskLater(Duel.getInstance(), 4 * 20);

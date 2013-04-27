@@ -83,12 +83,16 @@ public class PlayerData {
         }
 
         DuelInvitationKey key = duelInvitations.get(player.getName());
-
+        return key.getPlayerName();
+    }
+    
+    public boolean duelInviteIsTimedout(Player player) {
+        DuelInvitationKey key = duelInvitations.get(player.getName());
         if (key.getTimestamp() + Config.getInviteTimeout() <= Misc.getSystemTime()) {
-            return target;
+            return false;
         }
 
-        return key.getPlayerName();
+        return true;
     }
 
     public boolean removeDuelInvite(Player player) {
