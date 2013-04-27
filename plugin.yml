@@ -2,7 +2,7 @@ name: Duel
 author: TfT_02
 main: com.me.tft_02.duel.Duel
 description: Challenge other players to a duel!
-version: 0.0.1
+version: 0.0.2
 softdepend: [WorldGuard]
 commands:
    duel:
