@@ -47,9 +47,13 @@ public class HelpCommand implements CommandExecutor {
 
             case 2:
                 sender.sendMessage(ChatColor.GOLD + "Commands:");
-                if (sender.hasPermission("duel.commands")) {
-                    sender.sendMessage(dot + ChatColor.GREEN + "/duel [reload]/[help]" + ChatColor.GRAY + " General commands");
+                if (sender.hasPermission("duel.commands.reload")) {
+                    sender.sendMessage(dot + ChatColor.GREEN + "/duel <reload>" + ChatColor.GRAY + " Reload the configuration file");
                 }
+                if (sender.hasPermission("duel.commands.stats")) {
+                    sender.sendMessage(dot + ChatColor.GREEN + "/duel <stats>" + ChatColor.GRAY + " Checkout your stats");
+                }
+                sender.sendMessage(dot + ChatColor.GREEN + "/duel <help>" + ChatColor.GRAY + " View the help pages");
             default:
                 if (nextPage <= maxPages) {
                     sender.sendMessage(ChatColor.GOLD + "Type /duel help " + nextPage + " for more");
