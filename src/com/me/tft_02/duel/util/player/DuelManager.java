@@ -9,6 +9,8 @@ import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.database.DatabaseManager;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+import com.me.tft_02.duel.runnables.CountdownTask;
+import com.me.tft_02.duel.runnables.DuelCommenceTask;
 import com.me.tft_02.duel.runnables.DuelEndTask;
 import com.me.tft_02.duel.util.Misc;
 
@@ -40,6 +42,25 @@ public class DuelManager {
     public static void notifyPlayers(Location location, String message) {
         for (Player player : Misc.getNearbyPlayers(location)) {
             player.sendMessage(message);
+        }
+    }
+
+    public static void handleDuelInvites(Player player, Player target) {
+        PlayerData playerData = new PlayerData();
+
+        if (playerData.getDuelInvite(player).equals(target.getName())) {
+            if (playerData.duelInviteIsTimedout(player)) {
+                player.sendMessage(ChatColor.RED + "The Duel invitation has expired.");
+                playerData.removeDuelInvite(player);
+                return;
+            }
+
+            DuelManager.prepareDuel(player, target);
+            new CountdownTask(player.getLocation(), 4).runTaskTimer(Duel.getInstance(), 0, 1 * 20);
+            new DuelCommenceTask(player, target).runTaskLater(Duel.getInstance(), 4 * 20);
+        }
+        else {
+            playerData.setDuelInvite(player, target);
         }
     }
 
