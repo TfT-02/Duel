@@ -14,8 +14,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import com.me.tft_02.duel.Config;
+import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.util.Misc;
-import com.me.tft_02.duel.util.PlayerData;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
 

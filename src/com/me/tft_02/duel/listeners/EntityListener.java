@@ -14,7 +14,7 @@ import org.bukkit.event.entity.PotionSplashEvent;
 
 import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
-import com.me.tft_02.duel.util.PlayerData;
+import com.me.tft_02.duel.datatypes.player.PlayerData;
 
 public class EntityListener implements Listener {
     Duel plugin;

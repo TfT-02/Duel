@@ -18,11 +18,11 @@ import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.runnables.CountdownTask;
 import com.me.tft_02.duel.runnables.DuelCommenceTask;
 import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.Misc;
-import com.me.tft_02.duel.util.PlayerData;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
 
@@ -52,7 +52,6 @@ public class PlayerListener implements Listener {
             if (ItemUtils.isSword(inHand)) {
 
                 if (PlayerData.areDueling(player, target)) {
-                    player.sendMessage("[Debug] Dualing..");
                     return;
                 }
 

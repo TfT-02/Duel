@@ -3,7 +3,7 @@ package com.me.tft_02.duel.runnables;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.me.tft_02.duel.util.PlayerData;
+import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.util.player.DuelManager;
 
 public class DuelEndTask extends BukkitRunnable {

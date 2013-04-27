@@ -1,4 +1,4 @@
-package com.me.tft_02.duel.util;
+package com.me.tft_02.duel.datatypes.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,12 +8,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.util.Misc;
 
 public class PlayerData {
 
     public static HashMap<String, String> duels = new HashMap<String, String>();
-    public static HashMap<String, String> duelInvitations = new HashMap<String, String>();
+    public static HashMap<String, DuelInvitationKey> duelInvitations = new HashMap<String, DuelInvitationKey>();
     public static HashMap<String, List<ItemStack>> savedItems = new HashMap<String, List<ItemStack>>();
     public static HashMap<String, Boolean> duelRespawn = new HashMap<String, Boolean>();
 
@@ -74,11 +76,19 @@ public class PlayerData {
     }
 
     public String getDuelInvite(Player player) {
-        String target = "null";
-        if (duelInvitations.containsKey(player.getName())) {
-            return duelInvitations.get(player.getName());
+        String target = null;
+
+        if (!duelInvitations.containsKey(player.getName())) {
+            return target;
         }
-        return target;
+
+        DuelInvitationKey key = duelInvitations.get(player.getName());
+
+        if (key.getTimestamp() + Config.getInviteTimeout() <= Misc.getSystemTime()) {
+            return target;
+        }
+
+        return key.getPlayerName();
     }
 
     public boolean removeDuelInvite(Player player) {
@@ -93,9 +103,10 @@ public class PlayerData {
         if (getDuelInvite(target).equals(player.getName())) {
             return;
         }
+        int timestamp = (int) (System.currentTimeMillis() / 1000);
 
         player.sendMessage(ChatColor.GREEN + "You have challenged " + ChatColor.GOLD + target.getName() + ChatColor.GREEN + " to a duel!");
-        duelInvitations.put(target.getName(), player.getName());
+        duelInvitations.put(target.getName(), new DuelInvitationKey(player.getName(), timestamp));
         target.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " has just challenged you to a duel!");
         target.sendMessage(ChatColor.GREEN + "To accept right-click " + ChatColor.GOLD + player.getName());
     }
