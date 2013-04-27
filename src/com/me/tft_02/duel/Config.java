@@ -8,11 +8,11 @@ public class Config {
 
     /* GENERAL SETTINGS */
     public static boolean getStatsTrackingEnabled() {
-        return config.getBoolean("General.stats_tracking_enabled", true);
+        return config.getBoolean("General.Stats_Tracking_Enabled", true);
     }
 
     public static boolean getUpdateCheckEnabled() {
-        return config.getBoolean("General.update_check_enabled", true);
+        return config.getBoolean("General.Update_Check_Enabled", true);
     }
 
     /* ARENA SETTINGS */
@@ -34,6 +34,10 @@ public class Config {
 
     public static boolean getSaveInventory() {
         return config.getBoolean("Duel.Save_Inventory", true);
+    }
+
+    public static int getInviteTimeout() {
+        return config.getInt("Duel.Invitation_Timeout", 30);
     }
 
     public static boolean getBorderParticleEffectsEnabled() {

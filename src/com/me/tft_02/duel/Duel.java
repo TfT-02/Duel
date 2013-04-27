@@ -74,8 +74,8 @@ public class Duel extends JavaPlugin {
         final FileConfiguration config = this.getConfig();
 
         /* GENERAL SETTINGS */
-        config.addDefault("General.stats_tracking_enabled", true);
-        config.addDefault("General.update_check_enabled", true);
+        config.addDefault("General.Stats_Tracking_Enabled", true);
+        config.addDefault("General.Update_Check_Enabled", true);
 
         /* ARENA SETTINGS */
         config.addDefault("Duel.Knockback_Enabled", true);

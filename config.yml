@@ -1,3 +1,9 @@
 General:
-  stats_tracking_enabled: true
-  update_check_enabled: true
+  Stats_Tracking_Enabled: true
+  Update_Check_Enabled: true
+Duel:
+  Knockback_Enabled: true
+  Prevent_PVP: false
+  Override_PVP: true
+  Arena_Size: 20.0
+  Save_Inventory: true
