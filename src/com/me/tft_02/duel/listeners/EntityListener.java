@@ -30,7 +30,7 @@ public class EntityListener implements Listener {
      *
      * @param event The event to modify
      */
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getDamage() <= 0) {
             return;

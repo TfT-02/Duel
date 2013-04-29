@@ -54,6 +54,8 @@ public class DuelManager {
                 playerData.removeDuelInvite(player);
                 return;
             }
+            player.sendMessage(ChatColor.GREEN + "Duel invite accepted.");
+            target.sendMessage(ChatColor.GREEN + "Duel invite accepted.");
 
             DuelManager.prepareDuel(player, target);
             new CountdownTask(player.getLocation(), 4).runTaskTimer(Duel.getInstance(), 0, 1 * 20);

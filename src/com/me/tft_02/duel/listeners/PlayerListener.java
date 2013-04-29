@@ -49,7 +49,7 @@ public class PlayerListener implements Listener {
 
             if (ItemUtils.isSword(inHand)) {
 
-                if (PlayerData.areDueling(player, target)) {
+                if (PlayerData.isInDuel(player) || PlayerData.isInDuel(target)) {
                     return;
                 }
 
@@ -129,7 +129,7 @@ public class PlayerListener implements Listener {
      * 
      * @param event The event to check
      */
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
