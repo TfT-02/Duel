@@ -27,7 +27,7 @@ public class PlayerData {
     public static String getDuelTargetName(Player player) {
         String target = "null";
         if (duels.containsKey(player.getName())) {
-            return duels.get(player.getName());
+            target = duels.get(player.getName());
         }
         return target;
     }
@@ -60,6 +60,10 @@ public class PlayerData {
     }
 
     public static boolean areDueling(Player player, Player target) {
+        if (player == null || target == null) {
+            return false;
+        }
+
         Player duelTargetPlayer = getDuelTarget(target);
         Player duelTargetTarget = getDuelTarget(player);
 
