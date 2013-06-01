@@ -18,7 +18,6 @@ import com.me.tft_02.duel.listeners.PlayerListener;
 import com.me.tft_02.duel.runnables.DuelRangeTask;
 import com.me.tft_02.duel.util.Metrics;
 import com.me.tft_02.duel.util.UpdateChecker;
-
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Duel extends JavaPlugin {
