@@ -47,8 +47,7 @@ public class PlayerListener implements Listener {
         if (entity instanceof Player) {
             Player target = (Player) entity;
 
-            if (ItemUtils.isDuelWeapon(inHand) && player.isSneaking()) {
-
+            if (ItemUtils.isDuelWeapon(inHand) && player.isSneaking() && player.hasPermission("duel.challenge")) {
                 if (PlayerData.isInDuel(player) || PlayerData.isInDuel(target)) {
                     return;
                 }

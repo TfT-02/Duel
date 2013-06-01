@@ -8,6 +8,9 @@ commands:
       description: Usage /duel
       permission-message: You don't have <permission>
 permissions:
+    duel.challenge:
+        description: Users with this permission are allowed to challenge other players to a duel.
+        default: true
     duel.updatecheck:
         description: Users with this permission will receive a notification when there is a new version available.
         default: op
