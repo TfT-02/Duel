@@ -6,11 +6,10 @@ Key:
   ! Change
   - Removal
 
-Version 0.0.3 | Tested on CB 1.5.2-R0.1
-
 Version 0.0.2 | Tested on CB 1.5.2-R0.1
  + Added permission node duel.challenge
  + Added a new configuration option. List of items which a player can hold when challenging another player
+ + Added WorldGuard support
  = Fixed a NPE when a player was killed by an Entity
  ! Changed the duel challenge behavior. Players will now need to hold shift before they can send a challenge
 

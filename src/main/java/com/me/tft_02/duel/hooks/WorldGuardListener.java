@@ -28,7 +28,7 @@ public class WorldGuardListener implements Listener {
         Player defender = event.getDefender();
 
         if (Config.getOverridePVP() && PlayerData.areDueling(attacker, defender)) {
-            event.setCancelled(false);
+            event.setCancelled(true);
         }
     }
 }
