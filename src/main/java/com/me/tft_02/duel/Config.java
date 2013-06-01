@@ -1,5 +1,8 @@
 package com.me.tft_02.duel;
 
+import java.util.HashSet;
+
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class Config {
@@ -24,4 +27,17 @@ public class Config {
     public static boolean getBorderParticleEffectsEnabled() { return false; }
 
     /* @formatter:on */
+
+    public static HashSet<Material> getDuelWeaponItems() {
+        HashSet<Material> miscItems = new HashSet<Material>();
+
+        for (String item : config.getStringList("Challenge.Duel_Items")) {
+            Material material = Material.getMaterial(item.toUpperCase());
+
+            if (material != null) {
+                miscItems.add(material);
+            }
+        }
+        return miscItems;
+    }
 }

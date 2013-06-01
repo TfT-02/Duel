@@ -10,3 +10,15 @@ Duel:
 Arena:
   Knockback_Enabled: true
   Radius: 20.0
+Challenge:
+  Duel_Items:
+    - Diamond_Sword
+    - Diamond_Axe
+    - Gold_Sword
+    - Gold_Axe
+    - Iron_Sword
+    - Iron_Axe
+    - Stone_Sword
+    - Stone_Axe
+    - Wood_Sword
+    - Wood_Axe
