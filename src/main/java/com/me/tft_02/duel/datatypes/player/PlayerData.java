@@ -115,7 +115,7 @@ public class PlayerData {
         player.sendMessage(ChatColor.GREEN + "You have challenged " + ChatColor.GOLD + target.getName() + ChatColor.GREEN + " to a duel!");
         duelInvitations.put(target.getName(), new DuelInvitationKey(player.getName(), Misc.getSystemTime()));
         target.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " has just challenged you to a duel!");
-        target.sendMessage(ChatColor.GREEN + "To accept right-click " + ChatColor.GOLD + player.getName());
+        target.sendMessage(ChatColor.GREEN + "To accept shift + right-click " + ChatColor.GOLD + player.getName() + "while holding a valid item.");
     }
 
     public void setDuelInviteNone(Player player) {

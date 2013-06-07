@@ -42,7 +42,7 @@ public class HelpCommand implements CommandExecutor {
             case 1:
                 sender.sendMessage(ChatColor.GOLD + "How does it work?");
                 sender.sendMessage(dot + ChatColor.GRAY + "Duel allows players to challenge eachother for a battle.");
-                sender.sendMessage(dot + ChatColor.GRAY + "Right-click another player while holding a sword to challenge him.");
+                sender.sendMessage(dot + ChatColor.DARK_AQUA + "Shift + Right-click" + ChatColor.GRAY + " another player while holding a sword to challenge him.");
                 sender.sendMessage(dot + ChatColor.GRAY + "The challengee wil have to right-click the challenger to accept the duel.");
 
             case 2:
