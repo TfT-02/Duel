@@ -34,8 +34,8 @@ public class UpdateChecker {
             JSONObject versions = (JSONObject) ((JSONObject) o).get("versions");
             String newVersion = (String) versions.get("version");
 
-            String[] oldTokens = version.split("[.]");
-            String[] newTokens = newVersion.split("[.]");
+            String[] oldTokens = version.replaceAll("(?i)(-)(.+?)(-)", "-").split("[.]|-b");
+            String[] newTokens = newVersion.replaceAll("(?i)(-)(.+?)(-)", "-").split("[.]|-b");
 
             for (int i = 0; i < 3; i++) {
                 Integer newVer = Integer.parseInt(newTokens[i]);
