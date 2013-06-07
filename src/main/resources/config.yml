@@ -22,3 +22,7 @@ Challenge:
     - Stone_Axe
     - Wood_Sword
     - Wood_Axe
+WorldGuard:
+  Use_As_Whitelist: false
+  Regions:
+  - no_duels_here

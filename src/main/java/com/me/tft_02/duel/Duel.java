@@ -99,7 +99,7 @@ public class Duel extends JavaPlugin {
         /* WORLDGUARD SETTINGS */
         config.addDefault("WorldGuard.Use_As_Whitelist", false);
 
-        String[] defaultRegions = { "noduelshere" };
+        String[] defaultRegions = { "no_duels_here" };
         config.addDefault("WorldGuard.Regions", defaultRegions);
 
         config.options().copyDefaults(true);
