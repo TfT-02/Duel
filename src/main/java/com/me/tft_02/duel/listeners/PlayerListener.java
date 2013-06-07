@@ -129,27 +129,24 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        Player killer = event.getEntity().getKiller();
 
-        if (!PlayerData.areDueling(player, killer)) {
+        if (!PlayerData.isInDuel(player)) {
             return;
         }
 
-        if (killer != null && player != killer) {
-            PlayerData.duelRespawn.put(player.getName(), true);
+        PlayerData.duelRespawn.put(player.getName(), true);
 
-            if (Config.getSaveInventory()) {
-                List<ItemStack> items = new ArrayList<ItemStack>();
+        if (Config.getSaveInventory()) {
+            List<ItemStack> items = new ArrayList<ItemStack>();
 
-                for (ItemStack item : new ArrayList<ItemStack>(event.getDrops())) {
-                    items.add(item);
-                    event.getDrops().remove(item);
-                }
-
-                PlayerData.storeItemsDeath(player, items);
+            for (ItemStack item : new ArrayList<ItemStack>(event.getDrops())) {
+                items.add(item);
+                event.getDrops().remove(item);
             }
 
-            DuelManager.endDuel(killer, player);
+            PlayerData.storeItemsDeath(player, items);
         }
+
+        DuelManager.endDuel(PlayerData.getDuelTarget(player), player);
     }
 }
