@@ -12,13 +12,31 @@ import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.runnables.CountdownTask;
 import com.me.tft_02.duel.runnables.DuelCommenceTask;
 import com.me.tft_02.duel.runnables.DuelEndTask;
+import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.Misc;
+import com.me.tft_02.duel.util.RegionUtils;
 
 public class DuelManager {
     public enum DuelMessageType {
         START,
         END;
     };
+
+    public static boolean canDuel(Player player) {
+        if (!player.hasPermission("duel.challenge")) {
+            return false;
+        }
+
+        if (!ItemUtils.isDuelWeapon(player.getItemInHand()) && !player.isSneaking()) {
+            return false;
+        }
+        
+        if (!RegionUtils.canDuelHere(player.getLocation())) {
+            return false;
+        }
+
+        return true;
+    }
 
     public static void notifyPlayers(Location location, DuelMessageType messageType) {
         String message = "";

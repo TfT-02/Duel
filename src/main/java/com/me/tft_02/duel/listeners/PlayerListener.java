@@ -19,7 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
-import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
@@ -42,12 +41,11 @@ public class PlayerListener implements Listener {
     public void onPlayerInteract(PlayerInteractEntityEvent event) {
         Player player = event.getPlayer();
         Entity entity = event.getRightClicked();
-        ItemStack inHand = player.getItemInHand();
 
         if (entity instanceof Player) {
             Player target = (Player) entity;
 
-            if (ItemUtils.isDuelWeapon(inHand) && player.isSneaking() && player.hasPermission("duel.challenge")) {
+            if (DuelManager.canDuel(player)) {
                 if (PlayerData.isInDuel(player) || PlayerData.isInDuel(target)) {
                     return;
                 }
