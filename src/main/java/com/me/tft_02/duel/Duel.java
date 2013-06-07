@@ -16,6 +16,7 @@ import com.me.tft_02.duel.hooks.WorldGuardListener;
 import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
 import com.me.tft_02.duel.runnables.DuelRangeTask;
+import com.me.tft_02.duel.runnables.RegionCheckTask;
 import com.me.tft_02.duel.util.Metrics;
 import com.me.tft_02.duel.util.UpdateChecker;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -59,6 +60,11 @@ public class Duel extends JavaPlugin {
         BukkitScheduler scheduler = getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(this, new DuelRangeTask(), 0, 2 * 20);
 
+        if (worldGuardEnabled) {
+            //Region check timer (Runs every five seconds)
+            new RegionCheckTask().runTaskTimer(this, 5 * 20, 5 * 20);
+        }
+
         checkForUpdates();
 
         if (Config.getStatsTrackingEnabled()) {
@@ -90,6 +96,12 @@ public class Duel extends JavaPlugin {
         config.addDefault("Arena.Knockback_Enabled", true);
         config.addDefault("Arena.Radius", 20.0);
 
+        /* WORLDGUARD SETTINGS */
+        config.addDefault("WorldGuard.Use_As_Whitelist", false);
+
+        String[] defaultRegions = { "noduelshere" };
+        config.addDefault("WorldGuard.Regions", defaultRegions);
+
         config.options().copyDefaults(true);
         saveConfig();
     }
@@ -102,7 +114,7 @@ public class Duel extends JavaPlugin {
         }
     }
 
-    WorldGuardPlugin getWorldGuard() {
+    public WorldGuardPlugin getWorldGuard() {
         Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
 
         if (plugin == null || !(plugin instanceof WorldGuardPlugin)) {

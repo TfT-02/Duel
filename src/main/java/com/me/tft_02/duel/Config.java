@@ -1,6 +1,7 @@
 package com.me.tft_02.duel;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -39,5 +40,12 @@ public class Config {
             }
         }
         return miscItems;
+    }
+
+    /* WORLDGUARD SETTINGS */
+    public static boolean getUseAsWhitelist() { return config.getBoolean("WorldGuard.Use_As_Whitelist", false); }
+
+    public static List<String> getRegionList() {
+        return Duel.getInstance().getConfig().getStringList("WorldGuard.Regions");
     }
 }
