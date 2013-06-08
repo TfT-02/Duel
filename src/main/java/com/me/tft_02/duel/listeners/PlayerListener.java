@@ -19,6 +19,8 @@ import org.bukkit.inventory.ItemStack;
 import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+import com.me.tft_02.duel.runnables.RegionCheckTask;
+import com.me.tft_02.duel.runnables.RetrieveLevelsTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
@@ -109,12 +111,13 @@ public class PlayerListener implements Listener {
 
             if (Config.getSaveInventory()) {
                 List<ItemStack> items = new ArrayList<ItemStack>();
-                items = PlayerData.retrieveItemsDeath(player);
+                items = PlayerData.retrieveInventory(player);
                 if (items != null) {
                     for (ItemStack item : items) {
                         player.getInventory().addItem(item);
                     }
                 }
+                new RetrieveLevelsTask(player).runTaskLater(Duel.getInstance(), 1);
 
                 player.updateInventory();
             }
@@ -122,7 +125,7 @@ public class PlayerListener implements Listener {
     }
 
     /**
-     * Check PlayerRespawnEvent events.
+     * Check PlayerDeathEvent events.
      * 
      * @param event The event to check
      */
@@ -144,7 +147,8 @@ public class PlayerListener implements Listener {
                 event.getDrops().remove(item);
             }
 
-            PlayerData.storeItemsDeath(player, items);
+            PlayerData.storeInventory(player, items);
+            PlayerData.storeLevelsAndExp(player);
         }
 
         DuelManager.endDuel(PlayerData.getDuelTarget(player), player);

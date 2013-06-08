@@ -17,6 +17,7 @@ public class PlayerData {
     public static HashMap<String, String> duels = new HashMap<String, String>();
     public static HashMap<String, DuelInvitationKey> duelInvitations = new HashMap<String, DuelInvitationKey>();
     public static HashMap<String, List<ItemStack>> savedItems = new HashMap<String, List<ItemStack>>();
+    public static HashMap<String, LevelAndExpKey> savedLevel = new HashMap<String, LevelAndExpKey>();
     public static HashMap<String, Boolean> duelRespawn = new HashMap<String, Boolean>();
 
     public void setDuel(Player player, Player target) {
@@ -134,7 +135,7 @@ public class PlayerData {
         return duelingPlayers;
     }
 
-    public static void storeItemsDeath(Player player, List<ItemStack> items) {
+    public static void storeInventory(Player player, List<ItemStack> items) {
         String playerName = player.getName();
 
         if (savedItems.containsKey(playerName)) {
@@ -144,7 +145,7 @@ public class PlayerData {
         savedItems.put(playerName, items);
     }
 
-    public static List<ItemStack> retrieveItemsDeath(Player player) {
+    public static List<ItemStack> retrieveInventory(Player player) {
         String playerName = player.getName();
 
         if (savedItems.containsKey(playerName)) {
@@ -153,5 +154,28 @@ public class PlayerData {
         else {
             return null;
         }
+    }
+
+    public static void storeLevelsAndExp(Player player) {
+        String playerName = player.getName();
+
+        if (savedLevel.containsKey(playerName)) {
+            savedLevel.put(playerName, null);
+        }
+
+        savedLevel.put(playerName, new LevelAndExpKey(player.getLevel(), player.getExp()));
+    }
+
+    public static boolean retrieveLevelsAndExp(Player player) {
+        String playerName = player.getName();
+
+        if (savedLevel.containsKey(playerName)) {
+            LevelAndExpKey key = savedLevel.get(playerName);
+            player.setLevel(key.getLevel());
+            player.setExp(key.getExp());
+            return true;
+        }
+
+        return false;
     }
 }

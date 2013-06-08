@@ -10,6 +10,7 @@ Version 0.0.3 | Tested on CB 1.5.2-R0.1
  + Added more WorldGuard support, white- or blacklist certain regions
  = Fixed information in the help command
  ! Changed when a player wins/loses a duel. Environmental deaths will now also end a duel
+ ! Now also stores levels and experience when saving a players inventory
 
 Version 0.0.2 | Tested on CB 1.5.2-R0.1
  + Added permission node duel.challenge
