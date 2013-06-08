@@ -31,7 +31,7 @@ public class DuelManager {
             return false;
         }
         
-        if (!RegionUtils.canDuelHere(player.getLocation())) {
+        if (Duel.getInstance().worldGuardEnabled && !RegionUtils.canDuelHere(player.getLocation())) {
             return false;
         }
 
