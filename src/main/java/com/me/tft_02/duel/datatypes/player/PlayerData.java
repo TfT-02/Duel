@@ -39,7 +39,7 @@ public class PlayerData {
     }
 
     public static boolean removeDuelTarget(Player player) {
-        if (duels.containsKey(player.getName())) {
+        if (player != null && duels.containsKey(player.getName())) {
             duels.remove(player.getName());
             return true;
         }
