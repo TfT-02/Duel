@@ -13,7 +13,15 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 public class RegionUtils {
 
     public static boolean canDuelHere(Location location) {
-        return isListedRegion(getRegion(location)) && Config.getUseAsWhitelist();
+        boolean isWhitelist = Config.getUseAsWhitelist();
+
+        if (isListedRegion(getRegion(location))) {
+            return isWhitelist;
+        }
+        else if (!isWhitelist) {
+            return true;
+        }
+        return isWhitelist;
     }
 
     private static boolean isListedRegion(String region) {

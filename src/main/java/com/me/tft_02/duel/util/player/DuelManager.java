@@ -124,6 +124,10 @@ public class DuelManager {
     public static void endDuelInTie(Player player) {
         Player target = PlayerData.getDuelTarget(player);
 
+        if (target == null) {
+            return;
+        }
+
         PlayerData.removeDuelTarget(player);
         PlayerData.removeDuelTarget(target);
         notifyPlayers(player.getLocation(), DuelMessageType.END);
