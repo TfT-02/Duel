@@ -19,7 +19,6 @@ import org.bukkit.inventory.ItemStack;
 import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
-import com.me.tft_02.duel.runnables.RegionCheckTask;
 import com.me.tft_02.duel.runnables.RetrieveLevelsTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
@@ -110,6 +109,10 @@ public class PlayerListener implements Listener {
             PlayerData.duelRespawn.put(player.getName(), false);
 
             if (Config.getSaveInventory()) {
+                List<ItemStack> armorList = PlayerData.retrieveArmor(player);
+                ItemStack[] armor = armorList.toArray(new ItemStack[armorList.size()]);
+                player.getInventory().setArmorContents(armor);
+
                 List<ItemStack> items = new ArrayList<ItemStack>();
                 items = PlayerData.retrieveInventory(player);
                 if (items != null) {
@@ -140,15 +143,21 @@ public class PlayerListener implements Listener {
         PlayerData.duelRespawn.put(player.getName(), true);
 
         if (Config.getSaveInventory()) {
-            List<ItemStack> items = new ArrayList<ItemStack>();
-
-            for (ItemStack item : new ArrayList<ItemStack>(event.getDrops())) {
-                items.add(item);
-                event.getDrops().remove(item);
+            List<ItemStack> armorItems = new ArrayList<ItemStack>();
+            for (ItemStack armor : player.getInventory().getArmorContents()) {
+                armorItems.add(armor);
             }
 
+            List<ItemStack> items = new ArrayList<ItemStack>();
+            for (ItemStack item : player.getInventory().getContents()) {
+                items.add(item);
+            }
+
+            PlayerData.storeArmor(player, armorItems);
             PlayerData.storeInventory(player, items);
             PlayerData.storeLevelsAndExp(player);
+
+            event.getDrops().clear();
         }
 
         DuelManager.endDuel(PlayerData.getDuelTarget(player), player);

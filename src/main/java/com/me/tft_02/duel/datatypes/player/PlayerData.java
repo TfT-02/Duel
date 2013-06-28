@@ -16,7 +16,8 @@ public class PlayerData {
 
     public static HashMap<String, String> duels = new HashMap<String, String>();
     public static HashMap<String, DuelInvitationKey> duelInvitations = new HashMap<String, DuelInvitationKey>();
-    public static HashMap<String, List<ItemStack>> savedItems = new HashMap<String, List<ItemStack>>();
+    public static HashMap<String, List<ItemStack>> savedInventoryItems = new HashMap<String, List<ItemStack>>();
+    public static HashMap<String, List<ItemStack>> savedInventoryArmor = new HashMap<String, List<ItemStack>>();
     public static HashMap<String, LevelAndExpKey> savedLevel = new HashMap<String, LevelAndExpKey>();
     public static HashMap<String, Boolean> duelRespawn = new HashMap<String, Boolean>();
 
@@ -138,18 +139,39 @@ public class PlayerData {
     public static void storeInventory(Player player, List<ItemStack> items) {
         String playerName = player.getName();
 
-        if (savedItems.containsKey(playerName)) {
-            savedItems.put(playerName, null);
+        if (savedInventoryItems.containsKey(playerName)) {
+            savedInventoryItems.put(playerName, null);
         }
 
-        savedItems.put(playerName, items);
+        savedInventoryItems.put(playerName, items);
     }
 
     public static List<ItemStack> retrieveInventory(Player player) {
         String playerName = player.getName();
 
-        if (savedItems.containsKey(playerName)) {
-            return savedItems.get(playerName);
+        if (savedInventoryItems.containsKey(playerName)) {
+            return savedInventoryItems.get(playerName);
+        }
+        else {
+            return null;
+        }
+    }
+
+    public static void storeArmor(Player player, List<ItemStack> items) {
+        String playerName = player.getName();
+
+        if (savedInventoryArmor.containsKey(playerName)) {
+            savedInventoryArmor.put(playerName, null);
+        }
+
+        savedInventoryArmor.put(playerName, items);
+    }
+
+    public static List<ItemStack> retrieveArmor(Player player) {
+        String playerName = player.getName();
+
+        if (savedInventoryArmor.containsKey(playerName)) {
+            return savedInventoryArmor.get(playerName);
         }
         else {
             return null;
