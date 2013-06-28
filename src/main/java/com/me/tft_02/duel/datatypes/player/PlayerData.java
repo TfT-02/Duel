@@ -137,41 +137,36 @@ public class PlayerData {
     }
 
     public static void storeInventory(Player player, List<ItemStack> items) {
-        String playerName = player.getName();
-
-        if (savedInventoryItems.containsKey(playerName)) {
-            savedInventoryItems.put(playerName, null);
-        }
-
-        savedInventoryItems.put(playerName, items);
+        storeItems(player, items, savedInventoryItems);
     }
 
     public static List<ItemStack> retrieveInventory(Player player) {
-        String playerName = player.getName();
-
-        if (savedInventoryItems.containsKey(playerName)) {
-            return savedInventoryItems.get(playerName);
-        }
-        else {
-            return null;
-        }
+        return retrieveItems(player, savedInventoryItems);
     }
 
     public static void storeArmor(Player player, List<ItemStack> items) {
-        String playerName = player.getName();
-
-        if (savedInventoryArmor.containsKey(playerName)) {
-            savedInventoryArmor.put(playerName, null);
-        }
-
-        savedInventoryArmor.put(playerName, items);
+        storeItems(player, items, savedInventoryArmor);
     }
 
     public static List<ItemStack> retrieveArmor(Player player) {
+        return retrieveItems(player, savedInventoryArmor);
+    }
+
+    public static void storeItems(Player player, List<ItemStack> items, HashMap<String, List<ItemStack>> hashmap) {
         String playerName = player.getName();
 
-        if (savedInventoryArmor.containsKey(playerName)) {
-            return savedInventoryArmor.get(playerName);
+        if (hashmap.containsKey(playerName)) {
+            hashmap.put(playerName, null);
+        }
+
+        hashmap.put(playerName, items);
+    }
+
+    public static List<ItemStack> retrieveItems(Player player, HashMap<String, List<ItemStack>> hashmap) {
+        String playerName = player.getName();
+
+        if (hashmap.containsKey(playerName)) {
+            return hashmap.get(playerName);
         }
         else {
             return null;
