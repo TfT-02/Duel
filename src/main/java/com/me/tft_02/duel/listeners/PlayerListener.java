@@ -145,12 +145,16 @@ public class PlayerListener implements Listener {
         if (Config.getSaveInventory()) {
             List<ItemStack> armorItems = new ArrayList<ItemStack>();
             for (ItemStack armor : player.getInventory().getArmorContents()) {
-                armorItems.add(armor);
+                if (armor != null) {
+                    armorItems.add(armor);
+                }
             }
 
             List<ItemStack> items = new ArrayList<ItemStack>();
             for (ItemStack item : player.getInventory().getContents()) {
-                items.add(item);
+                if (item != null) {
+                    items.add(item);
+                }
             }
 
             PlayerData.storeArmor(player, armorItems);
