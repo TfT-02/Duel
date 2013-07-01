@@ -140,7 +140,7 @@ public class PlayerData {
         target.sendMessage(ChatColor.GREEN + "To accept " + ChatColor.DARK_AQUA + "hold shift" + ChatColor.GREEN + " and " + ChatColor.DARK_AQUA + "right-click " + ChatColor.GOLD + player.getName() + ChatColor.GREEN + " while holding a valid item.");
     }
 
-    public void setDuelInviteNone(Player player) {
+    public void removeDuelInvitation(Player player) {
         duelInvitations.put(player.getName(), new DuelInvitationKey("none", Misc.getSystemTime()));
     }
 

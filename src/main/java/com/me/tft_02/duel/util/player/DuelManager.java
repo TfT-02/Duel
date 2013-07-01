@@ -95,8 +95,8 @@ public class DuelManager {
 
     public static void prepareDuel(Player player, Player target) {
         PlayerData playerData = new PlayerData();
-        playerData.setDuelInviteNone(player);
-        playerData.setDuelInviteNone(target);
+        playerData.removeDuelInvitation(player);
+        playerData.removeDuelInvitation(target);
 
         PlayerData.setOccupied(player, true);
         PlayerData.setOccupied(target, true);
