@@ -99,7 +99,7 @@ public class PlayerListener implements Listener {
      * 
      * @param event The event to check
      */
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         Location arenaCenter = ArenaManager.getArenaLocation(player);
