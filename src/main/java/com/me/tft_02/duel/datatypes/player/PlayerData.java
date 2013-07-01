@@ -2,6 +2,7 @@ package com.me.tft_02.duel.datatypes.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -15,6 +16,7 @@ import com.me.tft_02.duel.util.Misc;
 public class PlayerData {
 
     public static HashMap<String, String> duels = new HashMap<String, String>();
+    public static LinkedHashSet<String> occupied = new LinkedHashSet<String>();
     public static HashMap<String, DuelInvitationKey> duelInvitations = new HashMap<String, DuelInvitationKey>();
     public static HashMap<String, List<ItemStack>> savedInventoryItems = new HashMap<String, List<ItemStack>>();
     public static HashMap<String, List<ItemStack>> savedInventoryArmor = new HashMap<String, List<ItemStack>>();
@@ -54,6 +56,24 @@ public class PlayerData {
         return true;
     }
 
+    // Occupied
+    public static boolean isOccupied(Player player)  {
+        if (occupied.contains(player.getName())) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void setOccupied(Player player, boolean isOccupied) {
+        if (isOccupied) {
+            occupied.add(player.getName());
+        }
+        else if (!isOccupied) {
+            occupied.remove(player.getName());
+        }
+    }
+
+    // Respawn
     public static boolean wasInDuel(Player player) {
         if (duelRespawn.containsKey(player.getName())) {
             return duelRespawn.get(player.getName());

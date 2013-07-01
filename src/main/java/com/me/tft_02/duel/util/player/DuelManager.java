@@ -39,6 +39,10 @@ public class DuelManager {
             return false;
         }
 
+        if (PlayerData.isOccupied(player)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -76,6 +80,7 @@ public class DuelManager {
                 playerData.removeDuelInvite(player);
                 return;
             }
+
             player.sendMessage(ChatColor.GREEN + "Duel invite accepted.");
             target.sendMessage(ChatColor.GREEN + "Duel invite accepted.");
 
@@ -92,6 +97,9 @@ public class DuelManager {
         PlayerData playerData = new PlayerData();
         playerData.setDuelInviteNone(player);
         playerData.setDuelInviteNone(target);
+
+        PlayerData.setOccupied(player, true);
+        PlayerData.setOccupied(target, true);
 
         ArenaManager.setArena(player);
         ArenaManager.setArena(target);
@@ -114,6 +122,9 @@ public class DuelManager {
     }
 
     public static void endDuel(Player winner, Player loser) {
+        PlayerData.setOccupied(winner, false);
+        PlayerData.setOccupied(loser, false);
+
         PlayerData.removeDuelTarget(winner);
         PlayerData.removeDuelTarget(loser);
         notifyPlayers(winner.getLocation(), DuelMessageType.END);
@@ -134,6 +145,10 @@ public class DuelManager {
 
         PlayerData.removeDuelTarget(player);
         PlayerData.removeDuelTarget(target);
+
+        PlayerData.setOccupied(player, true);
+        PlayerData.setOccupied(target, true);
+
         notifyPlayers(player.getLocation(), DuelMessageType.END);
 
         DatabaseManager.increaseTieCount(player, 1);
