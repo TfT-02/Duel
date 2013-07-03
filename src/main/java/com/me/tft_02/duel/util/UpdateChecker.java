@@ -37,7 +37,7 @@ public class UpdateChecker {
             String[] oldTokens = version.replaceAll("(?i)(-)(.+?)(-)", "-").split("[.]|-b");
             String[] newTokens = newVersion.replaceAll("(?i)(-)(.+?)(-)", "-").split("[.]|-b");
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 4; i++) {
                 Integer newVer = Integer.parseInt(newTokens[i]);
                 Integer oldVer;
 
