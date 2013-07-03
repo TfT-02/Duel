@@ -21,4 +21,8 @@ public class ArenaManager {
 
         return location;
     }
+
+    public static void deleteArena(Player player) {
+        arenas.remove(player.getName());
+    }
 }

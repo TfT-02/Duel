@@ -90,7 +90,7 @@ public class PlayerListener implements Listener {
         if (PlayerData.isInDuel(player)) {
             Player target = PlayerData.getDuelTarget(player);
 
-            DuelManager.endDuel(target, player);
+            DuelManager.endDuelResult(target, player);
         }
     }
 
@@ -164,6 +164,6 @@ public class PlayerListener implements Listener {
             event.getDrops().clear();
         }
 
-        DuelManager.endDuel(PlayerData.getDuelTarget(player), player);
+        DuelManager.endDuelResult(PlayerData.getDuelTarget(player), player);
     }
 }

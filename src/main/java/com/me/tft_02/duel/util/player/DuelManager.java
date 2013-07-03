@@ -94,16 +94,15 @@ public class DuelManager {
         }
     }
 
-    public static void prepareDuel(Player player, Player target) {
+    public static void prepareDuel(Player player) {
         PlayerData playerData = new PlayerData();
         playerData.removeDuelInvitation(player);
-        playerData.removeDuelInvitation(target);
-
         PlayerData.setOccupied(player, true);
-        PlayerData.setOccupied(target, true);
-
         ArenaManager.setArena(player);
-        ArenaManager.setArena(target);
+    }
+
+    public static void prepareDuel(Player player, Player target) {
+        prepareDuel(player);
     }
 
     public static void startDuel(Player player, Player target) {
@@ -122,12 +121,10 @@ public class DuelManager {
         new DuelEndTask(player).runTaskLater(Duel.getInstance(), duelLength * 20);
     }
 
-    public static void endDuel(Player winner, Player loser) {
-        PlayerData.setOccupied(winner, false);
-        PlayerData.setOccupied(loser, false);
+    public static void endDuelResult(Player winner, Player loser) {
+        endDuel(winner);
+        endDuel(loser);
 
-        PlayerData.removeDuelTarget(winner);
-        PlayerData.removeDuelTarget(loser);
         notifyPlayers(winner.getLocation(), DuelMessageType.END);
 
         DatabaseManager.increaseWinCount(winner, 1);
@@ -144,15 +141,18 @@ public class DuelManager {
             return;
         }
 
-        PlayerData.removeDuelTarget(player);
-        PlayerData.removeDuelTarget(target);
-
-        PlayerData.setOccupied(player, true);
-        PlayerData.setOccupied(target, true);
+        endDuel(player);
+        endDuel(target);
 
         notifyPlayers(player.getLocation(), DuelMessageType.END);
 
         DatabaseManager.increaseTieCount(player, 1);
         DatabaseManager.increaseTieCount(target, 1);
+    }
+
+    public static void endDuel(Player player) {
+        PlayerData.removeDuelTarget(player);
+        PlayerData.setOccupied(player, false);
+        ArenaManager.deleteArena(player);
     }
 }
