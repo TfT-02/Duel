@@ -103,6 +103,7 @@ public class DuelManager {
 
     public static void prepareDuel(Player player, Player target) {
         prepareDuel(player);
+        prepareDuel(target);
     }
 
     public static void startDuel(Player player, Player target) {
