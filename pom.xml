@@ -32,6 +32,32 @@
           <target>1.6</target>
         </configuration>
       </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.5</version>
+                <configuration>
+                    <artifactSet>
+                        <includes>
+                            <include>org.mcstats.bukkit:metrics</include>
+                        </includes>
+                    </artifactSet>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.mcstats.bukkit:metrics</pattern>
+                            <shadedPattern>com.me.tft_02.duel.util</shadedPattern>
+                        </relocation>
+                    </relocations>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
     </plugins>
     </build>
     <repositories>
