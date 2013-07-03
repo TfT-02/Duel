@@ -64,7 +64,6 @@ public class DuelManager {
         for (Player player : Misc.getNearbyPlayers(location, MESSAGE_RANGE)) {
             player.sendMessage(message);
         }
-
     }
 
     public static void notifyPlayers(Location location, String message) {
