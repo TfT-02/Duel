@@ -17,6 +17,8 @@ import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.RegionUtils;
 
 public class DuelManager {
+    private static int MESSAGE_RANGE = Config.getMessageRange();
+
     public enum DuelMessageType {
         START,
         END;
@@ -34,7 +36,7 @@ public class DuelManager {
         if (!ItemUtils.isDuelWeapon(player.getItemInHand()) && !player.isSneaking()) {
             return false;
         }
-        
+
         if (Duel.getInstance().worldGuardEnabled && !RegionUtils.canDuelHere(player.getLocation())) {
             return false;
         }
@@ -59,14 +61,14 @@ public class DuelManager {
                 break;
         }
 
-        for (Player player : Misc.getNearbyPlayers(location)) {
+        for (Player player : Misc.getNearbyPlayers(location, MESSAGE_RANGE)) {
             player.sendMessage(message);
         }
 
     }
 
     public static void notifyPlayers(Location location, String message) {
-        for (Player player : Misc.getNearbyPlayers(location)) {
+        for (Player player : Misc.getNearbyPlayers(location, MESSAGE_RANGE)) {
             player.sendMessage(message);
         }
     }

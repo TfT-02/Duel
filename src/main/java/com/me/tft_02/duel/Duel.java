@@ -91,6 +91,7 @@ public class Duel extends JavaPlugin {
         config.addDefault("Duel.Save_Inventory", true);
         config.addDefault("Duel.Invitation_Timeout", 30);
         config.addDefault("Duel.Duel_Length", 120);
+        config.addDefault("Duel.Message_Range", 100);
 
         /* ARENA SETTINGS */
         config.addDefault("Arena.Knockback_Enabled", true);

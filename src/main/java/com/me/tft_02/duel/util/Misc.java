@@ -49,11 +49,11 @@ public class Misc {
         return vector;
     }
 
-    public static List<Player> getNearbyPlayers(Location location) {
+    public static List<Player> getNearbyPlayers(Location location, int range) {
         List<Player> nearbyPlayers = new ArrayList<Player>();
 
         for (Player player : Duel.getInstance().getServer().getOnlinePlayers()) {
-            if (Misc.isNear(location, player.getLocation(), 100)) {
+            if (Misc.isNear(location, player.getLocation(), range)) {
                 nearbyPlayers.add(player);
             }
         }

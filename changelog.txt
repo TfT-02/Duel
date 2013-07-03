@@ -8,6 +8,7 @@ Key:
 
 Version 0.0.3 | Tested on CB 1.5.2-R0.1
  + Added more WorldGuard support, white- or blacklist certain regions
+ + Added new config option to configure the message range
  = Fixed information in the help command
  = Fixed bug where armor could disappear when a players inventory was full
  = Fixed bug which let players start multiple duels

@@ -21,6 +21,7 @@ public class Config {
     public static boolean getSaveInventory() { return config.getBoolean("Duel.Save_Inventory", true); }
     public static int getInviteTimeout() { return config.getInt("Duel.Invitation_Timeout", 30); }
     public static int getDuelLength() { return config.getInt("Duel.Duel_Length", 120); }
+    public static int getMessageRange() { return config.getInt("Duel.Message_Range", 100); }
 
     /* ARENA SETTINGS */
     public static boolean getBorderKnockBack() { return config.getBoolean("Arena.Knockback_Enabled", true); }
