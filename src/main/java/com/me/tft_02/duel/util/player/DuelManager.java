@@ -33,7 +33,7 @@ public class DuelManager {
             return false;
         }
 
-        if (!ItemUtils.isDuelWeapon(player.getItemInHand()) && !player.isSneaking()) {
+        if (!ItemUtils.isDuelWeapon(player.getItemInHand())) {
             return false;
         }
 
