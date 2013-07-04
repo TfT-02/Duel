@@ -32,7 +32,7 @@ public class EntityListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getDamage() <= 0) {
+        if ((int) event.getDamage() <= 0) {
             return;
         }
 
