@@ -57,7 +57,7 @@ public class PlayerData {
     }
 
     // Occupied
-    public static boolean isOccupied(Player player)  {
+    public static boolean isOccupied(Player player) {
         if (occupied.contains(player.getName())) {
             return true;
         }
