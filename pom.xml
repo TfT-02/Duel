@@ -74,6 +74,10 @@
 			<id>Plugin Metrics</id>
 			<url>http://repo.mcstats.org/content/repositories/public</url>
 		</repository>
+		<repository>
+			<id>genesis-repo</id>
+			<url>http://jenkins.genesis-mc.com/plugin/repository/project/Ghosts/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -94,6 +98,12 @@
 			<groupId>org.mcstats.bukkit</groupId>
 			<artifactId>metrics</artifactId>
 			<version>R7</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.me.tft_02.ghosts</groupId>
+			<artifactId>Ghosts</artifactId>
+			<version>LATEST</version>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>

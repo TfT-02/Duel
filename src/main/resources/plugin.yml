@@ -3,7 +3,7 @@ author: TfT_02
 main: com.me.tft_02.duel.Duel
 description: Challenge other players to a duel!
 version: ${project.version}-b${BUILD_NUMBER}
-softdepend: [WorldGuard]
+softdepend: [WorldGuard, Ghosts]
 commands:
    duel:
       description: Usage /duel
