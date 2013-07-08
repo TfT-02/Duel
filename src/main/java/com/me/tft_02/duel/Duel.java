@@ -26,6 +26,7 @@ public class Duel extends JavaPlugin {
     public static Duel instance;
 
     public boolean worldGuardEnabled = false;
+    public boolean ghostsEnabled = false;
 
     // Update Check
     public boolean updateAvailable;
@@ -45,6 +46,7 @@ public class Duel extends JavaPlugin {
         setupConfiguration();
 
         setupWorldGuard();
+        setupGhosts();
 
         getCommand("duel").setExecutor(new DuelCommand());
 
@@ -114,6 +116,14 @@ public class Duel extends JavaPlugin {
             worldGuardEnabled = true;
             getLogger().info("WorldGuard found!");
             getServer().getPluginManager().registerEvents(new WorldGuardListener(this), this);
+        }
+    }
+
+    private void setupGhosts() {
+        if (getServer().getPluginManager().isPluginEnabled("Ghosts")) {
+            ghostsEnabled = true;
+            getLogger().info("Ghosts found!");
+            getServer().getPluginManager().registerEvents(new GhostsListener(), this);
         }
     }
 
