@@ -25,11 +25,6 @@ import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
 
 public class PlayerListener implements Listener {
-    Duel plugin;
-
-    public PlayerListener(final Duel instance) {
-        plugin = instance;
-    }
 
     PlayerData playerData = new PlayerData();
 

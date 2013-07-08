@@ -13,6 +13,7 @@ import org.mcstats.Metrics;
 
 import com.me.tft_02.duel.commands.DuelCommand;
 import com.me.tft_02.duel.database.Data;
+import com.me.tft_02.duel.hooks.GhostsListener;
 import com.me.tft_02.duel.hooks.WorldGuardListener;
 import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
@@ -23,12 +24,6 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Duel extends JavaPlugin {
     public static Duel instance;
-
-    private final PlayerListener playerListener = new PlayerListener(this);
-    private final EntityListener entityListener = new EntityListener(this);
-
-    // Listeners of dependencies
-    private WorldGuardListener worldGuardListener = new WorldGuardListener(this);
 
     public boolean worldGuardEnabled = false;
 
@@ -45,10 +40,8 @@ public class Duel extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        final PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(playerListener, this);
-        pm.registerEvents(entityListener, this);
 
+        registerEvents();
         setupConfiguration();
 
         setupWorldGuard();
@@ -74,6 +67,17 @@ public class Duel extends JavaPlugin {
             }
             catch (IOException e) {}
         }
+    }
+
+    /**
+     * Registers all event listeners
+     */
+    private void registerEvents() {
+        PluginManager pluginManager = getServer().getPluginManager();
+
+        // Register events
+        pluginManager.registerEvents(new PlayerListener(), this);
+        pluginManager.registerEvents(new EntityListener(), this);
     }
 
     private void setupConfiguration() {
@@ -109,7 +113,7 @@ public class Duel extends JavaPlugin {
         if (getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
             worldGuardEnabled = true;
             getLogger().info("WorldGuard found!");
-            getServer().getPluginManager().registerEvents(worldGuardListener, this);
+            getServer().getPluginManager().registerEvents(new WorldGuardListener(this), this);
         }
     }
 

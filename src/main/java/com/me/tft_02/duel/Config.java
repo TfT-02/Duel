@@ -44,7 +44,9 @@ public class Config {
     }
 
     /* WORLDGUARD SETTINGS */
-    public static boolean getUseAsWhitelist() { return config.getBoolean("WorldGuard.Use_As_Whitelist", false); }
+    public static boolean getUseAsWhitelist() {
+        return config.getBoolean("WorldGuard.Use_As_Whitelist", false);
+    }
 
     public static List<String> getRegionList() {
         return Duel.getInstance().getConfig().getStringList("WorldGuard.Regions");

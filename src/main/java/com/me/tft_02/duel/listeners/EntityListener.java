@@ -13,15 +13,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 
 import com.me.tft_02.duel.Config;
-import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 
 public class EntityListener implements Listener {
-    Duel plugin;
-
-    public EntityListener(final Duel instance) {
-        plugin = instance;
-    }
 
     PlayerData playerData = new PlayerData();
 
@@ -32,7 +26,7 @@ public class EntityListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if ((int) event.getDamage() <= 0) {
+        if (event.getDamage() <= 0) {
             return;
         }
 
