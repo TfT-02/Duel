@@ -13,6 +13,7 @@ Version 0.0.3 | Tested on CB 1.5.2-R0.1
  = Fixed information in the help command
  = Fixed bug where armor could disappear when a players inventory was full
  = Fixed bug which let players start multiple duels
+ = Fixed bug where the arena location was lost when respawning a player
  ! Changed when a player wins/loses a duel. Environmental deaths will now also end a duel
  ! Now also stores levels and experience when saving a players inventory
 

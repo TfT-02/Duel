@@ -61,12 +61,13 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
-        Location targetLocation = event.getTo();
-        Location arenaCenter = ArenaManager.getArenaLocation(player);
 
         if (!PlayerData.isInDuel(player)) {
             return;
         }
+
+        Location targetLocation = event.getTo();
+        Location arenaCenter = ArenaManager.getArenaLocation(player);
 
         if (!Misc.isNear(targetLocation, arenaCenter, Config.getArenaSize())) {
             event.setCancelled(true);
@@ -87,6 +88,10 @@ public class PlayerListener implements Listener {
 
             DuelManager.endDuelResult(target, player);
         }
+
+        if (PlayerData.wasInDuel(player)) {
+            ArenaManager.deleteArena(player);
+        }
     }
 
     /**
@@ -102,6 +107,7 @@ public class PlayerListener implements Listener {
         if (PlayerData.wasInDuel(player)) {
             event.setRespawnLocation(arenaCenter);
             PlayerData.duelRespawn.put(player.getName(), false);
+            ArenaManager.deleteArena(player);
 
             if (Config.getSaveInventory()) {
                 List<ItemStack> armorList = PlayerData.retrieveArmor(player);

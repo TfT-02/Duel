@@ -123,8 +123,8 @@ public class DuelManager {
     }
 
     public static void endDuelResult(Player winner, Player loser) {
-        endDuel(winner);
-        endDuel(loser);
+        endDuel(winner, true);
+        endDuel(loser, false);
 
         notifyPlayers(winner.getLocation(), DuelMessageType.END);
 
@@ -142,8 +142,8 @@ public class DuelManager {
             return;
         }
 
-        endDuel(player);
-        endDuel(target);
+        endDuel(player, true);
+        endDuel(target, true);
 
         notifyPlayers(player.getLocation(), DuelMessageType.END);
 
@@ -151,7 +151,7 @@ public class DuelManager {
         DatabaseManager.increaseTieCount(target, 1);
     }
 
-    public static void endDuel(Player player) {
+    public static void endDuel(Player player, boolean deleteArena) {
         PlayerData.removeDuelTarget(player);
         PlayerData.setOccupied(player, false);
         ArenaManager.deleteArena(player);
