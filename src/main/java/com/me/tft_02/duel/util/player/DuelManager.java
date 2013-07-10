@@ -154,6 +154,9 @@ public class DuelManager {
     public static void endDuel(Player player, boolean deleteArena) {
         PlayerData.removeDuelTarget(player);
         PlayerData.setOccupied(player, false);
-        ArenaManager.deleteArena(player);
+
+        if (deleteArena) {
+            ArenaManager.deleteArena(player);
+        }
     }
 }
