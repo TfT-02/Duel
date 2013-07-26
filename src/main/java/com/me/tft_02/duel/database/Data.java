@@ -34,10 +34,10 @@ public class Data {
     }
 
     public static void saveData() {
-        File f = new File(Duel.getInstance().getDataFolder(), "data.dat");
+        File f = new File(Duel.p.getDataFolder(), "data.dat");
         try {
             if (!f.exists()) {
-                Duel.getInstance().getDataFolder().mkdirs();
+                Duel.p.getDataFolder().mkdirs();
                 f.createNewFile();
             }
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
@@ -46,17 +46,17 @@ public class Data {
             oos.writeObject(DatabaseManager.ties);
             oos.flush();
             oos.close();
-            Duel.getInstance().getLogger().log(Level.INFO, "Saved data successfully.");
+            Duel.p.getLogger().log(Level.INFO, "Saved data successfully.");
         }
         catch (Exception e) {
-            Duel.getInstance().getLogger().log(Level.SEVERE, "Failed to save data.");
+            Duel.p.getLogger().log(Level.SEVERE, "Failed to save data.");
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings({ "unchecked" })
     public static void loadData() {
-        File f = new File(Duel.getInstance().getDataFolder(), "data.dat");
+        File f = new File(Duel.p.getDataFolder(), "data.dat");
         if (f.exists()) {
             try {
                 @SuppressWarnings("resource")
@@ -64,12 +64,12 @@ public class Data {
                 DatabaseManager.wins = (HashMap<String, Integer>) ois.readObject();
                 DatabaseManager.losses = (HashMap<String, Integer>) ois.readObject();
                 DatabaseManager.ties = (HashMap<String, Integer>) ois.readObject();
-                Duel.getInstance().getLogger().log(Level.INFO, "Loaded data successfully.");
+                Duel.p.getLogger().log(Level.INFO, "Loaded data successfully.");
             }
             catch (Exception e) {
-                Duel.getInstance().getLogger().log(Level.SEVERE, "Failed to load data. Disabling the plugin!");
+                Duel.p.getLogger().log(Level.SEVERE, "Failed to load data. Disabling the plugin!");
                 e.printStackTrace();
-                Bukkit.getServer().getPluginManager().disablePlugin(Duel.getInstance());
+                Bukkit.getServer().getPluginManager().disablePlugin(Duel.p);
             }
         }
     }

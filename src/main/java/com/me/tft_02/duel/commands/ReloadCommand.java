@@ -11,7 +11,7 @@ public class ReloadCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Duel.getInstance().reloadConfig();
+        Duel.p.reloadConfig();
         sender.sendMessage(ChatColor.GREEN + "Configuration reloaded.");
         return true;
     }

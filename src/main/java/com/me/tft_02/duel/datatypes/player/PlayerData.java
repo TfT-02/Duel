@@ -38,7 +38,7 @@ public class PlayerData {
 
     public static Player getDuelTarget(Player player) {
         String targetName = getDuelTargetName(player);
-        return Duel.getInstance().getServer().getPlayer(targetName);
+        return Duel.p.getServer().getPlayer(targetName);
     }
 
     public static boolean removeDuelTarget(Player player) {
@@ -145,7 +145,7 @@ public class PlayerData {
     }
 
     public static List<Player> getDuelingPlayers() {
-        Player[] onlinePlayers = Duel.getInstance().getServer().getOnlinePlayers();
+        Player[] onlinePlayers = Duel.p.getServer().getOnlinePlayers();
         List<Player> duelingPlayers = new ArrayList<Player>();
 
         for (Player onlinePlayer : onlinePlayers) {

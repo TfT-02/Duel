@@ -23,7 +23,7 @@ import com.me.tft_02.duel.util.UpdateChecker;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Duel extends JavaPlugin {
-    public static Duel instance;
+    public static Duel p;
 
     public boolean worldGuardEnabled = false;
     public boolean ghostsEnabled = false;
@@ -31,16 +31,12 @@ public class Duel extends JavaPlugin {
     // Update Check
     public boolean updateAvailable;
 
-    public static Duel getInstance() {
-        return instance;
-    }
-
     /**
      * Run things on enable.
      */
     @Override
     public void onEnable() {
-        instance = this;
+        p = this;
 
         registerEvents();
         setupConfiguration();

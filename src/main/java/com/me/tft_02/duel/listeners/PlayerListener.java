@@ -121,7 +121,7 @@ public class PlayerListener implements Listener {
                         player.getInventory().addItem(item);
                     }
                 }
-                new RetrieveLevelsTask(player).runTaskLater(Duel.getInstance(), 1);
+                new RetrieveLevelsTask(player).runTaskLater(Duel.p, 1);
 
                 player.updateInventory();
             }

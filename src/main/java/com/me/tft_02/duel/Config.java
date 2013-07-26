@@ -8,7 +8,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class Config {
 
-    static FileConfiguration config = Duel.getInstance().getConfig();
+    static FileConfiguration config = Duel.p.getConfig();
 
     /* @formatter:off */
     /* GENERAL SETTINGS */
@@ -49,6 +49,6 @@ public class Config {
     }
 
     public static List<String> getRegionList() {
-        return Duel.getInstance().getConfig().getStringList("WorldGuard.Regions");
+        return Duel.p.getConfig().getStringList("WorldGuard.Regions");
     }
 }

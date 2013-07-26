@@ -34,7 +34,7 @@ public class RegionUtils {
     }
 
     public static String getRegion(Location location) {
-        RegionManager regionManager = Duel.getInstance().getWorldGuard().getRegionManager(location.getWorld());
+        RegionManager regionManager = Duel.p.getWorldGuard().getRegionManager(location.getWorld());
         ApplicableRegionSet set = regionManager.getApplicableRegions(location);
         LinkedList<String> parentNames = new LinkedList<String>();
         LinkedList<String> regions = new LinkedList<String>();

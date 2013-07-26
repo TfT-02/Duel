@@ -37,7 +37,7 @@ public class DuelManager {
             return false;
         }
 
-        if (Duel.getInstance().worldGuardEnabled && !RegionUtils.canDuelHere(player.getLocation())) {
+        if (Duel.p.worldGuardEnabled && !RegionUtils.canDuelHere(player.getLocation())) {
             return false;
         }
 
@@ -86,8 +86,8 @@ public class DuelManager {
             target.sendMessage(ChatColor.GREEN + "Duel invite accepted.");
 
             DuelManager.prepareDuel(player, target);
-            new CountdownTask(player.getLocation(), 4).runTaskTimer(Duel.getInstance(), 0, 1 * 20);
-            new DuelCommenceTask(player, target).runTaskLater(Duel.getInstance(), 4 * 20);
+            new CountdownTask(player.getLocation(), 4).runTaskTimer(Duel.p, 0, 1 * 20);
+            new DuelCommenceTask(player, target).runTaskLater(Duel.p, 4 * 20);
         }
         else {
             playerData.setDuelInvite(player, target);
@@ -119,7 +119,7 @@ public class DuelManager {
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
 
         int duelLength = Config.getDuelLength();
-        new DuelEndTask(player).runTaskLater(Duel.getInstance(), duelLength * 20);
+        new DuelEndTask(player).runTaskLater(Duel.p, duelLength * 20);
     }
 
     public static void endDuelResult(Player winner, Player loser) {

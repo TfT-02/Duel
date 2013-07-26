@@ -16,7 +16,7 @@ public class RegionCheckTask extends BukkitRunnable {
     }
 
     public void checkRegion() {
-        for (Player player : Duel.getInstance().getServer().getOnlinePlayers()) {
+        for (Player player : Duel.p.getServer().getOnlinePlayers()) {
             Location location = player.getLocation();
 
             if (!RegionUtils.canDuelHere(location)) {

@@ -52,7 +52,7 @@ public class Misc {
     public static List<Player> getNearbyPlayers(Location location, int range) {
         List<Player> nearbyPlayers = new ArrayList<Player>();
 
-        for (Player player : Duel.getInstance().getServer().getOnlinePlayers()) {
+        for (Player player : Duel.p.getServer().getOnlinePlayers()) {
             if (Misc.isNear(location, player.getLocation(), range)) {
                 nearbyPlayers.add(player);
             }

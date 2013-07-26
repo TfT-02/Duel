@@ -14,7 +14,7 @@ public class UpdateChecker {
     private UpdateChecker() {}
 
     public static boolean updateAvailable() throws Exception {
-        String version = Duel.getInstance().getDescription().getVersion();
+        String version = Duel.p.getDescription().getVersion();
         InputStreamReader isr;
 
         try {

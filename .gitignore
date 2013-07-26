@@ -33,7 +33,7 @@
 .idea/
 
 # Project Stuff
-/src/main/resources/mcMMO
+/src/main/resources/Duel
 
 # Other Libraries
 *.jar

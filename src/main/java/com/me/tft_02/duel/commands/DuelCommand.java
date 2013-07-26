@@ -36,7 +36,7 @@ public class DuelCommand implements CommandExecutor {
     private boolean printUsage(CommandSender sender) {
         sender.sendMessage(ChatColor.GRAY + "-----[ " + ChatColor.GOLD + "Duel" + ChatColor.GRAY + " ]----- by " + ChatColor.GOLD + "TfT_02");
 
-        String version = Duel.getInstance().getDescription().getVersion();
+        String version = Duel.p.getDescription().getVersion();
         sender.sendMessage(ChatColor.GRAY + "Running version: " + ChatColor.DARK_AQUA + version);
         sender.sendMessage(ChatColor.GRAY + "Use: /duel help for more information.");
         return true;
