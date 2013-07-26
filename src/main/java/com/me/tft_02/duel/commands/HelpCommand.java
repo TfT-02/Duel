@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.me.tft_02.duel.util.Permissions;
-import com.me.tft_02.ghosts.locale.LocaleLoader;
+import com.me.tft_02.duel.locale.LocaleLoader;
 
 public class HelpCommand implements CommandExecutor {
 

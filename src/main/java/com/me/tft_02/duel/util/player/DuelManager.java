@@ -16,7 +16,7 @@ import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.Permissions;
 import com.me.tft_02.duel.util.RegionUtils;
-import com.me.tft_02.ghosts.locale.LocaleLoader;
+import com.me.tft_02.duel.locale.LocaleLoader;
 
 public class DuelManager {
     private static int MESSAGE_RANGE = Config.getMessageRange();

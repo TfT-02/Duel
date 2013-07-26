@@ -17,7 +17,7 @@ import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
-import com.me.tft_02.ghosts.locale.LocaleLoader;
+import com.me.tft_02.duel.locale.LocaleLoader;
 
 public class DuelRangeTask extends BukkitRunnable {
 

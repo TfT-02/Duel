@@ -12,6 +12,7 @@ public class Config {
 
     /* @formatter:off */
     /* GENERAL SETTINGS */
+    public static String getLocale() { return config.getString("General.Locale", "en_us"); }
     public static boolean getStatsTrackingEnabled() { return config.getBoolean("General.Stats_Tracking_Enabled", true); }
     public static boolean getUpdateCheckEnabled() { return config.getBoolean("General.Update_Check_Enabled", true); }
 
