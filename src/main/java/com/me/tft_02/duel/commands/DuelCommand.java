@@ -1,11 +1,12 @@
 package com.me.tft_02.duel.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.ghosts.Ghosts;
+import com.me.tft_02.ghosts.locale.LocaleLoader;
 
 public class DuelCommand implements CommandExecutor {
     private CommandExecutor reloadCommand = new ReloadCommand();
@@ -34,11 +35,9 @@ public class DuelCommand implements CommandExecutor {
     }
 
     private boolean printUsage(CommandSender sender) {
-        sender.sendMessage(ChatColor.GRAY + "-----[ " + ChatColor.GOLD + "Duel" + ChatColor.GRAY + " ]----- by " + ChatColor.GOLD + "TfT_02");
-
-        String version = Duel.p.getDescription().getVersion();
-        sender.sendMessage(ChatColor.GRAY + "Running version: " + ChatColor.DARK_AQUA + version);
-        sender.sendMessage(ChatColor.GRAY + "Use: /duel help for more information.");
+        sender.sendMessage(LocaleLoader.getString("General.Plugin_Header", Duel.p.getDescription().getName(), Duel.p.getDescription().getAuthors()));
+        sender.sendMessage(LocaleLoader.getString("General.Running_Version", Ghosts.p.getDescription().getVersion()));
+        sender.sendMessage(LocaleLoader.getString("General.Use_Help"));
         return true;
     }
 }

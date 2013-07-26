@@ -1,9 +1,11 @@
 package com.me.tft_02.duel.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+
+import com.me.tft_02.duel.util.Permissions;
+import com.me.tft_02.ghosts.locale.LocaleLoader;
 
 public class HelpCommand implements CommandExecutor {
 
@@ -31,33 +33,45 @@ public class HelpCommand implements CommandExecutor {
         int nextPage = page + 1;
 
         if (page > maxPages) {
-            sender.sendMessage(ChatColor.RED + "This page does not exist." + ChatColor.GOLD + " /help [0-" + maxPages + "]");
+            sender.sendMessage(LocaleLoader.getString(LocaleLoader.getString("HelpCommand.0"), maxPages));
             return;
         }
 
-        String dot = ChatColor.DARK_RED + "* ";
-        sender.sendMessage(ChatColor.GOLD + "-----[ " + ChatColor.DARK_RED + "Duel Help" + ChatColor.GOLD + " ]----- Page " + page + "/" + maxPages);
-
+        sender.sendMessage(LocaleLoader.getString("Help.Page_Header", page, maxPages));
         switch (page) {
-            case 1:
-                sender.sendMessage(ChatColor.GOLD + "How does it work?");
-                sender.sendMessage(dot + ChatColor.GRAY + "Duel allows players to challenge eachother for a battle.");
-                sender.sendMessage(dot + ChatColor.DARK_AQUA + "Shift + Right-click" + ChatColor.GRAY + " another player while holding a sword to challenge him.");
-                sender.sendMessage(dot + ChatColor.GRAY + "The challengee wil have to right-click the challenger to accept the duel.");
+            case 0:
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_0"));
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_1"));
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_2"));
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_3"));
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_4"));
 
-            case 2:
-                sender.sendMessage(ChatColor.GOLD + "Commands:");
-                if (sender.hasPermission("duel.commands.reload")) {
-                    sender.sendMessage(dot + ChatColor.GREEN + "/duel <reload>" + ChatColor.GRAY + " Reload the configuration file");
+            case 1:
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_1.Line_0"));
+
+                if (Permissions.reload(sender)) {
+                    sendHelpPage(sender, LocaleLoader.getString("Help.Page_1.Line_1"));
                 }
-                if (sender.hasPermission("duel.commands.stats")) {
-                    sender.sendMessage(dot + ChatColor.GREEN + "/duel <stats>" + ChatColor.GRAY + " Checkout your stats");
+
+                if (Permissions.stats(sender)) {
+                    sendHelpPage(sender, LocaleLoader.getString("Help.Page_1.Line_2"));
                 }
-                sender.sendMessage(dot + ChatColor.GREEN + "/duel <help>" + ChatColor.GRAY + " View the help pages");
+
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_1.Line_3"));
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_1.Line_4"));
             default:
                 if (nextPage <= maxPages) {
-                    sender.sendMessage(ChatColor.GOLD + "Type /duel help " + nextPage + " for more");
+                    sender.sendMessage(LocaleLoader.getString("Help.Page_Ending", "/duel help", nextPage));
                 }
+        }
+    }
+
+    /**
+     * Send a string, but only if .length > 0
+     * */
+    private void sendHelpPage(CommandSender sender, String string) {
+        if (string.length() > 0) {
+            sender.sendMessage(string);
         }
     }
 }

@@ -1,9 +1,7 @@
 package com.me.tft_02.duel;
 
 import java.io.IOException;
-import java.util.logging.Level;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -17,10 +15,10 @@ import com.me.tft_02.duel.hooks.GhostsListener;
 import com.me.tft_02.duel.hooks.WorldGuardListener;
 import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
+import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.DuelRangeTask;
 import com.me.tft_02.duel.runnables.RegionCheckTask;
 import com.me.tft_02.duel.runnables.UpdateCheckerTask;
-import com.me.tft_02.duel.util.UpdateChecker;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Duel extends JavaPlugin {
