@@ -2,6 +2,7 @@ package com.me.tft_02.duel.datatypes.player;
 
 import java.util.List;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -11,6 +12,7 @@ import com.me.tft_02.duel.datatypes.LevelAndExpKey;
 public class DuelPlayer {
     private Player player;
 
+    private Location arena;
     private String targetName;
     private boolean occupied;
     private DuelInvitationKey duelInvitationKey;
@@ -87,5 +89,13 @@ public class DuelPlayer {
 
     public void setSavedLevel(LevelAndExpKey savedLevel) {
         this.savedLevel = savedLevel;
+    }
+
+    public Location getArena() {
+        return arena;
+    }
+
+    public void setArena(Location arena) {
+        this.arena = arena;
     }
 }

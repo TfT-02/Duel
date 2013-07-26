@@ -9,6 +9,7 @@ import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.database.DatabaseManager;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.duels.CountdownTask;
 import com.me.tft_02.duel.runnables.duels.DuelCommenceTask;
 import com.me.tft_02.duel.runnables.duels.DuelEndTask;
@@ -16,7 +17,6 @@ import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.Permissions;
 import com.me.tft_02.duel.util.RegionUtils;
-import com.me.tft_02.duel.locale.LocaleLoader;
 
 public class DuelManager {
     private static int MESSAGE_RANGE = Config.getMessageRange();

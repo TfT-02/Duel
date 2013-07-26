@@ -4,8 +4,8 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.me.tft_02.duel.util.player.DuelManager;
 import com.me.tft_02.duel.locale.LocaleLoader;
+import com.me.tft_02.duel.util.player.DuelManager;
 
 public class CountdownTask extends BukkitRunnable {
     private Location location;
