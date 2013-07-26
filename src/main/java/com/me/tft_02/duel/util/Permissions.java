@@ -4,6 +4,10 @@ import org.bukkit.permissions.Permissible;
 
 public class Permissions {
 
+    public static boolean challenge(Permissible permissible) {
+        return permissible.hasPermission("duel.challenge");
+    }
+
     public static boolean reload(Permissible permissible) {
         return permissible.hasPermission("duel.commands.reload");
     }

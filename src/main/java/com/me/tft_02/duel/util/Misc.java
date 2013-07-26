@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import com.me.tft_02.duel.Duel;
 
 public class Misc {
+
+    public static boolean isNPCEntity(Entity entity) {
+        return (entity == null || entity.hasMetadata("NPC"));
+    }
 
     public static int getSystemTime() {
         return (int) System.currentTimeMillis() / 1000;

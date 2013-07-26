@@ -14,6 +14,7 @@ import com.me.tft_02.duel.runnables.DuelCommenceTask;
 import com.me.tft_02.duel.runnables.DuelEndTask;
 import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.Misc;
+import com.me.tft_02.duel.util.Permissions;
 import com.me.tft_02.duel.util.RegionUtils;
 
 public class DuelManager {
@@ -25,7 +26,7 @@ public class DuelManager {
     };
 
     public static boolean canDuel(Player player) {
-        if (!player.hasPermission("duel.challenge")) {
+        if (!Permissions.challenge(player)) {
             return false;
         }
 
@@ -61,9 +62,7 @@ public class DuelManager {
                 break;
         }
 
-        for (Player player : Misc.getNearbyPlayers(location, MESSAGE_RANGE)) {
-            player.sendMessage(message);
-        }
+        notifyPlayers(location, message);
     }
 
     public static void notifyPlayers(Location location, String message) {

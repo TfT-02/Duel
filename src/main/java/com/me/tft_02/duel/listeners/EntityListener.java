@@ -14,6 +14,7 @@ import org.bukkit.event.entity.PotionSplashEvent;
 
 import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+import com.me.tft_02.duel.util.Misc;
 
 public class EntityListener implements Listener {
 
@@ -33,8 +34,7 @@ public class EntityListener implements Listener {
         Entity attacker = event.getDamager();
         Entity defender = event.getEntity();
 
-        // Check if either players is are Citizens NPCs
-        if (attacker.hasMetadata("NPC") || defender.hasMetadata("NPC")) {
+        if (Misc.isNPCEntity(attacker) || Misc.isNPCEntity(defender)) {
             return;
         }
 
