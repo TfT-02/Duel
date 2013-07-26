@@ -11,6 +11,8 @@ import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.datatypes.DuelInvitationKey;
+import com.me.tft_02.duel.datatypes.LevelAndExpKey;
 import com.me.tft_02.duel.util.Misc;
 
 public class PlayerData {

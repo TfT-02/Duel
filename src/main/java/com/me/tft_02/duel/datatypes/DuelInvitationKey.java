@@ -1,4 +1,4 @@
-package com.me.tft_02.duel.datatypes.player;
+package com.me.tft_02.duel.datatypes;
 
 public class DuelInvitationKey {
     private String playerName;
