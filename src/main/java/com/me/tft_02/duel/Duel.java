@@ -17,9 +17,9 @@ import com.me.tft_02.duel.hooks.WorldGuardListener;
 import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
 import com.me.tft_02.duel.locale.LocaleLoader;
-import com.me.tft_02.duel.runnables.DuelRangeTask;
 import com.me.tft_02.duel.runnables.RegionCheckTask;
 import com.me.tft_02.duel.runnables.UpdateCheckerTask;
+import com.me.tft_02.duel.runnables.duels.DuelRangeTask;
 import com.me.tft_02.duel.util.player.UserManager;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
