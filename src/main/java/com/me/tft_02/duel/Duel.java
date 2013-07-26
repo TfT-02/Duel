@@ -91,7 +91,7 @@ public class Duel extends JavaPlugin {
     private void setupWorldGuard() {
         if (getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
             worldGuardEnabled = true;
-            getLogger().info("WorldGuard found!");
+            debug("WorldGuard found!");
             getServer().getPluginManager().registerEvents(new WorldGuardListener(this), this);
         }
     }
@@ -99,7 +99,7 @@ public class Duel extends JavaPlugin {
     private void setupGhosts() {
         if (getServer().getPluginManager().isPluginEnabled("Ghosts")) {
             ghostsEnabled = true;
-            getLogger().info("Ghosts found!");
+            debug("Ghosts found!");
             getServer().getPluginManager().registerEvents(new GhostsListener(), this);
         }
     }
