@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -18,6 +17,7 @@ import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
+import com.me.tft_02.ghosts.locale.LocaleLoader;
 
 public class DuelRangeTask extends BukkitRunnable {
 
@@ -50,12 +50,12 @@ public class DuelRangeTask extends BukkitRunnable {
 
                     player.getWorld().playSound(playerLocation, Sound.FIZZ, 1F, 1F);
                     player.setVelocity(knockback.multiply(2));
-                    player.sendMessage(ChatColor.DARK_RED + "WARNING - YOU CAN'T LEAVE THE ARENA!");
+                    player.sendMessage(LocaleLoader.getString("Duel.Range.Warning"));
                 }
                 else {
                     Player target = PlayerData.getDuelTarget(player);
-                    player.sendMessage(ChatColor.DARK_RED + "TELEPORTING " + ChatColor.GOLD + player.getName() + ChatColor.DARK_RED + " BACK TO ARENA");
-                    target.sendMessage(ChatColor.DARK_RED + "TELEPORTING " + ChatColor.GOLD + player.getName() + ChatColor.DARK_RED + " BACK TO ARENA");
+                    player.sendMessage(LocaleLoader.getString("Duel.Range.Teleport", player.getName()));
+                    target.sendMessage(LocaleLoader.getString("Duel.Range.Teleport", player.getName()));
 
                     player.teleport(arenaCenter);
                     player.getWorld().playSound(playerLocation, Sound.ENDERMAN_TELEPORT, 1F, 0.5F);

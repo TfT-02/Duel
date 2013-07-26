@@ -1,6 +1,5 @@
 package com.me.tft_02.duel.util.player;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -16,13 +15,15 @@ import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.Permissions;
 import com.me.tft_02.duel.util.RegionUtils;
+import com.me.tft_02.ghosts.locale.LocaleLoader;
 
 public class DuelManager {
     private static int MESSAGE_RANGE = Config.getMessageRange();
 
     public enum DuelMessageType {
         START,
-        END;
+        END,
+        TIE;
     };
 
     public static boolean canDuel(Player player) {
@@ -52,11 +53,14 @@ public class DuelManager {
     public static void notifyPlayers(Location location, DuelMessageType messageType) {
         String message = "";
         switch (messageType) {
-            case END:
-                message = ChatColor.GOLD + "Duel has ended!";
-                break;
             case START:
-                message = ChatColor.GOLD + "Duel has started!";
+                message = LocaleLoader.getString("Duel.Started");
+                break;
+            case END:
+                message = LocaleLoader.getString("Duel.Ended", "!");
+                break;
+            case TIE:
+                message = LocaleLoader.getString("Duel.Ended", LocaleLoader.getString("Duel.Tie"));
                 break;
             default:
                 break;
@@ -76,13 +80,13 @@ public class DuelManager {
 
         if (playerData.getDuelInvite(player).equals(target.getName())) {
             if (playerData.duelInviteIsTimedout(player)) {
-                player.sendMessage(ChatColor.RED + "The Duel invitation has expired.");
+                player.sendMessage(LocaleLoader.getString("Duel.Invite.Expired"));
                 playerData.removeDuelInvite(player);
                 return;
             }
 
-            player.sendMessage(ChatColor.GREEN + "Duel invite accepted.");
-            target.sendMessage(ChatColor.GREEN + "Duel invite accepted.");
+            player.sendMessage(LocaleLoader.getString("Duel.Invite.Accepted"));
+            target.sendMessage(LocaleLoader.getString("Duel.Invite.Accepted"));
 
             DuelManager.prepareDuel(player, target);
             new CountdownTask(player.getLocation(), 4).runTaskTimer(Duel.p, 0, 1 * 20);
@@ -144,7 +148,7 @@ public class DuelManager {
         endDuel(player, true);
         endDuel(target, true);
 
-        notifyPlayers(player.getLocation(), DuelMessageType.END);
+        notifyPlayers(player.getLocation(), DuelMessageType.TIE);
 
         DatabaseManager.increaseTieCount(player, 1);
         DatabaseManager.increaseTieCount(target, 1);
