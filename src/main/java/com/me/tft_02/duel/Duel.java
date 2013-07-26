@@ -19,6 +19,7 @@ import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
 import com.me.tft_02.duel.runnables.DuelRangeTask;
 import com.me.tft_02.duel.runnables.RegionCheckTask;
+import com.me.tft_02.duel.runnables.UpdateCheckerTask;
 import com.me.tft_02.duel.util.UpdateChecker;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
@@ -143,18 +144,18 @@ public class Duel extends JavaPlugin {
     }
 
     private void checkForUpdates() {
-        if (Config.getUpdateCheckEnabled()) {
-            try {
-                updateAvailable = UpdateChecker.updateAvailable();
-            }
-            catch (Exception e) {
-                updateAvailable = false;
-            }
+        if (!Config.getUpdateCheckEnabled()) {
+            return;
+        }
 
-            if (updateAvailable) {
-                this.getLogger().log(Level.INFO, ChatColor.GOLD + "Duel is outdated!");
-                this.getLogger().log(Level.INFO, ChatColor.AQUA + "http://dev.bukkit.org/server-mods/duel/");
-            }
+        getServer().getScheduler().runTaskAsynchronously(this, new UpdateCheckerTask());
+    }
+
+    public void updateCheckerCallback(boolean updateAvailable) {
+        this.updateAvailable = updateAvailable;
+        if (updateAvailable) {
+            getLogger().info(LocaleLoader.getString("UpdateChecker.outdated"));
+            getLogger().info(LocaleLoader.getString("UpdateChecker.newavailable"));
         }
     }
 }
