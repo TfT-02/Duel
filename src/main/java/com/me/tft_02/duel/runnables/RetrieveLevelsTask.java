@@ -1,19 +1,19 @@
 package com.me.tft_02.duel.runnables;
 
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 
 public class RetrieveLevelsTask extends BukkitRunnable {
-    private Player player;
+    private DuelPlayer duelPlayer;
 
-    public RetrieveLevelsTask(Player player) {
-        this.player = player;
+    public RetrieveLevelsTask(DuelPlayer duelPlayer) {
+        this.duelPlayer = duelPlayer;
     }
 
     @Override
     public void run() {
-        PlayerData.retrieveLevelsAndExp(player);
+        PlayerData.retrieveLevelsAndExp(duelPlayer);
     }
 }

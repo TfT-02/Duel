@@ -2,7 +2,6 @@ package com.me.tft_02.duel.datatypes.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -18,12 +17,6 @@ import com.me.tft_02.duel.util.Misc;
 public class PlayerData {
 
     public static HashMap<String, String> duels = new HashMap<String, String>();
-    public static LinkedHashSet<String> occupied = new LinkedHashSet<String>();
-    public static HashMap<String, DuelInvitationKey> duelInvitations = new HashMap<String, DuelInvitationKey>();
-    public static HashMap<String, List<ItemStack>> savedInventoryItems = new HashMap<String, List<ItemStack>>();
-    public static HashMap<String, List<ItemStack>> savedInventoryArmor = new HashMap<String, List<ItemStack>>();
-    public static HashMap<String, LevelAndExpKey> savedLevel = new HashMap<String, LevelAndExpKey>();
-    public static HashMap<String, Boolean> duelRespawn = new HashMap<String, Boolean>();
 
     public void setDuel(Player player, Player target) {
         duels.put(player.getName(), target.getName());
@@ -58,31 +51,6 @@ public class PlayerData {
         return true;
     }
 
-    // Occupied
-    public static boolean isOccupied(Player player) {
-        if (occupied.contains(player.getName())) {
-            return true;
-        }
-        return false;
-    }
-
-    public static void setOccupied(Player player, boolean isOccupied) {
-        if (isOccupied) {
-            occupied.add(player.getName());
-        }
-        else if (!isOccupied) {
-            occupied.remove(player.getName());
-        }
-    }
-
-    // Respawn
-    public static boolean wasInDuel(Player player) {
-        if (duelRespawn.containsKey(player.getName())) {
-            return duelRespawn.get(player.getName());
-        }
-        return false;
-    }
-
     public static boolean areDueling(Player player, Player target) {
         if (player == null || target == null) {
             return false;
@@ -103,19 +71,12 @@ public class PlayerData {
 
     }
 
-    public String getDuelInvite(Player player) {
-        String target = "null";
-
-        if (!duelInvitations.containsKey(player.getName())) {
-            return target;
-        }
-
-        DuelInvitationKey key = duelInvitations.get(player.getName());
-        return key.getPlayerName();
+    public String getDuelInvite(DuelPlayer duelPlayer) {
+        return duelPlayer.getDuelInvite().getPlayerName();
     }
 
-    public boolean duelInviteIsTimedout(Player player) {
-        DuelInvitationKey key = duelInvitations.get(player.getName());
+    public boolean duelInviteIsTimedout(DuelPlayer duelPlayer) {
+        DuelInvitationKey key = duelPlayer.getDuelInvite();
         if (key.getTimestamp() + Config.getInviteTimeout() >= Misc.getSystemTime()) {
             return false;
         }
@@ -123,27 +84,25 @@ public class PlayerData {
         return true;
     }
 
-    public boolean removeDuelInvite(Player player) {
-        if (duelInvitations.containsKey(player.getName())) {
-            duelInvitations.remove(player.getName());
-            return true;
-        }
-        return false;
+    public void removeDuelInvite(DuelPlayer duelPlayer) {
+        duelPlayer.setDuelInvitationKey(null);
     }
 
-    public void setDuelInvite(Player player, Player target) {
-        if (getDuelInvite(target).equals(player.getName())) {
+    public void setDuelInvite(DuelPlayer duelPlayer, DuelPlayer duelTarget) {
+        if (getDuelInvite(duelTarget).equals(duelPlayer.getPlayer().getName())) {
             return;
         }
+        Player player = duelPlayer.getPlayer();
+        Player target = duelTarget.getPlayer();
 
         player.sendMessage(ChatColor.GREEN + "You have challenged " + ChatColor.GOLD + target.getName() + ChatColor.GREEN + " to a duel!");
-        duelInvitations.put(target.getName(), new DuelInvitationKey(player.getName(), Misc.getSystemTime()));
+        duelTarget.setDuelInvitationKey(new DuelInvitationKey(player.getName(), Misc.getSystemTime()));
         target.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " has just challenged you to a duel!");
         target.sendMessage(ChatColor.GREEN + "To accept " + ChatColor.DARK_AQUA + "hold shift" + ChatColor.GREEN + " and " + ChatColor.DARK_AQUA + "right-click " + ChatColor.GOLD + player.getName() + ChatColor.GREEN + " while holding a valid item.");
     }
 
-    public void removeDuelInvitation(Player player) {
-        duelInvitations.put(player.getName(), new DuelInvitationKey("none", Misc.getSystemTime()));
+    public void removeDuelInvitation(DuelPlayer duelPlayer) {
+        duelPlayer.setDuelInvitationKey(null);
     }
 
     public static List<Player> getDuelingPlayers() {
@@ -158,63 +117,38 @@ public class PlayerData {
         return duelingPlayers;
     }
 
-    public static void storeInventory(Player player, List<ItemStack> items) {
-        storeItems(player, items, savedInventoryItems);
+    public static void storeInventory(DuelPlayer duelPlayer, List<ItemStack> items) {
+        duelPlayer.setSavedInventoryItems(items);
     }
 
-    public static List<ItemStack> retrieveInventory(Player player) {
-        return retrieveItems(player, savedInventoryItems);
+    public static List<ItemStack> retrieveInventory(DuelPlayer duelPlayer) {
+        return duelPlayer.getSavedInventoryItems();
     }
 
-    public static void storeArmor(Player player, List<ItemStack> items) {
-        storeItems(player, items, savedInventoryArmor);
+    public static void storeArmor(DuelPlayer duelPlayer, List<ItemStack> items) {
+        duelPlayer.setSavedInventoryArmor(items);
     }
 
-    public static List<ItemStack> retrieveArmor(Player player) {
-        return retrieveItems(player, savedInventoryArmor);
+    public static List<ItemStack> retrieveArmor(DuelPlayer duelPlayer) {
+        return duelPlayer.getSavedInventoryArmor();
     }
 
-    public static void storeItems(Player player, List<ItemStack> items, HashMap<String, List<ItemStack>> hashmap) {
-        String playerName = player.getName();
+    public static void storeLevelsAndExp(DuelPlayer duelPlayer) {
+        Player player = duelPlayer.getPlayer();
+        duelPlayer.setSavedLevel(new LevelAndExpKey(player.getLevel(), player.getExp()));
+    }
 
-        if (hashmap.containsKey(playerName)) {
-            hashmap.put(playerName, null);
+    public static boolean retrieveLevelsAndExp(DuelPlayer duelPlayer) {
+        Player player = duelPlayer.getPlayer();
+
+        LevelAndExpKey key = duelPlayer.getSavedLevel();
+
+        if (key == null) {
+            return false;
         }
 
-        hashmap.put(playerName, items);
-    }
-
-    public static List<ItemStack> retrieveItems(Player player, HashMap<String, List<ItemStack>> hashmap) {
-        String playerName = player.getName();
-
-        if (hashmap.containsKey(playerName)) {
-            return hashmap.get(playerName);
-        }
-        else {
-            return null;
-        }
-    }
-
-    public static void storeLevelsAndExp(Player player) {
-        String playerName = player.getName();
-
-        if (savedLevel.containsKey(playerName)) {
-            savedLevel.put(playerName, null);
-        }
-
-        savedLevel.put(playerName, new LevelAndExpKey(player.getLevel(), player.getExp()));
-    }
-
-    public static boolean retrieveLevelsAndExp(Player player) {
-        String playerName = player.getName();
-
-        if (savedLevel.containsKey(playerName)) {
-            LevelAndExpKey key = savedLevel.get(playerName);
-            player.setLevel(key.getLevel());
-            player.setExp(key.getExp());
-            return true;
-        }
-
-        return false;
+        player.setLevel(key.getLevel());
+        player.setExp(key.getExp());
+        return true;
     }
 }

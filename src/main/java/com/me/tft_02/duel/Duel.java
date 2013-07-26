@@ -3,6 +3,7 @@ package com.me.tft_02.duel;
 import java.io.IOException;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +20,7 @@ import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.DuelRangeTask;
 import com.me.tft_02.duel.runnables.RegionCheckTask;
 import com.me.tft_02.duel.runnables.UpdateCheckerTask;
+import com.me.tft_02.duel.util.player.UserManager;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Duel extends JavaPlugin {
@@ -46,6 +48,10 @@ public class Duel extends JavaPlugin {
         getCommand("duel").setExecutor(new DuelCommand());
 
         Data.loadData();
+
+        for (Player player : getServer().getOnlinePlayers()) {
+            UserManager.addUser(player); // In case of reload add all users back into UserManager
+        }
 
         BukkitScheduler scheduler = getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(this, new DuelRangeTask(), 0, 2 * 20);

@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.database.DatabaseManager;
+import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.runnables.CountdownTask;
 import com.me.tft_02.duel.runnables.DuelCommenceTask;
@@ -43,7 +44,7 @@ public class DuelManager {
             return false;
         }
 
-        if (PlayerData.isOccupied(player)) {
+        if (UserManager.getPlayer(player).getOccupied()) {
             return false;
         }
 
@@ -78,10 +79,12 @@ public class DuelManager {
     public static void handleDuelInvites(Player player, Player target) {
         PlayerData playerData = new PlayerData();
 
-        if (playerData.getDuelInvite(player).equals(target.getName())) {
-            if (playerData.duelInviteIsTimedout(player)) {
+        DuelPlayer duelPlayer = UserManager.getPlayer(player);
+
+        if (duelPlayer.getDuelInvite().getPlayerName().equals(target.getName())) {
+            if (playerData.duelInviteIsTimedout(duelPlayer)) {
                 player.sendMessage(LocaleLoader.getString("Duel.Invite.Expired"));
-                playerData.removeDuelInvite(player);
+                playerData.removeDuelInvite(duelPlayer);
                 return;
             }
 
@@ -93,14 +96,16 @@ public class DuelManager {
             new DuelCommenceTask(player, target).runTaskLater(Duel.p, 4 * 20);
         }
         else {
-            playerData.setDuelInvite(player, target);
+            DuelPlayer duelTarget = UserManager.getPlayer(target);
+            playerData.setDuelInvite(duelPlayer, duelTarget);
         }
     }
 
     public static void prepareDuel(Player player) {
+        DuelPlayer duelPlayer = UserManager.getPlayer(player);
         PlayerData playerData = new PlayerData();
-        playerData.removeDuelInvitation(player);
-        PlayerData.setOccupied(player, true);
+        playerData.removeDuelInvitation(duelPlayer);
+        duelPlayer.setOccupied(true);
         ArenaManager.setArena(player);
     }
 
@@ -115,8 +120,8 @@ public class DuelManager {
         }
 
         PlayerData playerData = new PlayerData();
-        playerData.removeDuelInvite(player);
-        playerData.removeDuelInvite(target);
+        playerData.removeDuelInvite(UserManager.getPlayer(player));
+        playerData.removeDuelInvite(UserManager.getPlayer(target));
         playerData.setDuel(player, target);
         notifyPlayers(player.getLocation(), DuelMessageType.START);
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
@@ -156,7 +161,7 @@ public class DuelManager {
 
     public static void endDuel(Player player, boolean deleteArena) {
         PlayerData.removeDuelTarget(player);
-        PlayerData.setOccupied(player, false);
+        UserManager.getPlayer(player).setOccupied(false);
 
         if (deleteArena) {
             ArenaManager.deleteArena(player);

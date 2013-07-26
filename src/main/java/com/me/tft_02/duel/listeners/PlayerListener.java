@@ -11,6 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -18,11 +19,13 @@ import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.runnables.RetrieveLevelsTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
+import com.me.tft_02.duel.util.player.UserManager;
 
 public class PlayerListener implements Listener {
 
@@ -51,6 +54,22 @@ public class PlayerListener implements Listener {
                 DuelManager.handleDuelInvites(player, target);
             }
         }
+    }
+
+    /**
+     * Monitor PlayerJoin events.
+     *
+     * @param event The event to watch
+     */
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    private void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+
+        if (Misc.isNPCEntity(player)) {
+            return;
+        }
+
+        UserManager.addUser(player);
     }
 
     /**
@@ -89,7 +108,7 @@ public class PlayerListener implements Listener {
             DuelManager.endDuelResult(target, player);
         }
 
-        if (PlayerData.wasInDuel(player)) {
+        if (UserManager.getPlayer(player).getDuelRespawn()) {
             ArenaManager.deleteArena(player);
         }
     }
@@ -104,24 +123,25 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         Location arenaCenter = ArenaManager.getArenaLocation(player);
 
-        if (PlayerData.wasInDuel(player)) {
+        DuelPlayer duelPlayer = UserManager.getPlayer(player);
+        if (duelPlayer.getDuelRespawn()) {
             event.setRespawnLocation(arenaCenter);
-            PlayerData.duelRespawn.put(player.getName(), false);
+            duelPlayer.setDuelRespawn(false);
             ArenaManager.deleteArena(player);
 
             if (Config.getSaveInventory()) {
-                List<ItemStack> armorList = PlayerData.retrieveArmor(player);
+                List<ItemStack> armorList = PlayerData.retrieveArmor(duelPlayer);
                 ItemStack[] armor = armorList.toArray(new ItemStack[armorList.size()]);
                 player.getInventory().setArmorContents(armor);
 
                 List<ItemStack> items = new ArrayList<ItemStack>();
-                items = PlayerData.retrieveInventory(player);
+                items = PlayerData.retrieveInventory(duelPlayer);
                 if (items != null) {
                     for (ItemStack item : items) {
                         player.getInventory().addItem(item);
                     }
                 }
-                new RetrieveLevelsTask(player).runTaskLater(Duel.p, 1);
+                new RetrieveLevelsTask(duelPlayer).runTaskLater(Duel.p, 1);
 
                 player.updateInventory();
             }
@@ -141,7 +161,8 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        PlayerData.duelRespawn.put(player.getName(), true);
+        DuelPlayer duelPlayer = UserManager.getPlayer(player);
+        duelPlayer.setDuelRespawn(true);
 
         if (Config.getSaveInventory()) {
             List<ItemStack> armorItems = new ArrayList<ItemStack>();
@@ -158,9 +179,9 @@ public class PlayerListener implements Listener {
                 }
             }
 
-            PlayerData.storeArmor(player, armorItems);
-            PlayerData.storeInventory(player, items);
-            PlayerData.storeLevelsAndExp(player);
+            PlayerData.storeArmor(duelPlayer, armorItems);
+            PlayerData.storeInventory(duelPlayer, items);
+            PlayerData.storeLevelsAndExp(duelPlayer);
 
             event.getDrops().clear();
         }
