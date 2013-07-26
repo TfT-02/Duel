@@ -4,7 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import com.me.tft_02.duel.Config;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.database.DatabaseManager;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
@@ -19,7 +19,7 @@ import com.me.tft_02.duel.util.Permissions;
 import com.me.tft_02.duel.util.RegionUtils;
 
 public class DuelManager {
-    private static int MESSAGE_RANGE = Config.getMessageRange();
+    private static int MESSAGE_RANGE = Config.getInstance().getMessageRange();
 
     public enum DuelMessageType {
         START,
@@ -126,7 +126,7 @@ public class DuelManager {
         notifyPlayers(player.getLocation(), DuelMessageType.START);
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
 
-        int duelLength = Config.getDuelLength();
+        int duelLength = Config.getInstance().getDuelLength();
         new DuelEndTask(player).runTaskLater(Duel.p, duelLength * 20);
     }
 

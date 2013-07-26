@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import org.bukkit.Location;
 
-import com.me.tft_02.duel.Config;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.Duel;
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
@@ -13,7 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 public class RegionUtils {
 
     public static boolean canDuelHere(Location location) {
-        boolean isWhitelist = Config.getUseAsWhitelist();
+        boolean isWhitelist = Config.getInstance().getUseAsWhitelist();
 
         if (isListedRegion(getRegion(location))) {
             return isWhitelist;
@@ -25,7 +25,7 @@ public class RegionUtils {
     }
 
     private static boolean isListedRegion(String region) {
-        for (String name : Config.getRegionList()) {
+        for (String name : Config.getInstance().getRegionList()) {
             if (region.equalsIgnoreCase("[" + name + "]")) {
                 return true;
             }

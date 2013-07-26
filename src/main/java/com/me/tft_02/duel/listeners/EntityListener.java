@@ -12,7 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 
-import com.me.tft_02.duel.Config;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.util.Misc;
 
@@ -57,12 +57,12 @@ public class EntityListener implements Listener {
             }
 
             if (attacker instanceof Player) {
-                if (Config.getPreventPVP() && !PlayerData.areDueling((Player) attacker, defendingPlayer)) {
+                if (Config.getInstance().getPreventPVP() && !PlayerData.areDueling((Player) attacker, defendingPlayer)) {
                     event.setCancelled(true);
                 }
 
                 // Override other plugins which prevent PVP?
-                else if (Config.getOverridePVP() && PlayerData.areDueling((Player) attacker, defendingPlayer)) {
+                else if (Config.getInstance().getOverridePVP() && PlayerData.areDueling((Player) attacker, defendingPlayer)) {
                     event.setCancelled(false);
                 }
             }
@@ -94,7 +94,7 @@ public class EntityListener implements Listener {
                             event.setIntensity(target, 0);
                         }
                     }
-                    else if (Config.getPreventPVP()) {
+                    else if (Config.getInstance().getPreventPVP()) {
                         event.setIntensity(target, 0);
                     }
                 }

@@ -2,7 +2,7 @@ package com.me.tft_02.duel.util;
 
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.duel.Config;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.Duel;
 
 public class ItemUtils {
@@ -19,6 +19,6 @@ public class ItemUtils {
      * @return true if the item is a duel item, false otherwise
      */
     public static boolean isDuelWeapon(ItemStack item) {
-        return Config.getDuelWeaponItems().contains(item.getType());
+        return Config.getInstance().getDuelWeaponItems().contains(item.getType());
     }
 }

@@ -2,7 +2,6 @@ package com.me.tft_02.duel;
 
 import java.io.IOException;
 
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -11,6 +10,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.mcstats.Metrics;
 
 import com.me.tft_02.duel.commands.DuelCommand;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.database.Data;
 import com.me.tft_02.duel.hooks.GhostsListener;
 import com.me.tft_02.duel.hooks.WorldGuardListener;
@@ -42,7 +42,6 @@ public class Duel extends JavaPlugin {
         getLogger().setFilter(new LogFilter(this));
 
         registerEvents();
-        setupConfiguration();
 
         setupWorldGuard();
         setupGhosts();
@@ -65,7 +64,7 @@ public class Duel extends JavaPlugin {
 
         checkForUpdates();
 
-        if (Config.getStatsTrackingEnabled()) {
+        if (Config.getInstance().getStatsTrackingEnabled()) {
             try {
                 Metrics metrics = new Metrics(this);
                 metrics.start();
@@ -85,33 +84,6 @@ public class Duel extends JavaPlugin {
         pluginManager.registerEvents(new EntityListener(), this);
     }
 
-    private void setupConfiguration() {
-        final FileConfiguration config = this.getConfig();
-
-        /* GENERAL SETTINGS */
-        config.addDefault("General.Stats_Tracking_Enabled", true);
-        config.addDefault("General.Update_Check_Enabled", true);
-
-        /* DUEL SETTINGS */
-        config.addDefault("Duel.Prevent_PVP", false);
-        config.addDefault("Duel.Override_PVP", true);
-        config.addDefault("Duel.Save_Inventory", true);
-        config.addDefault("Duel.Invitation_Timeout", 30);
-        config.addDefault("Duel.Duel_Length", 120);
-        config.addDefault("Duel.Message_Range", 100);
-
-        /* ARENA SETTINGS */
-        config.addDefault("Arena.Knockback_Enabled", true);
-        config.addDefault("Arena.Radius", 20.0);
-
-        /* WORLDGUARD SETTINGS */
-        config.addDefault("WorldGuard.Use_As_Whitelist", false);
-
-        String[] defaultRegions = { "no_duels_here" };
-        config.addDefault("WorldGuard.Regions", defaultRegions);
-
-        config.options().copyDefaults(true);
-        saveConfig();
     public void debug(String message) {
         getLogger().info("[Debug] " + message);
     }
@@ -152,7 +124,7 @@ public class Duel extends JavaPlugin {
     }
 
     private void checkForUpdates() {
-        if (!Config.getUpdateCheckEnabled()) {
+        if (!Config.getInstance().getUpdateCheckEnabled()) {
             return;
         }
 

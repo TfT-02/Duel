@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.duel.Config;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
@@ -88,7 +88,7 @@ public class PlayerListener implements Listener {
         Location targetLocation = event.getTo();
         Location arenaCenter = ArenaManager.getArenaLocation(player);
 
-        if (!Misc.isNear(targetLocation, arenaCenter, Config.getArenaSize())) {
+        if (!Misc.isNear(targetLocation, arenaCenter, Config.getInstance().getArenaSize())) {
             event.setCancelled(true);
         }
     }
@@ -129,7 +129,7 @@ public class PlayerListener implements Listener {
             duelPlayer.setDuelRespawn(false);
             ArenaManager.deleteArena(player);
 
-            if (Config.getSaveInventory()) {
+            if (Config.getInstance().getSaveInventory()) {
                 List<ItemStack> armorList = PlayerData.retrieveArmor(duelPlayer);
                 ItemStack[] armor = armorList.toArray(new ItemStack[armorList.size()]);
                 player.getInventory().setArmorContents(armor);
@@ -164,7 +164,7 @@ public class PlayerListener implements Listener {
         DuelPlayer duelPlayer = UserManager.getPlayer(player);
         duelPlayer.setDuelRespawn(true);
 
-        if (Config.getSaveInventory()) {
+        if (Config.getInstance().getSaveInventory()) {
             List<ItemStack> armorItems = new ArrayList<ItemStack>();
             for (ItemStack armor : player.getInventory().getArmorContents()) {
                 if (armor != null) {

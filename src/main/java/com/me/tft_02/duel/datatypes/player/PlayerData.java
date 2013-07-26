@@ -8,8 +8,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.duel.Config;
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.DuelInvitationKey;
 import com.me.tft_02.duel.datatypes.LevelAndExpKey;
 import com.me.tft_02.duel.util.Misc;
@@ -77,7 +77,7 @@ public class PlayerData {
 
     public boolean duelInviteIsTimedout(DuelPlayer duelPlayer) {
         DuelInvitationKey key = duelPlayer.getDuelInvite();
-        if (key.getTimestamp() + Config.getInviteTimeout() >= Misc.getSystemTime()) {
+        if (key.getTimestamp() + Config.getInstance().getInviteTimeout() >= Misc.getSystemTime()) {
             return false;
         }
 

@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 
 import org.bukkit.ChatColor;
 
-import com.me.tft_02.duel.Config;
+import com.me.tft_02.duel.config.Config;
 
 public final class LocaleLoader {
     private static final String BUNDLE_ROOT = "com.me.tft_02.duel.locale.locale";
@@ -70,7 +70,7 @@ public final class LocaleLoader {
         if (bundle == null) {
             Locale.setDefault(new Locale("en", "US"));
             Locale locale = null;
-            String[] myLocale = Config.getLocale().split("[-_ ]");
+            String[] myLocale = Config.getInstance().getLocale().split("[-_ ]");
 
             if (myLocale.length == 1) {
                 locale = new Locale(myLocale[0]);

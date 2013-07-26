@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import com.me.tft_02.duel.Config;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.util.Misc;
@@ -32,14 +32,14 @@ public class DuelRangeTask extends BukkitRunnable {
         for (Player player : PlayerData.getDuelingPlayers()) {
             Location playerLocation = player.getLocation();
             Location arenaCenter = ArenaManager.getArenaLocation(player);
-            double arenaSize = Config.getArenaSize();
+            double arenaSize = Config.getInstance().getArenaSize();
 
-            if (Config.getBorderParticleEffectsEnabled()) {
+            if (Config.getInstance().getBorderParticleEffectsEnabled()) {
                 drawArenaCircle(arenaCenter, (int) arenaSize, Effect.MOBSPAWNER_FLAMES);
             }
 
             if (!Misc.isNear(playerLocation, arenaCenter, arenaSize)) {
-                if (!Config.getBorderKnockBack()) {
+                if (!Config.getInstance().getBorderKnockBack()) {
                     DuelManager.endDuelInTie(player);
                     return;
                 }
