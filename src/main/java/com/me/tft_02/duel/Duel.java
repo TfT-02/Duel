@@ -21,6 +21,7 @@ import com.me.tft_02.duel.runnables.RegionCheckTask;
 import com.me.tft_02.duel.runnables.UpdateCheckerTask;
 import com.me.tft_02.duel.runnables.duels.DuelRangeTask;
 import com.me.tft_02.duel.util.player.UserManager;
+import com.me.tft_02.duel.util.LogFilter;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Duel extends JavaPlugin {
@@ -38,6 +39,7 @@ public class Duel extends JavaPlugin {
     @Override
     public void onEnable() {
         p = this;
+        getLogger().setFilter(new LogFilter(this));
 
         registerEvents();
         setupConfiguration();
@@ -110,6 +112,8 @@ public class Duel extends JavaPlugin {
 
         config.options().copyDefaults(true);
         saveConfig();
+    public void debug(String message) {
+        getLogger().info("[Debug] " + message);
     }
 
     private void setupWorldGuard() {
