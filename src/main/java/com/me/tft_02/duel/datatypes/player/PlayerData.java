@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -12,6 +11,7 @@ import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.DuelInvitationKey;
 import com.me.tft_02.duel.datatypes.LevelAndExpKey;
+import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.util.Misc;
 
 public class PlayerData {
@@ -95,10 +95,11 @@ public class PlayerData {
         Player player = duelPlayer.getPlayer();
         Player target = duelTarget.getPlayer();
 
-        player.sendMessage(ChatColor.GREEN + "You have challenged " + ChatColor.GOLD + target.getName() + ChatColor.GREEN + " to a duel!");
+        player.sendMessage(LocaleLoader.getString("Duel.Invite.Send", target.getName()));
         duelTarget.setDuelInvitationKey(new DuelInvitationKey(player.getName(), Misc.getSystemTime()));
-        target.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " has just challenged you to a duel!");
-        target.sendMessage(ChatColor.GREEN + "To accept " + ChatColor.DARK_AQUA + "hold shift" + ChatColor.GREEN + " and " + ChatColor.DARK_AQUA + "right-click " + ChatColor.GOLD + player.getName() + ChatColor.GREEN + " while holding a valid item.");
+
+        target.sendMessage(LocaleLoader.getString("Duel.Invite.Receive.1", player.getName()));
+        target.sendMessage(LocaleLoader.getString("Duel.Invite.Receive.2", player.getName()));
     }
 
     public void removeDuelInvitation(DuelPlayer duelPlayer) {
