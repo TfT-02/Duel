@@ -1,7 +1,6 @@
 package com.me.tft_02.duel.datatypes.player;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.entity.Player;
@@ -13,39 +12,32 @@ import com.me.tft_02.duel.datatypes.DuelInvitationKey;
 import com.me.tft_02.duel.datatypes.LevelAndExpKey;
 import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.util.Misc;
+import com.me.tft_02.duel.util.player.UserManager;
 
 public class PlayerData {
 
-    public static HashMap<String, String> duels = new HashMap<String, String>();
-
     public void setDuel(Player player, Player target) {
-        duels.put(player.getName(), target.getName());
-        duels.put(target.getName(), player.getName());
-    }
-
-    public static String getDuelTargetName(Player player) {
-        String target = "null";
-        if (duels.containsKey(player.getName())) {
-            target = duels.get(player.getName());
-        }
-        return target;
+        UserManager.getPlayer(player).setTargetName(target.getName());
+        UserManager.getPlayer(target).setTargetName(player.getName());
     }
 
     public static Player getDuelTarget(Player player) {
-        String targetName = getDuelTargetName(player);
+        String targetName = UserManager.getPlayer(player).getTargetName();
         return Duel.p.getServer().getPlayer(targetName);
     }
 
     public static boolean removeDuelTarget(Player player) {
-        if (duels.containsKey(player.getName())) {
-            duels.remove(player.getName());
+        DuelPlayer duelPlayer = UserManager.getPlayer(player);
+
+        if (duelPlayer.getTargetName() != null) {
+            duelPlayer.setTargetName(null);
             return true;
         }
         return false;
     }
 
     public static boolean isInDuel(Player player) {
-        if (getDuelTarget(player) == null || getDuelTarget(player).equals("null")) {
+        if (UserManager.getPlayer(player).getTargetName() == null) {
             return false;
         }
         return true;
@@ -56,14 +48,18 @@ public class PlayerData {
             return false;
         }
 
-        Player duelTargetPlayer = getDuelTarget(target);
-        Player duelTargetTarget = getDuelTarget(player);
+        DuelPlayer duelPlayer = UserManager.getPlayer(player);
+        DuelPlayer duelTarget = UserManager.getPlayer(target);
 
-        if (duelTargetPlayer == null || duelTargetTarget == null) {
+        String playerTargetName = duelPlayer.getTargetName();
+        String targetTargetName = duelTarget.getTargetName();
+
+        if (playerTargetName == null || targetTargetName == null) {
             return false;
         }
 
-        if (player.getName().equals(duelTargetPlayer.getName()) && target.getName().equals(duelTargetTarget.getName())) {
+
+        if (playerTargetName.equals(targetTargetName) && targetTargetName.equals(playerTargetName)) {
             return true;
 
         }
@@ -92,6 +88,7 @@ public class PlayerData {
         if (getDuelInvite(duelTarget).equals(duelPlayer.getPlayer().getName())) {
             return;
         }
+
         Player player = duelPlayer.getPlayer();
         Player target = duelTarget.getPlayer();
 
@@ -107,12 +104,12 @@ public class PlayerData {
     }
 
     public static List<Player> getDuelingPlayers() {
-        Player[] onlinePlayers = Duel.p.getServer().getOnlinePlayers();
+        Iterable<DuelPlayer> duelPlayers = UserManager.getPlayers();
         List<Player> duelingPlayers = new ArrayList<Player>();
 
-        for (Player onlinePlayer : onlinePlayers) {
-            if (duels.containsKey(onlinePlayer.getName())) {
-                duelingPlayers.add(onlinePlayer);
+        for (DuelPlayer duelPlayer : duelPlayers) {
+            if (duelPlayer.getTargetName() != null) {
+                duelingPlayers.add(duelPlayer.getPlayer());
             }
         }
         return duelingPlayers;

@@ -33,11 +33,11 @@ public class DuelPlayer {
         this.player = player;
     }
 
-    public String getDuelTargetName() {
+    public String getTargetName() {
         return targetName;
     }
 
-    public void setDuelTargetName(String targetName) {
+    public void setTargetName(String targetName) {
         this.targetName = targetName;
     }
 
