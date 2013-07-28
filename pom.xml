@@ -23,6 +23,14 @@
 					<include>.jenkins</include>
 				</includes>
 			</resource>
+            <resource>
+                <targetPath>com/me/tft_02/duel/locale</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources/locale/</directory>
+                <includes>
+                    <include>locale*.properties</include>
+                </includes>
+            </resource>
 		</resources>
 		<plugins>
 			<plugin>

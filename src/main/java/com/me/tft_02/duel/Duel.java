@@ -134,8 +134,8 @@ public class Duel extends JavaPlugin {
     public void updateCheckerCallback(boolean updateAvailable) {
         this.updateAvailable = updateAvailable;
         if (updateAvailable) {
-            getLogger().info(LocaleLoader.getString("UpdateChecker.outdated"));
-            getLogger().info(LocaleLoader.getString("UpdateChecker.newavailable"));
+            getLogger().info(LocaleLoader.getString("UpdateChecker.Outdated"));
+            getLogger().info(LocaleLoader.getString("UpdateChecker.New_Available"));
         }
     }
 }
