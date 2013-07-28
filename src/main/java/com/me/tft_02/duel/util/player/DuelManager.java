@@ -81,7 +81,7 @@ public class DuelManager {
 
         DuelPlayer duelPlayer = UserManager.getPlayer(player);
 
-        if (duelPlayer.getDuelInvite().getPlayerName().equals(target.getName())) {
+        if (duelPlayer.getDuelInvite() != null && duelPlayer.getDuelInvite().getPlayerName().equals(target.getName())) {
             if (playerData.duelInviteIsTimedout(duelPlayer)) {
                 player.sendMessage(LocaleLoader.getString("Duel.Invite.Expired"));
                 playerData.removeDuelInvite(duelPlayer);

@@ -68,7 +68,11 @@ public class PlayerData {
     }
 
     public String getDuelInvite(DuelPlayer duelPlayer) {
-        return duelPlayer.getDuelInvite().getPlayerName();
+        if (duelPlayer.getDuelInvite() != null) {
+            return duelPlayer.getDuelInvite().getPlayerName();
+        } else {
+            return null;
+        }
     }
 
     public boolean duelInviteIsTimedout(DuelPlayer duelPlayer) {
@@ -85,7 +89,7 @@ public class PlayerData {
     }
 
     public void setDuelInvite(DuelPlayer duelPlayer, DuelPlayer duelTarget) {
-        if (getDuelInvite(duelTarget).equals(duelPlayer.getPlayer().getName())) {
+        if (getDuelInvite(duelTarget) != null && getDuelInvite(duelTarget).equals(duelPlayer.getPlayer().getName())) {
             return;
         }
 
