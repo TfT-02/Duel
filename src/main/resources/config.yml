@@ -1,17 +1,48 @@
 General:
-  Stats_Tracking_Enabled: true
-  Update_Check_Enabled: true
+    Locale: en_US
+
+    # Amount of time (in minutes) to wait between saves of player information
+    Save_Interval: 10
+
+    # Allow Duel to report on basic anonymous usage
+    Stats_Tracking: true
+
+    # Allow Duel to check if a new version is available
+    Update_Check: true
+    Prefer_Beta: false
+
+    # Should Duel print out debug messages?
+    Verbose_Logging: false
+
+    # Should Duel over-write configs to update, or make new ones ending in .new?
+    Config_Update_Overwrite: true
+
 Duel:
+  # Should Duel prevent player versus player combat outside duels?
   Prevent_PVP: false
+
+  # Override PVP prevention from other plugins?
   Override_PVP: true
+
+  # Save and restore a players inventory when they die in a duel?
   Save_Inventory: true
-  Invitation_Timeout: 30
+
+  # Duels end after 120 seconds by default in a tie
   Duel_Length: 120
+
+  # Heal players to full health when the duel ends?
   Heal_After_Duel: true
+
 Arena:
   Knockback_Enabled: true
   Radius: 20.0
+
 Challenge:
+  # Duel challenges expire after 30 seconds by default
+  Timeout: 30
+
+  # Items on this list can be used to challenge a player with shift + right click.
+  # Adding 'Air' will allow players to send a challenge while unarmed.
   Duel_Items:
     - Diamond_Sword
     - Diamond_Axe
@@ -23,7 +54,11 @@ Challenge:
     - Stone_Axe
     - Wood_Sword
     - Wood_Axe
+
 WorldGuard:
+  # Use the region list as a whitelist?
   Use_As_Whitelist: false
+
+  # Players can(not) duel in the regions listed below.
   Regions:
   - no_duels_here
