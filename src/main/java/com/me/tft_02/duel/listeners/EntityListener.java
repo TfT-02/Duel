@@ -18,8 +18,6 @@ import com.me.tft_02.duel.util.Misc;
 
 public class EntityListener implements Listener {
 
-    PlayerData playerData = new PlayerData();
-
     /**
      * Handle EntityDamageByEntityEvent events that involve modifying the event.
      *

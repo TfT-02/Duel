@@ -29,8 +29,6 @@ import com.me.tft_02.duel.util.player.UserManager;
 
 public class PlayerListener implements Listener {
 
-    PlayerData playerData = new PlayerData();
-
     /**
      * Monitor PlayerInteractEntityEvent events.
      * 
