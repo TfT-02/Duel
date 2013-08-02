@@ -43,6 +43,7 @@ public class Config extends AutoUpdateConfigLoader {
     public  int getInviteTimeout() { return config.getInt("Duel.Invitation_Timeout", 30); }
     public  int getDuelLength() { return config.getInt("Duel.Duel_Length", 120); }
     public  int getMessageRange() { return config.getInt("Duel.Message_Range", 100); }
+    public  boolean getHealEnabled() { return config.getBoolean("Duel.Heal_After_Duel", true); }
 
     /* ARENA SETTINGS */
     public  boolean getBorderKnockBack() { return config.getBoolean("Arena.Knockback_Enabled", true); }

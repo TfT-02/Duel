@@ -7,6 +7,7 @@ Duel:
   Save_Inventory: true
   Invitation_Timeout: 30
   Duel_Length: 120
+  Heal_After_Duel: true
 Arena:
   Knockback_Enabled: true
   Radius: 20.0

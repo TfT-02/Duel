@@ -166,5 +166,11 @@ public class DuelManager {
         if (deleteArena) {
             ArenaManager.deleteArena(player);
         }
+
+        boolean heal = Config.getInstance().getHealEnabled();
+        if (heal) {
+            player.setHealth(player.getMaxHealth());
+            player.setFireTicks(0);
+        }
     }
 }
