@@ -7,7 +7,7 @@ Key:
   - Removal
 
 Version 0.0.4 | Tested on CB 1.6.2-R0.1
- + Added localization!
+ + Added localization! (French and Dutch translations done)
  + Added heal players to full health after a duel
  = Fixed bug where Exp was still dropped even though save inventory was enabled
  ! Changed UpdateChecker to run Asynchronously
