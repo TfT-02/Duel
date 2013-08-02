@@ -98,7 +98,7 @@ public class PlayerListener implements Listener {
      * 
      * @param event The event to check
      */
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
@@ -184,6 +184,7 @@ public class PlayerListener implements Listener {
             PlayerData.storeLevelsAndExp(duelPlayer);
 
             event.getDrops().clear();
+            event.setDroppedExp(0);
         }
 
         DuelManager.endDuelResult(PlayerData.getDuelTarget(player), player);
