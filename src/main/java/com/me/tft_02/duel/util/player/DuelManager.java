@@ -7,8 +7,10 @@ import org.bukkit.entity.Player;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.database.DatabaseManager;
+import com.me.tft_02.duel.datatypes.DuelResultType;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+import com.me.tft_02.duel.events.player.DuelEndEvent;
 import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.duels.CountdownTask;
 import com.me.tft_02.duel.runnables.duels.DuelCommenceTask;
@@ -134,6 +136,12 @@ public class DuelManager {
         endDuel(winner, true);
         endDuel(loser, false);
 
+        DuelEndEvent eventWinner = new DuelEndEvent(winner, DuelResultType.WIN);
+        Duel.p.getServer().getPluginManager().callEvent(eventWinner);
+
+        DuelEndEvent eventLoser = new DuelEndEvent(loser, DuelResultType.LOSS);
+        Duel.p.getServer().getPluginManager().callEvent(eventLoser);
+
         notifyPlayers(winner.getLocation(), DuelMessageType.END);
 
         DatabaseManager.increaseWinCount(winner, 1);
@@ -149,6 +157,9 @@ public class DuelManager {
         if (target == null) {
             return;
         }
+
+        DuelEndEvent event = new DuelEndEvent(player, DuelResultType.TIE);
+        Duel.p.getServer().getPluginManager().callEvent(event);
 
         endDuel(player, true);
         endDuel(target, true);
