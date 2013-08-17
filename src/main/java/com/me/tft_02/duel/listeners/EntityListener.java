@@ -56,13 +56,53 @@ public class EntityListener implements Listener {
 
             if (attacker instanceof Player) {
                 Player attackingPlayer = (Player) attacker;
+                if (Config.getInstance().getOverridePVP() && PlayerData.areDueling(attackingPlayer, defendingPlayer)) {
+                    event.setCancelled(false);
+                }
+            }
+        }
+    }
+
+    /**
+     * Handle EntityDamageByEntityEvent events that involve modifying the event.
+     *
+     * @param event The event to modify
+     */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onEntityDamageByEntityLowest(EntityDamageByEntityEvent event) {
+        if (event.getDamage() <= 0) {
+            return;
+        }
+
+        Entity attacker = event.getDamager();
+        Entity defender = event.getEntity();
+
+        if (Misc.isNPCEntity(attacker) || Misc.isNPCEntity(defender)) {
+            return;
+        }
+
+        if (attacker instanceof Projectile) {
+            attacker = ((Projectile) attacker).getShooter();
+        }
+        else if (attacker instanceof Tameable) {
+            AnimalTamer animalTamer = ((Tameable) attacker).getOwner();
+
+            if (animalTamer instanceof Entity) {
+                attacker = (Entity) animalTamer;
+            }
+        }
+
+        if (defender instanceof Player) {
+            Player defendingPlayer = (Player) defender;
+
+            if (!defendingPlayer.isOnline()) {
+                return;
+            }
+
+            if (attacker instanceof Player) {
+                Player attackingPlayer = (Player) attacker;
                 if (Config.getInstance().getPreventPVP() && !PlayerData.areDueling(attackingPlayer, defendingPlayer)) {
                     event.setCancelled(true);
-                }
-
-                // Override other plugins which prevent PVP?
-                else if (Config.getInstance().getOverridePVP() && PlayerData.areDueling(attackingPlayer, defendingPlayer)) {
-                    event.setCancelled(false);
                 }
             }
         }
