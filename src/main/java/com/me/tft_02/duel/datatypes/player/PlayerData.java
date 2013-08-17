@@ -58,13 +58,11 @@ public class PlayerData {
             return false;
         }
 
-
-        if (playerTargetName.equals(targetTargetName) && targetTargetName.equals(playerTargetName)) {
+        if (playerTargetName.equals(target.getName()) && targetTargetName.equals(player.getName())) {
             return true;
-
         }
-        return false;
 
+        return false;
     }
 
     public String getDuelInvite(DuelPlayer duelPlayer) {
