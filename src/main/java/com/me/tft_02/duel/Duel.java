@@ -69,7 +69,7 @@ public class Duel extends JavaPlugin {
                 Metrics metrics = new Metrics(this);
                 metrics.start();
             }
-            catch (IOException e) {}
+            catch (IOException ignored) {}
         }
     }
 

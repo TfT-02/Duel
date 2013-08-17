@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.bukkit.Material;
 
-import com.me.tft_02.duel.Duel;
-
 public class Config extends AutoUpdateConfigLoader {
     private static  Config instance;
 
@@ -66,7 +64,7 @@ public class Config extends AutoUpdateConfigLoader {
 
     /* WORLDGUARD SETTINGS */
     public boolean getUseAsWhitelist() { return config.getBoolean("WorldGuard.Use_As_Whitelist", false); }
-    public List<String> getRegionList() { return Duel.p.getConfig().getStringList("WorldGuard.Regions"); }
+    public List<String> getRegionList() { return config.getStringList("WorldGuard.Regions"); }
 
     /* @formatter:on */
 }

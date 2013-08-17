@@ -15,6 +15,7 @@ import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.duels.CountdownTask;
 import com.me.tft_02.duel.runnables.duels.DuelCommenceTask;
 import com.me.tft_02.duel.runnables.duels.DuelEndTask;
+import com.me.tft_02.duel.runnables.duels.HealPlayerTask;
 import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.Permissions;
@@ -149,6 +150,10 @@ public class DuelManager {
 
         loser.playSound(loser.getLocation(), Sound.WITHER_SPAWN, 1F, 0F);
         winner.playSound(loser.getLocation(), Sound.WITHER_SPAWN, 1F, 0F);
+
+        if (Config.getInstance().getHealEnabled()) {
+            new HealPlayerTask(winner).runTask(Duel.p);
+        }
     }
 
     public static void endDuelInTie(Player player) {
@@ -168,6 +173,12 @@ public class DuelManager {
 
         DatabaseManager.increaseTieCount(player, 1);
         DatabaseManager.increaseTieCount(target, 1);
+
+
+        if (Config.getInstance().getHealEnabled()) {
+            new HealPlayerTask(player).runTask(Duel.p);
+            new HealPlayerTask(target).runTask(Duel.p);
+        }
     }
 
     public static void endDuel(Player player, boolean deleteArena) {
@@ -176,12 +187,6 @@ public class DuelManager {
 
         if (deleteArena) {
             ArenaManager.deleteArena(player);
-        }
-
-        boolean heal = Config.getInstance().getHealEnabled();
-        if (heal) {
-            player.setHealth(player.getMaxHealth());
-            player.setFireTicks(0);
         }
     }
 }

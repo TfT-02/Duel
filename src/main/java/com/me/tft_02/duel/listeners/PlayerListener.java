@@ -22,6 +22,7 @@ import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.runnables.RetrieveLevelsTask;
+import com.me.tft_02.duel.runnables.duels.HealPlayerTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
