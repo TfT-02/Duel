@@ -15,54 +15,56 @@ General:
     Config_Update_Overwrite: true
 
 Duel:
-  # Should Duel prevent player versus player combat outside duels?
-  Prevent_PVP: false
     # Should it be possible to challenge players to a duel using commands?
     Enable_Challenge_Commands: false
 
-  # Override PVP prevention from other plugins?
-  Override_PVP: true
     # Should it be possible to challenge players to a duel by interacting? (Right-clicking)
     Enable_Challenge_Interact: true
 
-  # Save and restore a players inventory when they die in a duel?
-  Save_Inventory: true
+    # Should Duel prevent player versus player combat outside duels?
+    Prevent_PVP: false
 
-  # Duels end after 120 seconds by default in a tie
-  Duel_Length: 120
+    # Override PVP prevention from other plugins?
+    Override_PVP: true
 
-  # The range in which players will receive messages about a duel starting
-  Message_Range: 100
+    # Save and restore a players inventory when they die in a duel?
+    Save_Inventory: true
 
-  # Heal players to full health when the duel ends?
-  Heal_After_Duel: true
+    # Duels end after 120 seconds by default in a tie
+    Duel_Length: 120
+
+    # The range in which players will receive messages about a duel starting
+    Message_Range: 100
+
+    # Heal players to full health when the duel ends?
+    Heal_After_Duel: true
 
 Arena:
-  Knockback_Enabled: true
-  Radius: 20.0
+    Knockback_Enabled: true
+    Radius: 20.0
 
 Challenge:
-  # Duel challenges expire after 30 seconds by default
-  Timeout: 30
+    # Duel challenges expire after 30 seconds by default
+    Timeout: 30
 
-  # Items on this list can be used to challenge a player with shift + right click.
-  # Adding 'Air' will allow players to send a challenge while unarmed.
-  Duel_Items:
-    - Diamond_Sword
-    - Diamond_Axe
-    - Gold_Sword
-    - Gold_Axe
-    - Iron_Sword
-    - Iron_Axe
-    - Stone_Sword
-    - Stone_Axe
-    - Wood_Sword
-    - Wood_Axe
+    # Items on this list can be used to challenge a player with shift + right click.
+    # Adding 'Air' will allow players to send a challenge while unarmed.
+    Duel_Items:
+      - Diamond_Sword
+      - Diamond_Axe
+      - Gold_Sword
+      - Gold_Axe
+      - Iron_Sword
+      - Iron_Axe
+      - Stone_Sword
+      - Stone_Axe
+      - Wood_Sword
+      - Wood_Axe
 
 WorldGuard:
-  # Use the region list as a whitelist?
-  Use_As_Whitelist: false
+    # Use the region list as a whitelist?
+    Use_As_Whitelist: false
 
-  # Players can(not) duel in the regions listed below.
-  Regions:
-  - no_duels_here
+    # Players can(not) duel in the regions listed below.
+    Regions:
+    - no_duels_here
