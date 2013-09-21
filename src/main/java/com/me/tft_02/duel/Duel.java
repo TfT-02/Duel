@@ -30,6 +30,9 @@ public class Duel extends JavaPlugin {
     // Update Check
     public boolean updateAvailable;
 
+    // Config Validation Check
+    public boolean noErrorsInConfigFiles = true;
+
     /**
      * Run things on enable.
      */
@@ -37,6 +40,12 @@ public class Duel extends JavaPlugin {
     public void onEnable() {
         p = this;
         getLogger().setFilter(new LogFilter(this));
+
+        Config.getInstance();
+
+        if (!noErrorsInConfigFiles) {
+            return;
+        }
 
         registerEvents();
 

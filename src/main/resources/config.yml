@@ -27,6 +27,9 @@ Duel:
   # Duels end after 120 seconds by default in a tie
   Duel_Length: 120
 
+  # The range in which players will receive messages about a duel starting
+  Message_Range: 100
+
   # Heal players to full health when the duel ends?
   Heal_After_Duel: true
 

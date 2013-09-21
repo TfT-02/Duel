@@ -1,5 +1,6 @@
 package com.me.tft_02.duel.config;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -10,6 +11,7 @@ public class Config extends AutoUpdateConfigLoader {
 
     private Config() {
         super("config.yml");
+        validate();
     }
 
     public static Config getInstance() {
@@ -18,6 +20,24 @@ public class Config extends AutoUpdateConfigLoader {
         }
 
         return instance;
+    }
+
+    @Override
+    protected boolean validateKeys() {
+        // Validate all the settings!
+        List<String> reason = new ArrayList<String>();
+
+        /* General Settings */
+        if (getSaveInterval() <= 0) {
+            reason.add("General.Save_Interval should be greater than 0!");
+        }
+
+        /* Duel Settings */
+        if (getDuelLength() <= 0) {
+            reason.add("Duel.Duel_Length should be greater than 0!");
+        }
+
+        return noErrorsInConfig(reason);
     }
 
     @Override

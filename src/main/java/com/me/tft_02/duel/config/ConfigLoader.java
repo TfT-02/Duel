@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -88,6 +89,29 @@ public abstract class ConfigLoader {
             catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    protected boolean validateKeys() {
+        return true;
+    }
+
+    protected boolean noErrorsInConfig(List<String> issues) {
+        for (String issue : issues) {
+            plugin.getLogger().warning(issue);
+        }
+
+        return issues.isEmpty();
+    }
+
+    protected void validate() {
+        if (validateKeys()) {
+            plugin.debug("No errors found in " + fileName + "!");
+        }
+        else {
+            plugin.getLogger().warning("Errors were found in " + fileName + "! Duel was disabled!");
+            plugin.getServer().getPluginManager().disablePlugin(plugin);
+            plugin.noErrorsInConfigFiles = false;
         }
     }
 }

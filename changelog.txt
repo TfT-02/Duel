@@ -10,6 +10,7 @@ Version 0.0.4 | Tested on CB 1.6.2-R0.1
  + Added localization! (French and Dutch translations done)
  + Added heal players to full health after a duel
  + Added DuelEndEvent, is fired when duels end
+ + Added config validation, Duel is disabled if there are errors in config.yml
  = Fixed bug where Exp was still dropped even though save inventory was enabled
  ! Changed UpdateChecker to run Asynchronously
  - Removed Metrics
