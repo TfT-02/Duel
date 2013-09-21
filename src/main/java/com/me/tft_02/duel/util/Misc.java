@@ -50,8 +50,7 @@ public class Misc {
         double Y = Math.sin(pitch) * Math.sin(yaw);
         double Z = Math.cos(pitch);
 
-        Vector vector = new Vector(X, Z, Y);
-        return vector;
+        return new Vector(X, Z, Y);
     }
 
     public static List<Player> getNearbyPlayers(Location location, int range) {
