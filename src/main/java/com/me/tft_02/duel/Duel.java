@@ -90,7 +90,7 @@ public class Duel extends JavaPlugin {
         if (getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
             worldGuardEnabled = true;
             debug("WorldGuard found!");
-            getServer().getPluginManager().registerEvents(new WorldGuardListener(this), this);
+            getServer().getPluginManager().registerEvents(new WorldGuardListener(), this);
         }
     }
 

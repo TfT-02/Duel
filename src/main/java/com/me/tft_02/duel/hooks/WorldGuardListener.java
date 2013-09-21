@@ -6,16 +6,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 
 import com.me.tft_02.duel.config.Config;
-import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.sk89q.worldguard.protection.events.DisallowedPVPEvent;
 
 public class WorldGuardListener implements Listener {
-    Duel plugin;
-
-    public WorldGuardListener(final Duel instance) {
-        plugin = instance;
-    }
 
     /**
      * Handle DisallowedPVPEvent events that involve modifying the event.
