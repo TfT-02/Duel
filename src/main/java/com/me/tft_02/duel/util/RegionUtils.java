@@ -4,8 +4,9 @@ import java.util.LinkedList;
 
 import org.bukkit.Location;
 
-import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.config.Config;
+
 import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;

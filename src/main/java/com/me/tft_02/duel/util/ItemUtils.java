@@ -2,8 +2,8 @@ package com.me.tft_02.duel.util;
 
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.config.Config;
 
 public class ItemUtils {
     Duel plugin;

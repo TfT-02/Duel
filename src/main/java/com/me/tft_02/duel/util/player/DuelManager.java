@@ -4,8 +4,8 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.database.DatabaseManager;
 import com.me.tft_02.duel.datatypes.DuelResultType;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;

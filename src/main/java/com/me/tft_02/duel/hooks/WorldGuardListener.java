@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+
 import com.sk89q.worldguard.protection.events.DisallowedPVPEvent;
 
 public class WorldGuardListener implements Listener {
