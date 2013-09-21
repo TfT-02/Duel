@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 import com.me.tft_02.duel.commands.DuelCommand;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.database.Data;
+import com.me.tft_02.duel.hooks.FactionsListener;
 import com.me.tft_02.duel.hooks.GhostsListener;
 import com.me.tft_02.duel.hooks.WorldGuardListener;
 import com.me.tft_02.duel.listeners.EntityListener;
@@ -19,6 +20,7 @@ import com.me.tft_02.duel.runnables.UpdateCheckerTask;
 import com.me.tft_02.duel.runnables.duels.DuelRangeTask;
 import com.me.tft_02.duel.util.LogFilter;
 import com.me.tft_02.duel.util.player.UserManager;
+
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Duel extends JavaPlugin {
@@ -26,6 +28,7 @@ public class Duel extends JavaPlugin {
 
     public boolean worldGuardEnabled = false;
     public boolean ghostsEnabled = false;
+    public boolean factionsEnabled = false;
 
     // Update Check
     public boolean updateAvailable;
@@ -50,6 +53,7 @@ public class Duel extends JavaPlugin {
         registerEvents();
 
         setupWorldGuard();
+        setupFactions();
         setupGhosts();
 
         getCommand("duel").setExecutor(new DuelCommand());
@@ -91,6 +95,14 @@ public class Duel extends JavaPlugin {
             worldGuardEnabled = true;
             debug("WorldGuard found!");
             getServer().getPluginManager().registerEvents(new WorldGuardListener(), this);
+        }
+    }
+
+    private void setupFactions() {
+        if (getServer().getPluginManager().isPluginEnabled("Factions")) {
+            factionsEnabled = true;
+            debug("Factions found!");
+            getServer().getPluginManager().registerEvents(new FactionsListener(), this);
         }
     }
 
