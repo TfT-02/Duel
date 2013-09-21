@@ -87,18 +87,26 @@ public class PlayerData {
     }
 
     public void setDuelInvite(DuelPlayer duelPlayer, DuelPlayer duelTarget) {
+        Player player = duelPlayer.getPlayer();
+
         if (getDuelInvite(duelTarget) != null && getDuelInvite(duelTarget).equals(duelPlayer.getPlayer().getName())) {
+            player.sendMessage(LocaleLoader.getString("Duel.Invite.AlreadySend"));
             return;
         }
 
-        Player player = duelPlayer.getPlayer();
         Player target = duelTarget.getPlayer();
 
         player.sendMessage(LocaleLoader.getString("Duel.Invite.Send", target.getName()));
         duelTarget.setDuelInvitationKey(new DuelInvitationKey(player.getName(), Misc.getSystemTime()));
 
         target.sendMessage(LocaleLoader.getString("Duel.Invite.Receive.1", player.getName()));
-        target.sendMessage(LocaleLoader.getString("Duel.Invite.Receive.2", player.getName()));
+
+        if (Config.getInstance().getChallengeInteractEnabled()) {
+            target.sendMessage(LocaleLoader.getString("Duel.Invite.Receive.2", player.getName()));
+        }
+        else if (Config.getInstance().getChallengeCommandsEnabled()) {
+            target.sendMessage(LocaleLoader.getString("Duel.Invite.Receive.3", player.getName()));
+        }
     }
 
     public void removeDuelInvitation(DuelPlayer duelPlayer) {

@@ -17,9 +17,13 @@ General:
 Duel:
   # Should Duel prevent player versus player combat outside duels?
   Prevent_PVP: false
+    # Should it be possible to challenge players to a duel using commands?
+    Enable_Challenge_Commands: false
 
   # Override PVP prevention from other plugins?
   Override_PVP: true
+    # Should it be possible to challenge players to a duel by interacting? (Right-clicking)
+    Enable_Challenge_Interact: true
 
   # Save and restore a players inventory when they die in a duel?
   Save_Inventory: true

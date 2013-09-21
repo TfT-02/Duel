@@ -5,18 +5,21 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.locale.LocaleLoader;
 
 public class DuelCommand implements CommandExecutor {
     private CommandExecutor reloadCommand = new ReloadCommand();
     private CommandExecutor helpCommand = new HelpCommand();
     private CommandExecutor statsCommand = new StatsCommand();
+    private CommandExecutor challengeCommand = new ChallengeCommand();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("duel")) {
             switch (args.length) {
                 case 1:
+                case 2:
                     if (args[0].equalsIgnoreCase("help")) {
                         return helpCommand.onCommand(sender, command, label, args);
                     }
@@ -25,6 +28,10 @@ public class DuelCommand implements CommandExecutor {
                     }
                     else if (args[0].equalsIgnoreCase("stats")) {
                         return statsCommand.onCommand(sender, command, label, args);
+                    }
+
+                    if (Config.getInstance().getChallengeCommandsEnabled() && (args[0].equalsIgnoreCase("challenge") || args[0].equalsIgnoreCase("request"))) {
+                        return challengeCommand.onCommand(sender, command, label, args);
                     }
                 default:
                     return printUsage(sender);

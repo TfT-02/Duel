@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -62,5 +63,51 @@ public class Misc {
             }
         }
         return nearbyPlayers;
+    }
+
+    /**
+     * Attempts to match any player names with the given name, and returns a list of all possibly matches.
+     *
+     * This list is not sorted in any particular order.
+     * If an exact match is found, the returned list will only contain a single result.
+     *
+     * @param partialName Name to match
+     * @return List of all possible names
+     */
+    public static List<String> matchPlayer(String partialName) {
+        List<String> matchedPlayers = new ArrayList<String>();
+
+        for (OfflinePlayer offlinePlayer : Duel.p.getServer().getOfflinePlayers()) {
+            String playerName = offlinePlayer.getName();
+
+            if (partialName.equalsIgnoreCase(playerName)) {
+                // Exact match
+                matchedPlayers.clear();
+                matchedPlayers.add(playerName);
+                break;
+            }
+            if (playerName.toLowerCase().contains(partialName.toLowerCase())) {
+                // Partial match
+                matchedPlayers.add(playerName);
+            }
+        }
+
+        return matchedPlayers;
+    }
+
+    /**
+     * Get a matched player name if one was found in the database.
+     *
+     * @param partialName Name to match
+     * @return Matched name or {@code partialName} if no match was found
+     */
+    public static String getMatchedPlayerName(String partialName) {
+        List<String> matches = matchPlayer(partialName);
+
+        if (matches.size() == 1) {
+            partialName = matches.get(0);
+        }
+
+        return partialName;
     }
 }

@@ -2,7 +2,6 @@ package com.me.tft_02.duel.util.player;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,19 +71,13 @@ public final class UserManager {
     }
 
     /**
-     * Get the DuelPlayer of a player by a partial name.
+     * Get the DuelPlayer of a player by name.
      *
-     * @param playerName The partial name of the player whose DuelPlayer to retrieve
+     * @param playerName The name of the player whose DuelPlayer to retrieve
      * @return the player's DuelPlayer object
      */
     public static DuelPlayer getPlayer(String playerName) {
-        List<Player> matches = Duel.p.getServer().matchPlayer(playerName);
-
-        if (matches.size() == 1) {
-            playerName = matches.get(0).getName();
-        }
-
-        return players.get(playerName);
+        return retrieveDuelPlayer(playerName, false);
     }
 
     /**
@@ -94,6 +87,31 @@ public final class UserManager {
      * @return the player's DuelPlayer object
      */
     public static DuelPlayer getPlayer(OfflinePlayer player) {
-        return players.get(player.getName());
+        return retrieveDuelPlayer(player.getName(), false);
+    }
+
+    public static DuelPlayer getPlayer(String playerName, boolean offlineValid) {
+        return retrieveDuelPlayer(playerName, offlineValid);
+    }
+
+    private static DuelPlayer retrieveDuelPlayer(String playerName, boolean offlineValid) {
+        DuelPlayer DuelPlayer = players.get(playerName);
+
+        if (DuelPlayer == null) {
+            Player player = Duel.p.getServer().getPlayerExact(playerName);
+
+            if (player == null) {
+                if (!offlineValid) {
+                    Duel.p.getLogger().warning("A valid DuelPlayer object could not be found for " + playerName + ".");
+                }
+
+                return null;
+            }
+
+            DuelPlayer = new DuelPlayer(player);
+            players.put(playerName, DuelPlayer);
+        }
+
+        return DuelPlayer;
     }
 }

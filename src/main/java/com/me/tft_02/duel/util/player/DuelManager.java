@@ -31,16 +31,22 @@ public class DuelManager {
     };
 
     public static boolean canDuel(Player player) {
+        return canDuel(player, true);
+    }
+
+    public static boolean canDuel(Player player, boolean interact) {
         if (!Permissions.challenge(player)) {
             return false;
         }
 
-        if (!player.isSneaking()) {
-            return false;
-        }
+        if (interact) {
+            if (!player.isSneaking()) {
+                return false;
+            }
 
-        if (!ItemUtils.isDuelWeapon(player.getItemInHand())) {
-            return false;
+            if (!ItemUtils.isDuelWeapon(player.getItemInHand())) {
+                return false;
+            }
         }
 
         if (Duel.p.worldGuardEnabled && !RegionUtils.canDuelHere(player.getLocation())) {

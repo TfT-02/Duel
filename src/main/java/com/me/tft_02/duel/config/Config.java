@@ -33,6 +33,10 @@ public class Config extends AutoUpdateConfigLoader {
         }
 
         /* Duel Settings */
+        if (!(getChallengeCommandsEnabled() || getChallengeInteractEnabled())) {
+            reason.add("Either Enable_Challenge_Commands or Enable_Challenge_Interact should be enabled!");
+        }
+
         if (getDuelLength() <= 0) {
             reason.add("Duel.Duel_Length should be greater than 0!");
         }
@@ -54,6 +58,8 @@ public class Config extends AutoUpdateConfigLoader {
     public boolean getConfigOverwriteEnabled() { return config.getBoolean("General.Config_Update_Overwrite", true); }
 
     /* DUEL SETTINGS */
+    public boolean getChallengeCommandsEnabled() { return config.getBoolean("Duel.Enable_Challenge_Commands", false); }
+    public boolean getChallengeInteractEnabled() { return config.getBoolean("Duel.Enable_Challenge_Interact", true); }
     public boolean getPreventPVP() { return config.getBoolean("Duel.Prevent_PVP", false); }
     public boolean getOverridePVP() { return config.getBoolean("Duel.Override_PVP", true); }
     public boolean getSaveInventory() { return config.getBoolean("Duel.Save_Inventory", true); }

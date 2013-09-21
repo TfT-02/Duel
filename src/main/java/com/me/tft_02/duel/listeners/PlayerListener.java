@@ -17,12 +17,11 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 
-import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.Duel;
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.runnables.RetrieveLevelsTask;
-import com.me.tft_02.duel.runnables.duels.HealPlayerTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
@@ -37,6 +36,10 @@ public class PlayerListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerInteract(PlayerInteractEntityEvent event) {
+        if (!Config.getInstance().getChallengeInteractEnabled()) {
+            return;
+        }
+
         Player player = event.getPlayer();
         Entity entity = event.getRightClicked();
 
