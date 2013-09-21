@@ -12,6 +12,7 @@ Version 0.0.4 | Tested on CB 1.6.2-R0.1
  + Added DuelEndEvent, is fired when duels end
  = Fixed bug where Exp was still dropped even though save inventory was enabled
  ! Changed UpdateChecker to run Asynchronously
+ - Removed Metrics
 
 Version 0.0.3 | Tested on CB 1.5.2-R1.0 && CB 1.6.2-R0.1
  + Added more WorldGuard support, white- or blacklist certain regions

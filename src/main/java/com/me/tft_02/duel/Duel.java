@@ -1,13 +1,10 @@
 package com.me.tft_02.duel;
 
-import java.io.IOException;
-
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.mcstats.Metrics;
 
 import com.me.tft_02.duel.commands.DuelCommand;
 import com.me.tft_02.duel.config.Config;
@@ -20,8 +17,8 @@ import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.RegionCheckTask;
 import com.me.tft_02.duel.runnables.UpdateCheckerTask;
 import com.me.tft_02.duel.runnables.duels.DuelRangeTask;
-import com.me.tft_02.duel.util.player.UserManager;
 import com.me.tft_02.duel.util.LogFilter;
+import com.me.tft_02.duel.util.player.UserManager;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Duel extends JavaPlugin {
@@ -63,14 +60,6 @@ public class Duel extends JavaPlugin {
         }
 
         checkForUpdates();
-
-        if (Config.getInstance().getStatsTrackingEnabled()) {
-            try {
-                Metrics metrics = new Metrics(this);
-                metrics.start();
-            }
-            catch (IOException ignored) {}
-        }
     }
 
     /**

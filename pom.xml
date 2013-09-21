@@ -41,32 +41,6 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>1.5</version>
-				<configuration>
-					<artifactSet>
-						<includes>
-							<include>org.mcstats.bukkit:metrics</include>
-						</includes>
-					</artifactSet>
-					<relocations>
-						<relocation>
-							<pattern>org.mcstats.bukkit:metrics</pattern>
-							<shadedPattern>com.me.tft_02.duel.util</shadedPattern>
-						</relocation>
-					</relocations>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 	<repositories>
@@ -77,10 +51,6 @@
 		<repository>
 			<id>sk89q-repo</id>
 			<url>http://maven.sk89q.com/repo/</url>
-		</repository>
-		<repository>
-			<id>Plugin Metrics</id>
-			<url>http://repo.mcstats.org/content/repositories/public</url>
 		</repository>
 		<repository>
 			<id>genesis-repo</id>
@@ -101,12 +71,6 @@
 			<version>LATEST</version>
 			<scope>compile</scope>
 			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>org.mcstats.bukkit</groupId>
-			<artifactId>metrics</artifactId>
-			<version>R7</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.me.tft_02.ghosts</groupId>
