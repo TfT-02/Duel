@@ -3,6 +3,7 @@ package com.me.tft_02.duel.util;
 import java.util.LinkedList;
 
 import org.bukkit.Location;
+import org.bukkit.World;
 
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
@@ -14,9 +15,25 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 public class RegionUtils {
 
     public static boolean canDuelHere(Location location) {
-        boolean isWhitelist = Config.getInstance().getUseAsWhitelist();
+        return canDuelHere(location.getWorld()) && canDuelHere(getRegion(location));
+    }
 
-        if (isListedRegion(getRegion(location))) {
+    private static boolean canDuelHere(World world) {
+        boolean isWhitelist = Config.getInstance().getWGUseAsWhitelist();
+
+        if (Config.getInstance().getWorldList().contains(world.getName())) {
+            return isWhitelist;
+        }
+        else if (!isWhitelist) {
+            return true;
+        }
+        return isWhitelist;
+    }
+
+    private static boolean canDuelHere(String region) {
+        boolean isWhitelist = Config.getInstance().getWGUseAsWhitelist();
+
+        if (isListedRegion(region)) {
             return isWhitelist;
         }
         else if (!isWhitelist) {
@@ -26,7 +43,7 @@ public class RegionUtils {
     }
 
     private static boolean isListedRegion(String region) {
-        for (String name : Config.getInstance().getRegionList()) {
+        for (String name : Config.getInstance().getWGRegionList()) {
             if (region.equalsIgnoreCase("[" + name + "]")) {
                 return true;
             }
@@ -34,7 +51,7 @@ public class RegionUtils {
         return false;
     }
 
-    public static String getRegion(Location location) {
+    private static String getRegion(Location location) {
         RegionManager regionManager = Duel.p.getWorldGuard().getRegionManager(location.getWorld());
         ApplicableRegionSet set = regionManager.getApplicableRegions(location);
         LinkedList<String> parentNames = new LinkedList<String>();

@@ -88,8 +88,12 @@ public class Config extends AutoUpdateConfigLoader {
     }
 
     /* WORLDGUARD SETTINGS */
-    public boolean getUseAsWhitelist() { return config.getBoolean("WorldGuard.Use_As_Whitelist", false); }
-    public List<String> getRegionList() { return config.getStringList("WorldGuard.Regions"); }
+    public boolean getWGUseAsWhitelist() { return config.getBoolean("WorldGuard.Use_As_Whitelist", false); }
+    public List<String> getWGRegionList() { return config.getStringList("WorldGuard.Regions"); }
+
+    /* WORLD SETTINGS */
+    public boolean getWorldUseAsWhitelist() { return config.getBoolean("Worlds.Use_As_Whitelist", false); }
+    public List<String> getWorldList() { return config.getStringList("Worlds.Worlds"); }
 
     /* @formatter:on */
 }

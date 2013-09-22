@@ -68,3 +68,11 @@ WorldGuard:
     # Players can(not) duel in the regions listed below.
     Regions:
     - no_duels_here
+
+Worlds:
+    # Use the world list as a whitelist?
+    Use_As_Whitelist: false
+
+    # Players can(not) duel in the worlds listed below.
+    Worlds:
+    - no_duels_here
