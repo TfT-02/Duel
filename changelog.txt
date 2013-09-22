@@ -8,6 +8,7 @@ Key:
 
 Version 0.1.0 | Tested on CB 1.6.4-R0.1
  + Added white- or blacklist for worlds
+ ! Improved region checking
 
 Version 0.0.4 | Tested on CB 1.6.2-R1.0
  + Added Factions support (Requires Factions v2.2.0+)

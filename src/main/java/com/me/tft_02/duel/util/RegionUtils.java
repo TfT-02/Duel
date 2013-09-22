@@ -19,15 +19,13 @@ public class RegionUtils {
     }
 
     private static boolean canDuelHere(World world) {
-        boolean isWhitelist = Config.getInstance().getWGUseAsWhitelist();
+        boolean isWhitelist = Config.getInstance().getWorldUseAsWhitelist();
 
         if (Config.getInstance().getWorldList().contains(world.getName())) {
             return isWhitelist;
         }
-        else if (!isWhitelist) {
-            return true;
-        }
-        return isWhitelist;
+
+        return !isWhitelist;
     }
 
     private static boolean canDuelHere(String region) {
@@ -36,10 +34,8 @@ public class RegionUtils {
         if (isListedRegion(region)) {
             return isWhitelist;
         }
-        else if (!isWhitelist) {
-            return true;
-        }
-        return isWhitelist;
+
+        return !isWhitelist;
     }
 
     private static boolean isListedRegion(String region) {
@@ -70,6 +66,7 @@ public class RegionUtils {
         for (String name : parentNames) {
             regions.remove(name);
         }
+
         return regions.toString();
     }
 }

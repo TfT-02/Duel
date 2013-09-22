@@ -23,7 +23,12 @@ public class PlayerData {
 
     public static Player getDuelTarget(Player player) {
         String targetName = UserManager.getPlayer(player).getTargetName();
-        return Duel.p.getServer().getPlayer(targetName);
+
+        if (targetName != null) {
+            return Duel.p.getServer().getPlayer(targetName);
+        }
+
+        return null;
     }
 
     public static boolean removeDuelTarget(Player player) {
