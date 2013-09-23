@@ -22,8 +22,6 @@ import com.me.tft_02.duel.util.Permissions;
 import com.me.tft_02.duel.util.RegionUtils;
 
 public class DuelManager {
-    private static int MESSAGE_RANGE = Config.getInstance().getMessageRange();
-
     public enum DuelMessageType {
         START,
         END,
@@ -80,7 +78,7 @@ public class DuelManager {
     }
 
     public static void notifyPlayers(Location location, String message) {
-        for (Player player : Misc.getNearbyPlayers(location, MESSAGE_RANGE)) {
+        for (Player player : Misc.getNearbyPlayers(location, Config.getInstance().getMessageRange())) {
             player.sendMessage(message);
         }
     }
