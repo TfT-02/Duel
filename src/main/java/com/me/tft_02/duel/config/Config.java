@@ -58,8 +58,6 @@ public class Config extends AutoUpdateConfigLoader {
     public boolean getConfigOverwriteEnabled() { return config.getBoolean("General.Config_Update_Overwrite", true); }
 
     /* DUEL SETTINGS */
-    public boolean getChallengeCommandsEnabled() { return config.getBoolean("Duel.Enable_Challenge_Commands", false); }
-    public boolean getChallengeInteractEnabled() { return config.getBoolean("Duel.Enable_Challenge_Interact", true); }
     public boolean getPreventPVP() { return config.getBoolean("Duel.Prevent_PVP", false); }
     public boolean getOverridePVP() { return config.getBoolean("Duel.Override_PVP", true); }
     public boolean getSaveInventory() { return config.getBoolean("Duel.Save_Inventory", true); }
@@ -73,6 +71,8 @@ public class Config extends AutoUpdateConfigLoader {
     public boolean getBorderParticleEffectsEnabled() { return false; }
 
     /* CHALLENGE SETTINGS */
+    public boolean getChallengeCommandsEnabled() { return config.getBoolean("Challenge.Enable_Challenge_Commands", false); }
+    public boolean getChallengeInteractEnabled() { return config.getBoolean("Challenge.Enable_Challenge_Interact", true); }
     public int getInviteTimeout() { return config.getInt("Challenge.Timeout", 30); }
     public HashSet<Material> getDuelWeaponItems() {
         HashSet<Material> miscItems = new HashSet<Material>();
