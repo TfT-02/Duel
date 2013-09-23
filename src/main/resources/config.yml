@@ -34,7 +34,7 @@ Duel:
     Duel_Length: 120
 
     # The range in which players will receive messages about a duel starting
-    Message_Range: 100
+    Message_Range: 50
 
     # Heal players to full health when the duel ends?
     Heal_After_Duel: true

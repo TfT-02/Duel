@@ -64,7 +64,7 @@ public class Config extends AutoUpdateConfigLoader {
     public boolean getOverridePVP() { return config.getBoolean("Duel.Override_PVP", true); }
     public boolean getSaveInventory() { return config.getBoolean("Duel.Save_Inventory", true); }
     public int getDuelLength() { return config.getInt("Duel.Duel_Length", 120); }
-    public int getMessageRange() { return config.getInt("Duel.Message_Range", 100); }
+    public int getMessageRange() { return config.getInt("Duel.Message_Range", 50); }
     public boolean getHealEnabled() { return config.getBoolean("Duel.Heal_After_Duel", true); }
 
     /* ARENA SETTINGS */
