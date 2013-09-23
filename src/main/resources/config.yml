@@ -28,6 +28,7 @@ Duel:
     Duel_Length: 120
 
     # The range in which players will receive messages about a duel starting
+    # Setting this value to 0 will only send the messages to the two dueling players
     Message_Range: 50
 
     # Heal players to full health when the duel ends?
