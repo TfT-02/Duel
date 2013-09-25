@@ -33,7 +33,7 @@ public class HelpCommand implements CommandExecutor {
         int nextPage = page + 1;
 
         if (page > maxPages) {
-            sender.sendMessage(LocaleLoader.getString(LocaleLoader.getString("HelpCommand.0"), maxPages));
+            sender.sendMessage(LocaleLoader.getString(LocaleLoader.getString("Help.Page_Does_Not_Exist"), maxPages));
             return;
         }
 
