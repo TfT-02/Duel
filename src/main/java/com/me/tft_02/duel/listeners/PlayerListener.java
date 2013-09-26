@@ -25,6 +25,7 @@ import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.RetrieveLevelsTask;
 import com.me.tft_02.duel.util.Misc;
+import com.me.tft_02.duel.util.Permissions;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
 import com.me.tft_02.duel.util.player.UserManager;
@@ -74,6 +75,11 @@ public class PlayerListener implements Listener {
         }
 
         UserManager.addUser(player);
+
+        if (Permissions.updateNotifications(player) && Duel.p.updateAvailable) {
+            player.sendMessage(LocaleLoader.getString("UpdateChecker.Outdated"));
+            player.sendMessage(LocaleLoader.getString("UpdateChecker.New_Available"));
+        }
     }
 
     /**

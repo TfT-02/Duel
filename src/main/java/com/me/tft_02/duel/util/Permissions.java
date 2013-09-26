@@ -8,6 +8,10 @@ public class Permissions {
         return permissible.hasPermission("duel.challenge");
     }
 
+    public static boolean updateNotifications(Permissible permissible) {
+        return permissible.hasPermission("duel.updatecheck");
+    }
+
     public static boolean reload(Permissible permissible) {
         return permissible.hasPermission("duel.commands.reload");
     }
