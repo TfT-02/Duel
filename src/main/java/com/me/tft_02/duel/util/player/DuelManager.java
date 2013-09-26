@@ -1,5 +1,6 @@
 package com.me.tft_02.duel.util.player;
 
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -35,6 +36,10 @@ public class DuelManager {
 
     public static boolean canDuel(Player player, boolean interact) {
         if (!Permissions.challenge(player)) {
+            return false;
+        }
+
+        if (player.getGameMode() == GameMode.CREATIVE) {
             return false;
         }
 
