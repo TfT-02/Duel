@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -21,6 +22,7 @@ import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.RetrieveLevelsTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
@@ -190,5 +192,21 @@ public class PlayerListener implements Listener {
         }
 
         DuelManager.endDuelResult(PlayerData.getDuelTarget(player), player);
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
+        Player player = event.getPlayer();
+
+        if (!PlayerData.isInDuel(player)) {
+            return;
+        }
+
+        String command = event.getMessage();
+
+        if (Config.getInstance().getBlockedCommands().contains(event.getMessage())) {
+            player.sendMessage(LocaleLoader.getString("Duel.Command.Blocked", command));
+            event.setCancelled(true);
+        }
     }
 }

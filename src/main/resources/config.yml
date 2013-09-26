@@ -34,6 +34,10 @@ Duel:
     # Heal players to full health when the duel ends?
     Heal_After_Duel: true
 
+    # Players who are in a duel will not be able to use commands in this list
+    Blocked_Commands:
+    - /this_is_blocked
+
 Arena:
     Knockback_Enabled: true
     Radius: 20.0

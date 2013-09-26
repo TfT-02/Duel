@@ -8,6 +8,7 @@ Key:
 
 Version 0.1.0 | Tested on CB 1.6.4-R0.1
  + Added white- or blacklist for worlds
+ + Added blacklist for using commands while in a duel
  = Fixed messages when ending a duel in a tie
  ! Moved Enable_Challenge_Commands and Enable_Challenge_Interact to the Challenge section in config.yml
  ! Improved region checking

@@ -64,6 +64,7 @@ public class Config extends AutoUpdateConfigLoader {
     public int getDuelLength() { return config.getInt("Duel.Duel_Length", 120); }
     public int getMessageRange() { return config.getInt("Duel.Message_Range", 50); }
     public boolean getHealEnabled() { return config.getBoolean("Duel.Heal_After_Duel", true); }
+    public List<String> getBlockedCommands() { return config.getStringList("Duel.Blocked_Commands"); }
 
     /* ARENA SETTINGS */
     public boolean getBorderKnockBack() { return config.getBoolean("Arena.Knockback_Enabled", true); }
