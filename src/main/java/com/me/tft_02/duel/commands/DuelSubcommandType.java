@@ -4,7 +4,7 @@ public enum DuelSubcommandType {
     RELOAD,
     HELP,
     STATS,
-    INFO;
+    CHALLENGE;
 
     public static DuelSubcommandType getSubcommand(String commandName) {
         for (DuelSubcommandType command : values()) {
@@ -18,6 +18,9 @@ public enum DuelSubcommandType {
         }
         else if (commandName.equalsIgnoreCase("r")) {
             return RELOAD;
+        }
+        else if (commandName.equalsIgnoreCase("request")) {
+            return CHALLENGE;
         }
 
         return null;

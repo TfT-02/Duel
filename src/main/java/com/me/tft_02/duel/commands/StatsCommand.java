@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.me.tft_02.duel.database.DatabaseManager;
+import com.me.tft_02.duel.util.CommandUtils;
 
 public class StatsCommand implements CommandExecutor {
 
@@ -16,8 +17,8 @@ public class StatsCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("You cannot use this command from the console!");
+        if (CommandUtils.noConsoleUsage(sender)) {
+            return true;
         }
 
         Player player = (Player) sender;
