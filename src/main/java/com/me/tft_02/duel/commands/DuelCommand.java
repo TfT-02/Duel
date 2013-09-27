@@ -20,7 +20,7 @@ public class DuelCommand implements CommandExecutor {
             switch (args.length) {
                 case 1:
                 case 2:
-                    if (args[0].equalsIgnoreCase("help")) {
+                    if (args[0].equalsIgnoreCase("help") || args[0].equalsIgnoreCase("?")) {
                         return helpCommand.onCommand(sender, command, label, args);
                     }
                     else if (args[0].equalsIgnoreCase("reload")) {
