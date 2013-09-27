@@ -1,5 +1,6 @@
 package com.me.tft_02.duel;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -144,8 +145,8 @@ public class Duel extends JavaPlugin {
     public void updateCheckerCallback(boolean updateAvailable) {
         this.updateAvailable = updateAvailable;
         if (updateAvailable) {
-            getLogger().info(LocaleLoader.getString("UpdateChecker.Outdated"));
-            getLogger().info(LocaleLoader.getString("UpdateChecker.New_Available"));
+            getLogger().info(ChatColor.stripColor(LocaleLoader.getString("UpdateChecker.Outdated")));
+            getLogger().info(ChatColor.stripColor(LocaleLoader.getString("UpdateChecker.New_Available")));
         }
     }
 }
