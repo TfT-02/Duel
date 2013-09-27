@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.util.Permissions;
 
@@ -39,14 +40,15 @@ public class HelpCommand implements CommandExecutor {
 
         sender.sendMessage(LocaleLoader.getString("Help.Page_Header", page, maxPages));
         switch (page) {
-            case 0:
+            case 1:
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_0"));
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_1"));
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_2"));
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_3"));
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_4"));
+                return;
 
-            case 1:
+            case 2:
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_1.Line_0"));
 
                 if (Permissions.reload(sender)) {
@@ -58,17 +60,23 @@ public class HelpCommand implements CommandExecutor {
                 }
 
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_1.Line_3"));
-                sendHelpPage(sender, LocaleLoader.getString("Help.Page_1.Line_4"));
+
+                if (Config.getInstance().getChallengeCommandsEnabled()) {
+                    sendHelpPage(sender, LocaleLoader.getString("Help.Page_1.Line_4"));
+                }
+                return;
+
             default:
                 if (nextPage <= maxPages) {
                     sender.sendMessage(LocaleLoader.getString("Help.Page_Ending", "/duel help", nextPage));
                 }
+                return;
         }
     }
 
     /**
      * Send a string, but only if .length > 0
-     * */
+     */
     private void sendHelpPage(CommandSender sender, String string) {
         if (string.length() > 0) {
             sender.sendMessage(string);
