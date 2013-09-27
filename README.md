@@ -5,6 +5,9 @@ What is Duel?
 Duel is a Bukkit plugin that allows two players to challenge each other to a duel.
 Other players will not be allowed to interfere with dueling players.
 
+### Dev builds
+The latest development builds are available [here](http://jenkins.genesis-mc.com/view/TfT_02/job/Duel/).
+
 How does it work?
 ----------------
 
