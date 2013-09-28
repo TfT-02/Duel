@@ -94,23 +94,32 @@ public class Duel extends JavaPlugin {
     private void setupWorldGuard() {
         if (getServer().getPluginManager().isPluginEnabled("WorldGuard")) {
             worldGuardEnabled = true;
-            debug("WorldGuard found!");
+            debug("Hooked into WorldGuard successfully!");
             getServer().getPluginManager().registerEvents(new WorldGuardListener(), this);
         }
     }
 
     private void setupFactions() {
-        if (getServer().getPluginManager().isPluginEnabled("Factions")) {
-            factionsEnabled = true;
-            debug("Factions found!");
-            getServer().getPluginManager().registerEvents(new FactionsListener(), this);
+        PluginManager pluginManager = getServer().getPluginManager();
+
+        if (pluginManager.isPluginEnabled("Factions")) {
+            // Check Factions version 2.2.0, which has FactionsEventPvpDisallowed
+            int version = Integer.parseInt(pluginManager.getPlugin("Factions").getDescription().getVersion().replaceAll("[.]", ""));
+            if (version >= 220) {
+                factionsEnabled = true;
+                debug("Hooked into Factions successfully!");
+                pluginManager.registerEvents(new FactionsListener(), this);
+            }
+            else {
+                debug("Duel does not support this version of Factions!");
+            }
         }
     }
 
     private void setupGhosts() {
         if (getServer().getPluginManager().isPluginEnabled("Ghosts")) {
             ghostsEnabled = true;
-            debug("Ghosts found!");
+            debug("Hooked into Ghosts successfully!");
             getServer().getPluginManager().registerEvents(new GhostsListener(), this);
         }
     }
