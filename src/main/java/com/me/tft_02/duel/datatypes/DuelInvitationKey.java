@@ -1,12 +1,14 @@
 package com.me.tft_02.duel.datatypes;
 
+import com.me.tft_02.duel.util.Misc;
+
 public class DuelInvitationKey {
     private String playerName;
     private int timestamp;
 
-    public DuelInvitationKey(String playerName, int timestamp) {
+    public DuelInvitationKey(String playerName) {
         this.setPlayerName(playerName);
-        this.setTimestamp(timestamp);
+        this.setTimestamp(Misc.getSystemTime());
     }
 
     public String getPlayerName() {

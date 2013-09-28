@@ -109,7 +109,7 @@ public class PlayerData {
         Player target = duelTarget.getPlayer();
 
         player.sendMessage(LocaleLoader.getString("Duel.Challenge.Send", target.getName()));
-        duelTarget.setDuelInvitationKey(new DuelInvitationKey(name, Misc.getSystemTime()));
+        duelTarget.setDuelInvitationKey(new DuelInvitationKey(name));
 
         target.sendMessage(LocaleLoader.getString("Duel.Challenge.Receive.1", name));
 
