@@ -12,6 +12,8 @@ import org.bukkit.util.Vector;
 import com.me.tft_02.duel.Duel;
 
 public class Misc {
+    public static final int TIME_CONVERSION_FACTOR = 1000;
+    public static final int TICK_CONVERSION_FACTOR = 20;
 
     public static boolean isNPCEntity(Entity entity) {
         return (entity == null || entity.hasMetadata("NPC"));
@@ -21,12 +23,17 @@ public class Misc {
         return (int) System.currentTimeMillis() / 1000;
     }
 
+    public static boolean cooldownExpired(long deactivatedTimeStamp, int cooldown) {
+        return (System.currentTimeMillis() >= (deactivatedTimeStamp + cooldown) * Misc.TIME_CONVERSION_FACTOR);
+    }
+
     /**
      * Determine if two locations are near each other.
-     * 
-     * @param first The first location
-     * @param second The second location
+     *
+     * @param first       The first location
+     * @param second      The second location
      * @param maxDistance The max distance apart
+     *
      * @return true if the distance between <code>first</code> and <code>second</code> is less than <code>maxDistance</code>, false otherwise
      */
     public static boolean isNear(Location first, Location second, double maxDistance) {
@@ -36,6 +43,11 @@ public class Misc {
 
         return first.distanceSquared(second) < (maxDistance * maxDistance);
 
+    }
+
+    public static Location getMiddle(Location first, Location second) {
+        //TODO test the maths!
+        return first.add(first.subtract(second).multiply(0.5));
     }
 
     public static Vector getKnockbackVector(Location first, Location second) {
@@ -67,11 +79,12 @@ public class Misc {
 
     /**
      * Attempts to match any player names with the given name, and returns a list of all possibly matches.
-     *
+     * <p/>
      * This list is not sorted in any particular order.
      * If an exact match is found, the returned list will only contain a single result.
      *
      * @param partialName Name to match
+     *
      * @return List of all possible names
      */
     public static List<String> matchPlayer(String partialName) {
@@ -99,6 +112,7 @@ public class Misc {
      * Get a matched player name if one was found in the database.
      *
      * @param partialName Name to match
+     *
      * @return Matched name or {@code partialName} if no match was found
      */
     public static String getMatchedPlayerName(String partialName) {

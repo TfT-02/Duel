@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.database.DatabaseManager;
+import com.me.tft_02.duel.datatypes.DuelInvitationKey;
 import com.me.tft_02.duel.datatypes.DuelResultType;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
@@ -80,10 +81,10 @@ public class DuelManager {
                 break;
         }
 
-        notifyPlayers(location, message);
+        notifyNearbyPlayers(location, message);
     }
 
-    public static void notifyPlayers(Location location, String message) {
+    public static void notifyNearbyPlayers(Location location, String message) {
         for (Player player : Misc.getNearbyPlayers(location, Config.getInstance().getMessageRange())) {
             player.sendMessage(message);
         }
@@ -93,16 +94,17 @@ public class DuelManager {
         PlayerData playerData = new PlayerData();
 
         DuelPlayer duelPlayer = UserManager.getPlayer(player);
+        DuelInvitationKey duelInvite = duelPlayer.getDuelInvite();
 
-        if (duelPlayer.getDuelInvite() != null && duelPlayer.getDuelInvite().getPlayerName().equals(target.getName())) {
+        if (duelInvite != null && duelInvite.getPlayerName().equals(target.getName())) {
             if (playerData.duelInviteIsTimedout(duelPlayer)) {
                 player.sendMessage(LocaleLoader.getString("Duel.Challenge.Expired"));
                 playerData.removeDuelInvite(duelPlayer);
                 return;
             }
 
-            player.sendMessage(LocaleLoader.getString("Duel.Challenge.Accepted"));
-            target.sendMessage(LocaleLoader.getString("Duel.Challenge.Accepted"));
+            Location middle = Misc.getMiddle(player.getLocation(), target.getLocation());
+            notifyNearbyPlayers(middle, LocaleLoader.getString("Duel.Challenge.Accepted", player.getName(), target.getName()));
 
             DuelManager.prepareDuel(player, target);
 
@@ -126,12 +128,13 @@ public class DuelManager {
         PlayerData playerData = new PlayerData();
         playerData.removeDuelInvitation(duelPlayer);
         duelPlayer.setOccupied(true);
-        ArenaManager.setArena(player);
     }
 
     public static void prepareDuel(Player player, Player target) {
         prepareDuel(player);
         prepareDuel(target);
+
+        ArenaManager.setArena(player, target);
     }
 
     public static void startDuel(Player player, Player target) {

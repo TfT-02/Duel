@@ -23,7 +23,7 @@ public class CountdownLocationTask extends BukkitRunnable {
 
     private void countdown() {
         if (number > 0) {
-            DuelManager.notifyPlayers(location, LocaleLoader.getString("Duel.Countdown", number));
+            DuelManager.notifyNearbyPlayers(location, LocaleLoader.getString("Duel.Countdown", number));
             location.getWorld().playSound(location, Sound.NOTE_PLING, 1F, 0F);
 
             if (number <= 1) {
