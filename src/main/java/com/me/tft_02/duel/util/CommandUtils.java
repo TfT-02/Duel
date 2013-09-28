@@ -26,7 +26,7 @@ public final class CommandUtils {
 
     public static boolean tooFar(CommandSender sender, Player target, int distance) {
         if (sender instanceof Player && !Misc.isNear(((Player) sender).getLocation(), target.getLocation(), distance)) {
-            sender.sendMessage(LocaleLoader.getString("Duel.Invite.TooFar"));
+            sender.sendMessage(LocaleLoader.getString("Duel.Challenge.Too_Far"));
             return true;
         }
 

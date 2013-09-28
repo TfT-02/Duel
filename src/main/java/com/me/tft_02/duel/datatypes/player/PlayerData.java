@@ -91,26 +91,33 @@ public class PlayerData {
         duelPlayer.setDuelInvitationKey(null);
     }
 
-    public void setDuelInvite(DuelPlayer duelPlayer, DuelPlayer duelTarget) {
+    /**
+     * Handle duel challenging
+     *
+     * @param duelPlayer the {@link DuelPlayer} object of the challenger
+     * @param duelTarget the {@link DuelPlayer} object of the challenged player
+     */
+    public void challenge(DuelPlayer duelPlayer, DuelPlayer duelTarget) {
         Player player = duelPlayer.getPlayer();
+        String name = player.getName();
 
-        if (getDuelInvite(duelTarget) != null && getDuelInvite(duelTarget).equals(duelPlayer.getPlayer().getName())) {
-            player.sendMessage(LocaleLoader.getString("Duel.Invite.AlreadySend"));
+        if (getDuelInvite(duelTarget) != null && getDuelInvite(duelTarget).equals(name)) {
+            player.sendMessage(LocaleLoader.getString("Duel.Challenge.Already_Send", name));
             return;
         }
 
         Player target = duelTarget.getPlayer();
 
-        player.sendMessage(LocaleLoader.getString("Duel.Invite.Send", target.getName()));
-        duelTarget.setDuelInvitationKey(new DuelInvitationKey(player.getName(), Misc.getSystemTime()));
+        player.sendMessage(LocaleLoader.getString("Duel.Challenge.Send", target.getName()));
+        duelTarget.setDuelInvitationKey(new DuelInvitationKey(name, Misc.getSystemTime()));
 
-        target.sendMessage(LocaleLoader.getString("Duel.Invite.Receive.1", player.getName()));
+        target.sendMessage(LocaleLoader.getString("Duel.Challenge.Receive.1", name));
 
         if (Config.getInstance().getChallengeInteractEnabled()) {
-            target.sendMessage(LocaleLoader.getString("Duel.Invite.Receive.2", player.getName()));
+            target.sendMessage(LocaleLoader.getString("Duel.Challenge.Receive.2", name));
         }
         else if (Config.getInstance().getChallengeCommandsEnabled()) {
-            target.sendMessage(LocaleLoader.getString("Duel.Invite.Receive.3", player.getName()));
+            target.sendMessage(LocaleLoader.getString("Duel.Challenge.Receive.3", name));
         }
     }
 

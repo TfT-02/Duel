@@ -96,13 +96,13 @@ public class DuelManager {
 
         if (duelPlayer.getDuelInvite() != null && duelPlayer.getDuelInvite().getPlayerName().equals(target.getName())) {
             if (playerData.duelInviteIsTimedout(duelPlayer)) {
-                player.sendMessage(LocaleLoader.getString("Duel.Invite.Expired"));
+                player.sendMessage(LocaleLoader.getString("Duel.Challenge.Expired"));
                 playerData.removeDuelInvite(duelPlayer);
                 return;
             }
 
-            player.sendMessage(LocaleLoader.getString("Duel.Invite.Accepted"));
-            target.sendMessage(LocaleLoader.getString("Duel.Invite.Accepted"));
+            player.sendMessage(LocaleLoader.getString("Duel.Challenge.Accepted"));
+            target.sendMessage(LocaleLoader.getString("Duel.Challenge.Accepted"));
 
             DuelManager.prepareDuel(player, target);
 
@@ -117,7 +117,7 @@ public class DuelManager {
         }
         else {
             DuelPlayer duelTarget = UserManager.getPlayer(target);
-            playerData.setDuelInvite(duelPlayer, duelTarget);
+            playerData.challenge(duelPlayer, duelTarget);
         }
     }
 

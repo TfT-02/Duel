@@ -30,7 +30,7 @@ public class ChallengeCommand implements CommandExecutor {
                 }
 
                 if (player == target) {
-                    sender.sendMessage(LocaleLoader.getString("Duel.Invite.Self"));
+                    sender.sendMessage(LocaleLoader.getString("Duel.Challenge.Self"));
                     return true;
                 }
 
