@@ -37,6 +37,8 @@ public class UpdateChecker {
             String[] oldTokens = version.replaceAll("(?i)(-)(.+?)(-)", "-").split("[.]|-b");
             String[] newTokens = newVersion.replaceAll("(?i)(-)(.+?)(-)", "-").split("[.]|-b");
 
+            boolean updateAvaiable = false;
+
             for (int i = 0; i < 4; i++) {
                 Integer newVer = Integer.parseInt(newTokens[i]);
                 Integer oldVer;
@@ -50,11 +52,14 @@ public class UpdateChecker {
                 }
 
                 if (oldVer < newVer) {
-                    return true;
+                    updateAvaiable = true;
+                }
+                else {
+                    updateAvaiable = false;
                 }
             }
 
-            return false;
+            return updateAvaiable;
         }
         catch (ParseException e) {
             return false;
