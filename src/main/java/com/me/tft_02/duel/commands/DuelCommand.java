@@ -20,6 +20,10 @@ public class DuelCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         this.sender = sender;
 
+        if (args.length < 1) {
+            return printUsage();
+        }
+
         DuelSubcommandType subcommand = DuelSubcommandType.getSubcommand(args[0]);
 
         if (subcommand == null) {
