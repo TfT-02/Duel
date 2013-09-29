@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.duel.datatypes.DuelInvitationKey;
 import com.me.tft_02.duel.datatypes.LevelAndExpKey;
+import com.me.tft_02.duel.util.Misc;
 
 public class DuelPlayer {
     private Player player;
@@ -15,6 +16,8 @@ public class DuelPlayer {
     private Location arena;
     private String targetName;
     private boolean occupied;
+    private int lastChallengeSend;
+    private int lastChallengeReceived;
     private DuelInvitationKey duelInvitationKey;
     private List<ItemStack> savedInventoryItems;
     private List<ItemStack> savedInventoryArmor;
@@ -97,5 +100,29 @@ public class DuelPlayer {
 
     public void setArena(Location arena) {
         this.arena = arena;
+    }
+
+    public int getLastChallengeSend() {
+        return lastChallengeSend;
+    }
+
+    public void setLastChallengeSend(int lastChallengeSend) {
+        this.lastChallengeSend = lastChallengeSend;
+    }
+
+    public void actualizeLastChallengeSend() {
+        setLastChallengeSend(Misc.getSystemTime());
+    }
+
+    public int getLastChallengeReceived() {
+        return lastChallengeReceived;
+    }
+
+    public void setLastChallengeReceived(int lastChallengeReceived) {
+        this.lastChallengeReceived = lastChallengeReceived;
+    }
+
+    public void actualizeLastChallengeReceived() {
+        setLastChallengeReceived(Misc.getSystemTime());
     }
 }

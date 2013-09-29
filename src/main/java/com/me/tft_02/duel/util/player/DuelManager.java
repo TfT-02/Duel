@@ -44,6 +44,8 @@ public class DuelManager {
             return false;
         }
 
+        DuelPlayer duelPlayer = UserManager.getPlayer(player);
+
         if (interact) {
             if (!player.isSneaking()) {
                 return false;
@@ -52,36 +54,25 @@ public class DuelManager {
             if (!ItemUtils.isDuelWeapon(player.getItemInHand())) {
                 return false;
             }
+
+            if (!Misc.cooldownExpired(duelPlayer.getLastChallengeSend(), 3)) {
+                return false;
+            }
         }
 
         if (Duel.p.worldGuardEnabled && !RegionUtils.canDuelHere(player.getLocation())) {
             return false;
         }
 
-        if (UserManager.getPlayer(player).getOccupied()) {
+        if (PlayerData.isInDuel(player)) {
+            return false;
+        }
+
+        if (duelPlayer.getOccupied()) {
             return false;
         }
 
         return true;
-    }
-
-    public static void notifyPlayers(Location location, DuelMessageType messageType) {
-        String message = "";
-        switch (messageType) {
-            case START:
-                message = LocaleLoader.getString("Duel.Started");
-                break;
-            case END:
-                message = LocaleLoader.getString("Duel.Ended", "!");
-                break;
-            case TIE:
-                message = LocaleLoader.getString("Duel.Ended", LocaleLoader.getString("Duel.Tie"));
-                break;
-            default:
-                break;
-        }
-
-        notifyNearbyPlayers(location, message);
     }
 
     public static void notifyNearbyPlayers(Location location, String message) {
@@ -96,7 +87,7 @@ public class DuelManager {
         DuelPlayer duelPlayer = UserManager.getPlayer(player);
         DuelInvitationKey duelInvite = duelPlayer.getDuelInvite();
 
-        if (duelInvite != null && duelInvite.getPlayerName().equals(target.getName())) {
+        if (acceptChallenge(target, duelInvite)) {
             if (playerData.duelInviteIsTimedout(duelPlayer)) {
                 player.sendMessage(LocaleLoader.getString("Duel.Challenge.Expired"));
                 playerData.removeDuelInvite(duelPlayer);
@@ -109,10 +100,10 @@ public class DuelManager {
             DuelManager.prepareDuel(player, target);
 
             if (Config.getInstance().getMessageRange() <= 0) {
-                new CountdownTask(player, target, 4).runTaskTimer(Duel.p, 0, 1 * 20);
+                new CountdownTask(player, target, 3).runTaskTimer(Duel.p, 0, 1 * 20);
             }
             else {
-                new CountdownLocationTask(player.getLocation(), 4).runTaskTimer(Duel.p, 0, 1 * 20);
+                new CountdownLocationTask(player.getLocation(), 3).runTaskTimer(Duel.p, 0, 1 * 20);
             }
 
             new DuelCommenceTask(player, target).runTaskLater(Duel.p, 4 * 20);
@@ -121,6 +112,10 @@ public class DuelManager {
             DuelPlayer duelTarget = UserManager.getPlayer(target);
             playerData.challenge(duelPlayer, duelTarget);
         }
+    }
+
+    private static boolean acceptChallenge(Player target, DuelInvitationKey duelInvite) {
+        return duelInvite != null && duelInvite.getPlayerName().equals(target.getName());
     }
 
     public static void prepareDuel(Player player) {
@@ -146,7 +141,10 @@ public class DuelManager {
         playerData.removeDuelInvite(UserManager.getPlayer(player));
         playerData.removeDuelInvite(UserManager.getPlayer(target));
         playerData.setDuel(player, target);
-        notifyPlayers(player.getLocation(), DuelMessageType.START);
+
+        player.sendMessage(LocaleLoader.getString("Duel.Started"));
+        target.sendMessage(LocaleLoader.getString("Duel.Started"));
+
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
 
         int duelLength = Config.getInstance().getDuelLength();
@@ -163,7 +161,7 @@ public class DuelManager {
         DuelEndEvent eventLoser = new DuelEndEvent(loser, DuelResultType.LOSS);
         Duel.p.getServer().getPluginManager().callEvent(eventLoser);
 
-        notifyPlayers(winner.getLocation(), DuelMessageType.END);
+        notifyNearbyPlayers(winner.getLocation(), LocaleLoader.getString("Duel.End.Result", winner.getName(), loser.getName()));
 
         DatabaseManager.increaseWinCount(winner, 1);
         DatabaseManager.increaseLossCount(loser, 1);
@@ -189,7 +187,7 @@ public class DuelManager {
         endDuel(player, true);
         endDuel(target, true);
 
-        notifyPlayers(player.getLocation(), DuelMessageType.TIE);
+        notifyNearbyPlayers(player.getLocation(), LocaleLoader.getString("Duel.End.Tie", player.getName(), target.getName()));
 
         DatabaseManager.increaseTieCount(player, 1);
         DatabaseManager.increaseTieCount(target, 1);

@@ -74,7 +74,8 @@ public class Config extends AutoUpdateConfigLoader {
     /* CHALLENGE SETTINGS */
     public boolean getChallengeCommandsEnabled() { return config.getBoolean("Challenge.Enable_Challenge_Commands", false); }
     public boolean getChallengeInteractEnabled() { return config.getBoolean("Challenge.Enable_Challenge_Interact", true); }
-    public int getInviteTimeout() { return config.getInt("Challenge.Timeout", 30); }
+    public int getInviteTimeout() { return config.getInt("Challenge.Timeout", 20); }
+
     public HashSet<Material> getDuelWeaponItems() {
         HashSet<Material> miscItems = new HashSet<Material>();
 

@@ -49,15 +49,18 @@ public class PlayerListener implements Listener {
         if (entity instanceof Player) {
             Player target = (Player) entity;
 
-            if (DuelManager.canDuel(player)) {
-                if (PlayerData.isInDuel(player) || PlayerData.isInDuel(target)) {
-                    return;
-                }
-
-                event.setCancelled(true);
-
-                DuelManager.handleDuelInvites(player, target);
+            if (!DuelManager.canDuel(player)) {
+                return;
             }
+
+            if (UserManager.getPlayer(target).getOccupied()) {
+                player.sendMessage(LocaleLoader.getString("Duel.Challenge.Occupied", target.getName()));
+                return;
+            }
+
+            event.setCancelled(true);
+
+            DuelManager.handleDuelInvites(player, target);
         }
     }
 

@@ -101,13 +101,20 @@ public class PlayerData {
         Player player = duelPlayer.getPlayer();
         String name = player.getName();
 
-        if (getDuelInvite(duelTarget) != null && getDuelInvite(duelTarget).equals(name)) {
-            player.sendMessage(LocaleLoader.getString("Duel.Challenge.Already_Send", name));
+        duelPlayer.actualizeLastChallengeSend();
+
+        if (!Misc.cooldownExpired(duelTarget.getLastChallengeReceived(), 3)) {
             return;
         }
 
         Player target = duelTarget.getPlayer();
 
+        if (hasBeenChallenged(duelTarget, name) && !duelInviteIsTimedout(duelTarget)) {
+            player.sendMessage(LocaleLoader.getString("Duel.Challenge.Already_Send", target.getName()));
+            return;
+        }
+
+        duelTarget.actualizeLastChallengeReceived();
         player.sendMessage(LocaleLoader.getString("Duel.Challenge.Send", target.getName()));
         duelTarget.setDuelInvitationKey(new DuelInvitationKey(name));
 
@@ -119,6 +126,10 @@ public class PlayerData {
         else if (Config.getInstance().getChallengeCommandsEnabled()) {
             target.sendMessage(LocaleLoader.getString("Duel.Challenge.Receive.3", name));
         }
+    }
+
+    private boolean hasBeenChallenged(DuelPlayer duelTarget, String name) {
+        return getDuelInvite(duelTarget) != null && getDuelInvite(duelTarget).equals(name);
     }
 
     public void removeDuelInvitation(DuelPlayer duelPlayer) {
