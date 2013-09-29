@@ -34,7 +34,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Monitor PlayerInteractEntityEvent events.
-     * 
+     *
      * @param event The event to watch
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -84,7 +84,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Check PlayerTeleportEvent events.
-     * 
+     *
      * @param event The event to check
      */
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -105,7 +105,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Check PlayerQuitEvent events.
-     * 
+     *
      * @param event The event to check
      */
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
@@ -125,7 +125,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Check PlayerRespawnEvent events.
-     * 
+     *
      * @param event The event to check
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -160,7 +160,7 @@ public class PlayerListener implements Listener {
 
     /**
      * Check PlayerDeathEvent events.
-     * 
+     *
      * @param event The event to check
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
