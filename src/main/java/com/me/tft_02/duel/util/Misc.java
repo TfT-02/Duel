@@ -42,13 +42,17 @@ public class Misc {
         }
 
         return first.distanceSquared(second) < (maxDistance * maxDistance);
-
     }
 
     public static Location getMiddle(Location first, Location second) {
-        //TODO fix the maths!
-//        return first.add(first.subtract(second).multiply(0.5));
-        return first;
+        double dX = first.getX() - second.getX();
+        double dZ = first.getZ() - second.getZ();
+
+        double x = first.getX() + dX;
+        double z = first.getZ() + dZ;
+        double y = first.getWorld().getHighestBlockYAt((int) x, (int) z);
+
+        return new Location(first.getWorld(), x, y, z);
     }
 
     public static Vector getKnockbackVector(Location first, Location second) {
