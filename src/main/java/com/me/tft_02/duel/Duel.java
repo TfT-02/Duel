@@ -21,6 +21,7 @@ import com.me.tft_02.duel.runnables.RegionCheckTask;
 import com.me.tft_02.duel.runnables.UpdateCheckerTask;
 import com.me.tft_02.duel.runnables.duels.DuelRangeTask;
 import com.me.tft_02.duel.util.LogFilter;
+import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.UserManager;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -70,11 +71,11 @@ public class Duel extends JavaPlugin {
         }
 
         BukkitScheduler scheduler = getServer().getScheduler();
-        scheduler.scheduleSyncRepeatingTask(this, new DuelRangeTask(), 0, 2 * 20);
+        scheduler.scheduleSyncRepeatingTask(this, new DuelRangeTask(), 0, 2 * Misc.TICK_CONVERSION_FACTOR);
 
         if (worldGuardEnabled) {
             //Region check timer (Runs every five seconds)
-            new RegionCheckTask().runTaskTimer(this, 5 * 20, 5 * 20);
+            new RegionCheckTask().runTaskTimer(this, 5 * Misc.TICK_CONVERSION_FACTOR, 5 * Misc.TICK_CONVERSION_FACTOR);
         }
 
         checkForUpdates();

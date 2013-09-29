@@ -150,7 +150,7 @@ public class DuelManager {
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
 
         int duelLength = Config.getInstance().getDuelLength();
-        new DuelEndTask(player).runTaskLater(Duel.p, duelLength * 20);
+        new DuelEndTask(player).runTaskLater(Duel.p, duelLength * Misc.TICK_CONVERSION_FACTOR);
     }
 
     public static void endDuelResult(Player winner, Player loser) {
