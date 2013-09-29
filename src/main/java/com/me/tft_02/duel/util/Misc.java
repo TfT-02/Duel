@@ -46,8 +46,9 @@ public class Misc {
     }
 
     public static Location getMiddle(Location first, Location second) {
-        //TODO test the maths!
-        return first.add(first.subtract(second).multiply(0.5));
+        //TODO fix the maths!
+//        return first.add(first.subtract(second).multiply(0.5));
+        return first;
     }
 
     public static Vector getKnockbackVector(Location first, Location second) {
