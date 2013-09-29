@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import com.me.tft_02.duel.commands.DuelCommand;
 import com.me.tft_02.duel.config.Config;
+import com.me.tft_02.duel.config.HiddenConfig;
 import com.me.tft_02.duel.database.Data;
 import com.me.tft_02.duel.hooks.FactionsListener;
 import com.me.tft_02.duel.hooks.GhostsListener;
@@ -46,6 +47,7 @@ public class Duel extends JavaPlugin {
         getLogger().setFilter(new LogFilter(this));
 
         Config.getInstance();
+        HiddenConfig.getInstance();
 
         if (!noErrorsInConfigFiles) {
             return;
@@ -57,7 +59,9 @@ public class Duel extends JavaPlugin {
         setupFactions();
         setupGhosts();
 
-        getCommand("duel").setExecutor(new DuelCommand());
+        if (HiddenConfig.getInstance().isCommandEnabled()) {
+            getCommand("duel").setExecutor(new DuelCommand());
+        }
 
         Data.loadData();
 
