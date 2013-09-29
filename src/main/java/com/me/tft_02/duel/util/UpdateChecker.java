@@ -45,7 +45,8 @@ public class UpdateChecker {
                     oldVer = Integer.parseInt(oldTokens[i]);
                 }
                 catch (NumberFormatException e) {
-                    oldVer = 0;
+                    Duel.p.getLogger().warning("Could not get information about this Duel version; perhaps you are running a custom one?");
+                    return false;
                 }
 
                 if (oldVer < newVer) {
