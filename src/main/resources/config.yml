@@ -34,6 +34,11 @@ Duel:
     # Heal players to full health when the duel ends?
     Heal_After_Duel: true
 
+    # Any potion effect type in this list will get removed when a duel starts
+    Potion_Effects_To_Remove:
+    - REGENERATION
+    - INVISIBILITY
+
     # Players who are in a duel will not be able to use commands in this list
     Blocked_Commands:
     - /this_is_blocked
