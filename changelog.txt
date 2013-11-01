@@ -9,6 +9,7 @@ Key:
 Version 0.1.0 | Tested on CB 1.6.4-R0.1
  + Added white- or blacklist for worlds
  + Added blacklist for using commands while in a duel
+ + Added config option to remove certain potion effects when a duel starts
  = Fixed messages when ending a duel in a tie
  ! Improved notification messages!
  ! Admins are now notified when logging in if there's an update available.

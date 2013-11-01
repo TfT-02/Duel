@@ -1,9 +1,12 @@
 package com.me.tft_02.duel.util.player;
 
+import java.util.List;
+
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
 
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
@@ -139,6 +142,9 @@ public class DuelManager {
         player.sendMessage(LocaleLoader.getString("Duel.Started"));
         target.sendMessage(LocaleLoader.getString("Duel.Started"));
 
+        removePotionEffects(player);
+        removePotionEffects(target);
+
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
 
         int duelLength = Config.getInstance().getDuelLength();
@@ -199,6 +205,16 @@ public class DuelManager {
 
         if (deleteArena) {
             ArenaManager.deleteArena(player);
+        }
+    }
+
+    private static void removePotionEffects(Player player) {
+        List<String> effectsToRemove = Config.getInstance().getPotionEffectsToRemove();
+
+        for (PotionEffect effect : player.getActivePotionEffects()) {
+            if (effectsToRemove.contains(effect.toString())) {
+                player.removePotionEffect(effect.getType());
+            }
         }
     }
 }
