@@ -123,6 +123,10 @@ public class EntityListener implements Listener {
 
         Player player = (Player) shooter;
 
+        if (Misc.isNPCEntity(player)) {
+            return;
+        }
+
         for (LivingEntity entity : event.getAffectedEntities()) {
             if (entity instanceof Player) {
                 Player target = (Player) entity;

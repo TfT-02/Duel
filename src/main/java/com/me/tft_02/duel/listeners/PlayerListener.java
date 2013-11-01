@@ -46,6 +46,10 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         Entity entity = event.getRightClicked();
 
+        if (Misc.isNPCEntity(player) || Misc.isNPCEntity(entity)) {
+            return;
+        }
+
         if (entity instanceof Player) {
             Player target = (Player) entity;
 
@@ -94,6 +98,10 @@ public class PlayerListener implements Listener {
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         Player player = event.getPlayer();
 
+        if (Misc.isNPCEntity(player)) {
+            return;
+        }
+
         if (!PlayerData.isInDuel(player)) {
             return;
         }
@@ -115,6 +123,10 @@ public class PlayerListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
+        if (Misc.isNPCEntity(player)) {
+            return;
+        }
+
         if (PlayerData.isInDuel(player)) {
             Player target = PlayerData.getDuelTarget(player);
 
@@ -134,6 +146,11 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onPlayerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
+
+        if (Misc.isNPCEntity(player)) {
+            return;
+        }
+
         Location arenaCenter = ArenaManager.getArenaLocation(player);
 
         DuelPlayer duelPlayer = UserManager.getPlayer(player);
@@ -172,6 +189,10 @@ public class PlayerListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
         Player player = event.getEntity();
+
+        if (Misc.isNPCEntity(player)) {
+            return;
+        }
 
         if (!PlayerData.isInDuel(player)) {
             return;
