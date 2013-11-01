@@ -127,15 +127,17 @@ public class EntityListener implements Listener {
             if (entity instanceof Player) {
                 Player target = (Player) entity;
 
-                if (player != target) {
-                    if (PlayerData.isInDuel(target)) {
-                        if (!PlayerData.areDueling(player, target)) {
-                            event.setIntensity(target, 0);
-                        }
-                    }
-                    else if (Config.getInstance().getPreventPVP()) {
+                if (player == target) {
+                    continue;
+                }
+
+                if (PlayerData.isInDuel(target)) {
+                    if (!PlayerData.areDueling(player, target)) {
                         event.setIntensity(target, 0);
                     }
+                }
+                else if (Config.getInstance().getPreventPVP()) {
+                    event.setIntensity(target, 0);
                 }
             }
         }

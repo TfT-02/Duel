@@ -137,27 +137,30 @@ public class PlayerListener implements Listener {
         Location arenaCenter = ArenaManager.getArenaLocation(player);
 
         DuelPlayer duelPlayer = UserManager.getPlayer(player);
-        if (duelPlayer.getDuelRespawn()) {
-            event.setRespawnLocation(arenaCenter);
-            duelPlayer.setDuelRespawn(false);
-            ArenaManager.deleteArena(player);
 
-            if (Config.getInstance().getSaveInventory()) {
-                List<ItemStack> armorList = PlayerData.retrieveArmor(duelPlayer);
-                ItemStack[] armor = armorList.toArray(new ItemStack[armorList.size()]);
-                player.getInventory().setArmorContents(armor);
+        if (!duelPlayer.getDuelRespawn()) {
+            return;
+        }
 
-                List<ItemStack> items = new ArrayList<ItemStack>();
-                items = PlayerData.retrieveInventory(duelPlayer);
-                if (items != null) {
-                    for (ItemStack item : items) {
-                        player.getInventory().addItem(item);
-                    }
+        event.setRespawnLocation(arenaCenter);
+        duelPlayer.setDuelRespawn(false);
+        ArenaManager.deleteArena(player);
+
+        if (Config.getInstance().getSaveInventory()) {
+            List<ItemStack> armorList = PlayerData.retrieveArmor(duelPlayer);
+            ItemStack[] armor = armorList.toArray(new ItemStack[armorList.size()]);
+            player.getInventory().setArmorContents(armor);
+
+            List<ItemStack> items = new ArrayList<ItemStack>();
+            items = PlayerData.retrieveInventory(duelPlayer);
+            if (items != null) {
+                for (ItemStack item : items) {
+                    player.getInventory().addItem(item);
                 }
-                new RetrieveLevelsTask(duelPlayer).runTaskLater(Duel.p, 1);
-
-                player.updateInventory();
             }
+            new RetrieveLevelsTask(duelPlayer).runTaskLater(Duel.p, 1);
+
+            player.updateInventory();
         }
     }
 
@@ -211,10 +214,8 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        String command = event.getMessage();
-
         if (Config.getInstance().getBlockedCommands().contains(event.getMessage())) {
-            player.sendMessage(LocaleLoader.getString("Duel.Command.Blocked", command));
+            player.sendMessage(LocaleLoader.getString("Duel.Command.Blocked", event.getMessage()));
             event.setCancelled(true);
         }
     }

@@ -25,11 +25,6 @@ import com.me.tft_02.duel.util.Permissions;
 import com.me.tft_02.duel.util.RegionUtils;
 
 public class DuelManager {
-    public enum DuelMessageType {
-        START,
-        END,
-        TIE;
-    };
 
     public static boolean canDuel(Player player) {
         return canDuel(player, true);
@@ -87,31 +82,30 @@ public class DuelManager {
         DuelPlayer duelPlayer = UserManager.getPlayer(player);
         DuelInvitationKey duelInvite = duelPlayer.getDuelInvite();
 
-        if (acceptChallenge(target, duelInvite)) {
-            if (playerData.duelInviteIsTimedout(duelPlayer)) {
-                player.sendMessage(LocaleLoader.getString("Duel.Challenge.Expired"));
-                playerData.removeDuelInvite(duelPlayer);
-                return;
-            }
-
-            Location middle = Misc.getMiddle(player.getLocation(), target.getLocation());
-            notifyNearbyPlayers(middle, LocaleLoader.getString("Duel.Challenge.Accepted", player.getName(), target.getName()));
-
-            DuelManager.prepareDuel(player, target);
-
-            if (Config.getInstance().getMessageRange() <= 0) {
-                new CountdownTask(player, target, 3).runTaskTimer(Duel.p, 0, 1 * 20);
-            }
-            else {
-                new CountdownLocationTask(player.getLocation(), 3).runTaskTimer(Duel.p, 0, 1 * 20);
-            }
-
-            new DuelCommenceTask(player, target).runTaskLater(Duel.p, 4 * 20);
-        }
-        else {
+        if (!acceptChallenge(target, duelInvite)) {
             DuelPlayer duelTarget = UserManager.getPlayer(target);
             playerData.challenge(duelPlayer, duelTarget);
         }
+
+        if (playerData.duelInviteIsTimedout(duelPlayer)) {
+            player.sendMessage(LocaleLoader.getString("Duel.Challenge.Expired"));
+            playerData.removeDuelInvite(duelPlayer);
+            return;
+        }
+
+        Location middle = Misc.getMiddle(player.getLocation(), target.getLocation());
+        notifyNearbyPlayers(middle, LocaleLoader.getString("Duel.Challenge.Accepted", player.getName(), target.getName()));
+
+        DuelManager.prepareDuel(player, target);
+
+        if (Config.getInstance().getMessageRange() <= 0) {
+            new CountdownTask(player, target, 3).runTaskTimer(Duel.p, 0, 1 * 20);
+        }
+        else {
+            new CountdownLocationTask(player.getLocation(), 3).runTaskTimer(Duel.p, 0, 1 * 20);
+        }
+
+        new DuelCommenceTask(player, target).runTaskLater(Duel.p, 4 * 20);
     }
 
     private static boolean acceptChallenge(Player target, DuelInvitationKey duelInvite) {
