@@ -68,7 +68,7 @@ public class EntityListener implements Listener {
      *
      * @param event The event to modify
      */
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void onEntityDamageByEntityLowest(EntityDamageByEntityEvent event) {
         if (event.getDamage() <= 0) {
             return;
