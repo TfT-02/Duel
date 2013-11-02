@@ -43,6 +43,9 @@ Duel:
     Blocked_Commands:
     - /this_is_blocked
 
+    # Actually kill players in a Duel?
+    Call_DeathEvents: false
+
 Arena:
     Knockback_Enabled: true
     Radius: 20.0

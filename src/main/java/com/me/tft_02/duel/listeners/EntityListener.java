@@ -10,14 +10,48 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.util.Misc;
+import com.me.tft_02.duel.util.player.DuelManager;
 
 public class EntityListener implements Listener {
 
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onEntityDamage(EntityDamageEvent event) {
+        if (Config.getInstance().getCallDeathEvents()) {
+            return;
+        }
+
+        Entity entity = event.getEntity();
+
+        if (Misc.isNPCEntity(entity)) {
+            return;
+        }
+
+        if (!(entity instanceof Player)) {
+            return;
+        }
+
+        Player player = (Player) entity;
+
+        if (!PlayerData.isInDuel(player)) {
+            return;
+        }
+
+        double playerHealth = player.getHealth();
+        double damageAmount = event.getDamage();
+
+        if ((playerHealth - damageAmount) > 0) {
+            return;
+        }
+
+        player.setHealth(1);
+        DuelManager.endDuelResult(PlayerData.getDuelTarget(player), player);
+    }
     /**
      * Handle EntityDamageByEntityEvent events that involve modifying the event.
      *

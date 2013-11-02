@@ -66,6 +66,7 @@ public class Config extends AutoUpdateConfigLoader {
     public boolean getHealEnabled() { return config.getBoolean("Duel.Heal_After_Duel", true); }
     public List<String> getPotionEffectsToRemove() { return config.getStringList("Duel.Potion_Effects_To_Remove"); }
     public List<String> getBlockedCommands() { return config.getStringList("Duel.Blocked_Commands"); }
+    public boolean getCallDeathEvents() { return config.getBoolean("Duel.Call_DeathEvents", false); }
 
     /* ARENA SETTINGS */
     public boolean getBorderKnockBack() { return config.getBoolean("Arena.Knockback_Enabled", true); }

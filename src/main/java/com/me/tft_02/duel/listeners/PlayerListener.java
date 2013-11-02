@@ -133,6 +133,10 @@ public class PlayerListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     private void onPlayerRespawn(PlayerRespawnEvent event) {
+        if (!Config.getInstance().getCallDeathEvents()) {
+            return;
+        }
+
         Player player = event.getPlayer();
         Location arenaCenter = ArenaManager.getArenaLocation(player);
 
@@ -168,6 +172,10 @@ public class PlayerListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerDeathEvent(PlayerDeathEvent event) {
+        if (!Config.getInstance().getCallDeathEvents()) {
+            return;
+        }
+
         Player player = event.getEntity();
 
         if (!PlayerData.isInDuel(player)) {
