@@ -1,6 +1,7 @@
 package com.me.tft_02.duel;
 
-import org.bukkit.ChatColor;
+import java.io.File;
+
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -18,16 +19,20 @@ import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
 import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.RegionCheckTask;
-import com.me.tft_02.duel.runnables.UpdateCheckerTask;
 import com.me.tft_02.duel.runnables.duels.DuelRangeTask;
 import com.me.tft_02.duel.util.LogFilter;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.UserManager;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import net.gravitydevelopment.updater.duel.Updater;
+import net.gravitydevelopment.updater.duel.Updater.UpdateType;
+import net.gravitydevelopment.updater.duel.Updater.UpdateResult;
 
 public class Duel extends JavaPlugin {
     public static Duel p;
+
+    public static File duel;
 
     public boolean worldGuardEnabled = false;
     public boolean ghostsEnabled = false;
@@ -59,6 +64,8 @@ public class Duel extends JavaPlugin {
         setupWorldGuard();
         setupFactions();
         setupGhosts();
+
+        setupFilePaths();
 
         if (HiddenConfig.getInstance().isCommandEnabled()) {
             getCommand("duel").setExecutor(new DuelCommand());
@@ -148,19 +155,33 @@ public class Duel extends JavaPlugin {
         this.getServer().getScheduler().cancelTasks(this);
     }
 
+
+    /**
+     * Setup the various storage file paths
+     */
+    private void setupFilePaths() {
+        duel = getFile();
+    }
+
     private void checkForUpdates() {
         if (!Config.getInstance().getUpdateCheckEnabled()) {
             return;
         }
 
-        getServer().getScheduler().runTaskAsynchronously(this, new UpdateCheckerTask());
-    }
+        Updater updater = new Updater(this, 55022, duel, UpdateType.NO_DOWNLOAD, false);
 
-    public void updateCheckerCallback(boolean updateAvailable) {
-        this.updateAvailable = updateAvailable;
-        if (updateAvailable) {
-            getLogger().info(ChatColor.stripColor(LocaleLoader.getString("UpdateChecker.Outdated")));
-            getLogger().info(ChatColor.stripColor(LocaleLoader.getString("UpdateChecker.New_Available")));
+        if (updater.getResult() != UpdateResult.UPDATE_AVAILABLE) {
+            this.updateAvailable = false;
+            return;
         }
+
+        if (updater.getLatestType().equals("beta") && !Config.getInstance().getPreferBeta()) {
+            this.updateAvailable = false;
+            return;
+        }
+
+        this.updateAvailable = true;
+        getLogger().info(LocaleLoader.getString("UpdateChecker.Outdated"));
+        getLogger().info(LocaleLoader.getString("UpdateChecker.New_Available"));
     }
 }
