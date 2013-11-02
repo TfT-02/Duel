@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -47,12 +49,19 @@ public class Misc {
     public static Location getMiddle(Location first, Location second) {
         double dX = first.getX() - second.getX();
         double dZ = first.getZ() - second.getZ();
+        double dY = first.getY() - second.getY();
 
         double x = first.getX() + dX;
         double z = first.getZ() + dZ;
-        double y = first.getWorld().getHighestBlockYAt((int) x, (int) z);
+        double y = first.getY() + dY;
 
-        return new Location(first.getWorld(), x, y, z);
+        World world = first.getWorld();
+
+        while (world.getBlockAt((int) x, (int) y, (int) z).getType() != Material.AIR) {
+            y++;
+        }
+
+        return new Location(world, x, y, z);
     }
 
     public static Vector getKnockbackVector(Location first, Location second) {
