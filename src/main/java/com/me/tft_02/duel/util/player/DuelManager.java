@@ -88,6 +88,7 @@ public class DuelManager {
         if (!acceptChallenge(target, duelInvite)) {
             DuelPlayer duelTarget = UserManager.getPlayer(target);
             playerData.challenge(duelPlayer, duelTarget);
+            return;
         }
 
         if (playerData.duelInviteIsTimedout(duelPlayer)) {
