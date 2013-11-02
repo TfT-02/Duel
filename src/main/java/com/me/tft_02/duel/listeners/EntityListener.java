@@ -25,7 +25,7 @@ public class EntityListener implements Listener {
      *
      * @param event The event to modify
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onEntityDamage(EntityDamageEvent event) {
         if (Config.getInstance().getCallDeathEvents()) {
             return;
@@ -57,6 +57,7 @@ public class EntityListener implements Listener {
         player.setHealth(1);
         DuelManager.endDuelResult(PlayerData.getDuelTarget(player), player);
     }
+    
     /**
      * Handle EntityDamageByEntityEvent events that involve modifying the event.
      *
