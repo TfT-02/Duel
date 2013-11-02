@@ -54,6 +54,7 @@ public class EntityListener implements Listener {
             return;
         }
 
+        event.setCancelled(true);
         player.setHealth(1);
         DuelManager.endDuelResult(PlayerData.getDuelTarget(player), player);
     }
