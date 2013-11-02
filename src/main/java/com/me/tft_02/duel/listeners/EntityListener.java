@@ -20,6 +20,11 @@ import com.me.tft_02.duel.util.player.DuelManager;
 
 public class EntityListener implements Listener {
 
+    /**
+     * Handle EntityDamageEvent events that involve modifying the event.
+     *
+     * @param event The event to modify
+     */
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamage(EntityDamageEvent event) {
         if (Config.getInstance().getCallDeathEvents()) {
