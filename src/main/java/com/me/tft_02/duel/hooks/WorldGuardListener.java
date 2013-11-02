@@ -17,7 +17,7 @@ public class WorldGuardListener implements Listener {
      *
      * @param event The event to modify
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDisallowedPVP(DisallowedPVPEvent event) {
         Player attacker = event.getAttacker();
         Player defender = event.getDefender();

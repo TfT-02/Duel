@@ -17,7 +17,7 @@ public class FactionsListener implements Listener {
      *
      * @param event The event to modify
      */
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onDisallowedPVP(FactionsEventPvpDisallowed event) {
         Player attacker = event.getAttacker();
         Player defender = event.getDefender();

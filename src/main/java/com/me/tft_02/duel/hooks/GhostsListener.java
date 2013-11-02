@@ -9,7 +9,7 @@ import com.me.tft_02.ghosts.events.tomb.TombCreateEvent;
 
 public class GhostsListener implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onCreateTomb(TombCreateEvent event) {
         if (PlayerData.isInDuel(event.getPlayer())) {
             event.setCancelled(true);
