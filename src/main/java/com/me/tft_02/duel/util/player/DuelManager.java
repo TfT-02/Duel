@@ -103,13 +103,13 @@ public class DuelManager {
         DuelManager.prepareDuel(player, target);
 
         if (Config.getInstance().getMessageRange() <= 0) {
-            new CountdownTask(player, target, 3).runTaskTimer(Duel.p, 0, 1 * 20);
+            new CountdownTask(player, target, 3).runTaskTimer(Duel.p, 0, 1 * Misc.TICK_CONVERSION_FACTOR);
         }
         else {
-            new CountdownLocationTask(player.getLocation(), 3).runTaskTimer(Duel.p, 0, 1 * 20);
+            new CountdownLocationTask(player.getLocation(), 3).runTaskTimer(Duel.p, 0, 1 * Misc.TICK_CONVERSION_FACTOR);
         }
 
-        new DuelCommenceTask(player, target).runTaskLater(Duel.p, 4 * 20);
+        new DuelCommenceTask(player, target).runTaskLater(Duel.p, 4 * Misc.TICK_CONVERSION_FACTOR);
     }
 
     private static boolean acceptChallenge(Player target, DuelInvitationKey duelInvite) {
