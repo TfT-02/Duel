@@ -6,6 +6,8 @@ Key:
   ! Change
   - Removal
 
+Version 0.1.1 | Tested on CB 1.6.4-R2.0
+
 Version 0.1.0 | Tested on CB 1.6.4-R2.0
  + Added white- or blacklist for worlds
  + Added blacklist for using commands while in a duel
