@@ -1,4 +1,4 @@
-package com.me.tft_02.duel.runnables;
+package com.me.tft_02.duel.runnables.hooks;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

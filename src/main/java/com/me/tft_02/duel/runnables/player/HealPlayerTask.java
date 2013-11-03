@@ -1,4 +1,4 @@
-package com.me.tft_02.duel.runnables.duels;
+package com.me.tft_02.duel.runnables.player;
 
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;

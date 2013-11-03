@@ -16,7 +16,7 @@ import org.bukkit.event.entity.PotionSplashEvent;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
-import com.me.tft_02.duel.runnables.duels.HealPlayerTask;
+import com.me.tft_02.duel.runnables.player.HealPlayerTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;

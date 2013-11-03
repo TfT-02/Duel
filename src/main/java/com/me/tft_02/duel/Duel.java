@@ -18,7 +18,7 @@ import com.me.tft_02.duel.hooks.WorldGuardListener;
 import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
 import com.me.tft_02.duel.locale.LocaleLoader;
-import com.me.tft_02.duel.runnables.RegionCheckTask;
+import com.me.tft_02.duel.runnables.hooks.RegionCheckTask;
 import com.me.tft_02.duel.runnables.duels.DuelRangeTask;
 import com.me.tft_02.duel.util.LogFilter;
 import com.me.tft_02.duel.util.Misc;

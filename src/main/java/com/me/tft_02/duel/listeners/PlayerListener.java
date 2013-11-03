@@ -23,7 +23,7 @@ import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.locale.LocaleLoader;
-import com.me.tft_02.duel.runnables.RetrieveLevelsTask;
+import com.me.tft_02.duel.runnables.player.RetrieveLevelsTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.Permissions;
 import com.me.tft_02.duel.util.player.ArenaManager;

@@ -21,7 +21,7 @@ import com.me.tft_02.duel.runnables.duels.CountdownLocationTask;
 import com.me.tft_02.duel.runnables.duels.CountdownTask;
 import com.me.tft_02.duel.runnables.duels.DuelCommenceTask;
 import com.me.tft_02.duel.runnables.duels.DuelEndTask;
-import com.me.tft_02.duel.runnables.duels.HealPlayerTask;
+import com.me.tft_02.duel.runnables.player.HealPlayerTask;
 import com.me.tft_02.duel.util.ItemUtils;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.Permissions;
