@@ -75,7 +75,7 @@
 		<dependency>
 			<groupId>com.me.tft_02.ghosts</groupId>
 			<artifactId>Ghosts</artifactId>
-			<version>LATEST</version>
+			<version>RELEASE</version>
 			<scope>compile</scope>
 		</dependency>
         <dependency>
