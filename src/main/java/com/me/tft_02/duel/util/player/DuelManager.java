@@ -109,7 +109,7 @@ public class DuelManager {
             new CountdownLocationTask(player.getLocation(), 3).runTaskTimer(Duel.p, 0, 1 * Misc.TICK_CONVERSION_FACTOR);
         }
 
-        new DuelCommenceTask(player, target).runTaskLater(Duel.p, 4 * Misc.TICK_CONVERSION_FACTOR);
+        new DuelCommenceTask(player, target).runTaskLater(Duel.p, 3 * Misc.TICK_CONVERSION_FACTOR);
     }
 
     private static boolean acceptChallenge(Player target, DuelInvitationKey duelInvite) {
