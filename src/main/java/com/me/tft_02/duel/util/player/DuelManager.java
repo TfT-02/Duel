@@ -17,7 +17,6 @@ import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.events.player.DuelEndEvent;
 import com.me.tft_02.duel.locale.LocaleLoader;
-import com.me.tft_02.duel.runnables.duels.CountdownLocationTask;
 import com.me.tft_02.duel.runnables.duels.CountdownTask;
 import com.me.tft_02.duel.runnables.duels.DuelCommenceTask;
 import com.me.tft_02.duel.runnables.duels.DuelEndTask;
@@ -102,13 +101,7 @@ public class DuelManager {
 
         DuelManager.prepareDuel(player, target);
 
-        if (Config.getInstance().getMessageRange() <= 0) {
-            new CountdownTask(player, target, 3).runTaskTimer(Duel.p, 0, 1 * Misc.TICK_CONVERSION_FACTOR);
-        }
-        else {
-            new CountdownLocationTask(player.getLocation(), 3).runTaskTimer(Duel.p, 0, 1 * Misc.TICK_CONVERSION_FACTOR);
-        }
-
+        new CountdownTask(player, target, 3).runTaskTimer(Duel.p, 0, 1 * Misc.TICK_CONVERSION_FACTOR);
         new DuelCommenceTask(player, target).runTaskLater(Duel.p, 3 * Misc.TICK_CONVERSION_FACTOR);
     }
 
