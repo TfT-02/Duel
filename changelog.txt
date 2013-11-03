@@ -6,7 +6,7 @@ Key:
   ! Change
   - Removal
 
-Version 0.1.0 | Tested on CB 1.6.4-R0.1
+Version 0.1.0 | Tested on CB 1.6.4-R2.0
  + Added white- or blacklist for worlds
  + Added blacklist for using commands while in a duel
  + Added config option to remove certain potion effects when a duel starts
