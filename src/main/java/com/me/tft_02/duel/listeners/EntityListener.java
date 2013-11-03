@@ -13,9 +13,12 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
 
+import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+import com.me.tft_02.duel.runnables.duels.HealPlayerTask;
 import com.me.tft_02.duel.util.Misc;
+import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
 
 public class EntityListener implements Listener {
@@ -56,7 +59,9 @@ public class EntityListener implements Listener {
 
         event.setCancelled(true);
         player.setHealth(1);
+        player.teleport(ArenaManager.getArenaLocation(player));
         DuelManager.endDuelResult(PlayerData.getDuelTarget(player), player);
+        new HealPlayerTask(player).runTaskLater(Duel.p, 1);
     }
     
     /**

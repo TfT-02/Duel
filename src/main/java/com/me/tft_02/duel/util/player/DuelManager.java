@@ -177,10 +177,6 @@ public class DuelManager {
 
         if (Config.getInstance().getHealEnabled()) {
             new HealPlayerTask(winner).runTask(Duel.p);
-
-            if (!Config.getInstance().getCallDeathEvents()) {
-                new HealPlayerTask(loser).runTask(Duel.p);
-            }
         }
     }
 
