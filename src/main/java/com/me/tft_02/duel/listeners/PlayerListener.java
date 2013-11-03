@@ -53,7 +53,7 @@ public class PlayerListener implements Listener {
         if (entity instanceof Player) {
             Player target = (Player) entity;
 
-            if (!DuelManager.canDuel(player)) {
+            if (!DuelManager.canDuel(player) || !DuelManager.canDuel(target, false)) {
                 return;
             }
 
