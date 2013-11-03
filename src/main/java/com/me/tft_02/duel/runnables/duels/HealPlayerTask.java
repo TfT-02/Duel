@@ -12,7 +12,9 @@ public class HealPlayerTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        player.setHealth(player.getMaxHealth());
-        player.setFireTicks(0);
+        if (player.isValid()) {
+            player.setHealth(player.getMaxHealth());
+            player.setFireTicks(0);
+        }
     }
 }

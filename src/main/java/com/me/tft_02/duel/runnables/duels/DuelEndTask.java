@@ -15,7 +15,7 @@ public class DuelEndTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (PlayerData.isInDuel(player)) {
+        if (player.isValid() && PlayerData.isInDuel(player)) {
             DuelManager.endDuelInTie(player);
         }
     }
