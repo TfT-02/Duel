@@ -136,8 +136,11 @@ public class DuelManager {
         }
 
         PlayerData playerData = new PlayerData();
-        playerData.removeDuelInvite(UserManager.getPlayer(player));
-        playerData.removeDuelInvite(UserManager.getPlayer(target));
+        DuelPlayer duelPlayer = UserManager.getPlayer(player);
+        DuelPlayer duelTarget = UserManager.getPlayer(target);
+
+        playerData.removeDuelInvite(duelPlayer);
+        playerData.removeDuelInvite(duelTarget);
         playerData.setDuel(player, target);
 
         player.sendMessage(LocaleLoader.getString("Duel.Started"));
@@ -149,7 +152,9 @@ public class DuelManager {
         player.getLocation().getWorld().playSound(player.getLocation(), Sound.NOTE_PLING, 1F, 1F);
 
         int duelLength = Config.getInstance().getDuelLength();
-        new DuelEndTask(player).runTaskLater(Duel.p, duelLength * Misc.TICK_CONVERSION_FACTOR);
+
+        duelPlayer.setDuelEndTask(new DuelEndTask(player).runTaskLater(Duel.p, duelLength * Misc.TICK_CONVERSION_FACTOR));
+        duelTarget.setDuelEndTask(new DuelEndTask(target).runTaskLater(Duel.p, duelLength * Misc.TICK_CONVERSION_FACTOR));
     }
 
     public static void endDuelResult(Player winner, Player loser) {
@@ -205,8 +210,15 @@ public class DuelManager {
     }
 
     public static void endDuel(Player player, boolean deleteArena) {
+        DuelPlayer duelPlayer = UserManager.getPlayer(player);
+
+        if (duelPlayer.getDuelEndTask() != null) {
+            duelPlayer.getDuelEndTask().cancel();
+            duelPlayer.setDuelEndTask(null);
+        }
+
         PlayerData.removeDuelTarget(player);
-        UserManager.getPlayer(player).setOccupied(false);
+        duelPlayer.setOccupied(false);
 
         if (deleteArena) {
             ArenaManager.deleteArena(player);

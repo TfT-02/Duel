@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitTask;
 
 import com.me.tft_02.duel.datatypes.DuelInvitationKey;
 import com.me.tft_02.duel.datatypes.LevelAndExpKey;
@@ -19,6 +20,7 @@ public class DuelPlayer {
     private int lastChallengeSend;
     private int lastChallengeReceived;
     private DuelInvitationKey duelInvitationKey;
+    private BukkitTask duelEndTask;
     private List<ItemStack> savedInventoryItems;
     private List<ItemStack> savedInventoryArmor;
     private LevelAndExpKey savedLevel;
@@ -68,6 +70,14 @@ public class DuelPlayer {
 
     public void setDuelInvitationKey(DuelInvitationKey duelInvitationKey) {
         this.duelInvitationKey = duelInvitationKey;
+    }
+
+    public BukkitTask getDuelEndTask() {
+        return duelEndTask;
+    }
+
+    public void setDuelEndTask(BukkitTask duelEndTask) {
+        this.duelEndTask = duelEndTask;
     }
 
     public List<ItemStack> getSavedInventoryItems() {
