@@ -47,13 +47,13 @@ public class Misc {
     }
 
     public static Location getMiddle(Location first, Location second) {
-        double dX = first.getX() - second.getX();
-        double dZ = first.getZ() - second.getZ();
-        double dY = first.getY() - second.getY();
+        double dX = first.getX() + second.getX();
+        double dZ = first.getZ() + second.getZ();
+        double dY = first.getY() + second.getY();
 
-        double x = first.getX() + dX;
-        double z = first.getZ() + dZ;
-        double y = first.getY() + dY;
+        double x = dX / 2;
+        double z = dZ / 2;
+        double y = dY / 2;
 
         World world = first.getWorld();
 

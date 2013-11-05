@@ -7,6 +7,7 @@ Key:
   - Removal
 
 Version 0.1.1 | Tested on CB 1.6.4-R2.0
+ = Fixed arena middle location calculations
 
 Version 0.1.0 | Tested on CB 1.6.4-R2.0
  + Added white- or blacklist for worlds
