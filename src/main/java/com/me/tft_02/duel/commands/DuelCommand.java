@@ -49,7 +49,8 @@ public class DuelCommand implements CommandExecutor {
     }
 
     private boolean printUsage() {
-        sender.sendMessage(LocaleLoader.getString("General.Plugin_Header", Duel.p.getDescription().getName(), Duel.p.getDescription().getAuthors()));
+        sender.sendMessage(LocaleLoader.getString("General.Plugin.Header", Duel.p.getDescription().getName(), Duel.p.getDescription().getAuthors()));
+        sender.sendMessage(LocaleLoader.getString("General.Plugin.Authors", Duel.p.getDescription().getAuthors()));
         sender.sendMessage(LocaleLoader.getString("General.Running_Version", Duel.p.getDescription().getVersion()));
         sender.sendMessage(LocaleLoader.getString("General.Use_Help"));
         return true;
