@@ -17,7 +17,6 @@ Check out the [BukkitDev]-page for more information!
 Who made this?
 ----------------   
 [![TfT_02](http://www.gravatar.com/avatar/b8914f9970e1f6ffd5281ce4770e20a7.png)](http://dev.bukkit.org/profiles/TfT_02/)
-[![roblikescake](http://www.gravatar.com/avatar/88cca2b097596a8013dbec6861432561.png)](http://dev.bukkit.org/profiles/roblikescake/)
 
 Download here: [BukkitDev]
 

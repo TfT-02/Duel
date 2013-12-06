@@ -3,7 +3,7 @@ version: ${project.version}-b${BUILD_NUMBER}
 description: >
   Challenge other players to a duel!
 
-authors: [TfT_02, roblikescake]
+author: TfT_02
 website: http://dev.bukkit.org/server-mods/duel/
 
 main: com.me.tft_02.duel.Duel
