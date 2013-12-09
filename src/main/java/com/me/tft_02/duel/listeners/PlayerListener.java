@@ -159,7 +159,7 @@ public class PlayerListener implements Listener {
 
         DuelPlayer duelPlayer = UserManager.getPlayer(player);
 
-        if (!duelPlayer.getDuelRespawn()) {
+        if (!duelPlayer.getDuelRespawn() || arenaCenter == null) {
             return;
         }
 
