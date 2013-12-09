@@ -155,7 +155,6 @@ public class Duel extends JavaPlugin {
         this.getServer().getScheduler().cancelTasks(this);
     }
 
-
     /**
      * Setup the various storage file paths
      */
