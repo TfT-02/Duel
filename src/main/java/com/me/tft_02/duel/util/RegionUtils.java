@@ -15,7 +15,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 public class RegionUtils {
 
     public static boolean canDuelHere(Location location) {
-        return canDuelHere(location.getWorld()) && canDuelHere(getRegion(location));
+        return canDuelHere(location.getWorld()) && (Duel.p.isWorldGuardEnabled() && canDuelHere(getRegion(location)));
     }
 
     private static boolean canDuelHere(World world) {

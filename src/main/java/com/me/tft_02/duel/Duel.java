@@ -34,9 +34,9 @@ public class Duel extends JavaPlugin {
 
     public static File duel;
 
-    public boolean worldGuardEnabled = false;
-    public boolean ghostsEnabled = false;
-    public boolean factionsEnabled = false;
+    private boolean worldGuardEnabled = false;
+    private boolean ghostsEnabled = false;
+    private boolean factionsEnabled = false;
 
     // Update Check
     public boolean updateAvailable;
@@ -77,13 +77,7 @@ public class Duel extends JavaPlugin {
             UserManager.addUser(player); // In case of reload add all users back into UserManager
         }
 
-        BukkitScheduler scheduler = getServer().getScheduler();
-        scheduler.scheduleSyncRepeatingTask(this, new DuelRangeTask(), 0, 2 * Misc.TICK_CONVERSION_FACTOR);
-
-        if (worldGuardEnabled) {
-            //Region check timer (Runs every five seconds)
-            new RegionCheckTask().runTaskTimer(this, 5 * Misc.TICK_CONVERSION_FACTOR, 5 * Misc.TICK_CONVERSION_FACTOR);
-        }
+        scheduleTasks();
 
         checkForUpdates();
     }
@@ -162,6 +156,14 @@ public class Duel extends JavaPlugin {
         duel = getFile();
     }
 
+    private void scheduleTasks() {
+        BukkitScheduler scheduler = getServer().getScheduler();
+        scheduler.scheduleSyncRepeatingTask(this, new DuelRangeTask(), 0, 2 * Misc.TICK_CONVERSION_FACTOR);
+
+        //Region check timer (Runs every five seconds)
+        new RegionCheckTask().runTaskTimer(this, 5 * Misc.TICK_CONVERSION_FACTOR, 5 * Misc.TICK_CONVERSION_FACTOR);
+    }
+
     private void checkForUpdates() {
         if (!Config.getInstance().getUpdateCheckEnabled()) {
             return;
@@ -182,5 +184,17 @@ public class Duel extends JavaPlugin {
         this.updateAvailable = true;
         getLogger().info(LocaleLoader.getString("UpdateChecker.Outdated"));
         getLogger().info(LocaleLoader.getString("UpdateChecker.New_Available"));
+    }
+
+    public boolean isWorldGuardEnabled() {
+        return worldGuardEnabled;
+    }
+
+    public boolean isGhostsEnabled() {
+        return ghostsEnabled;
+    }
+
+    public boolean isFactionsEnabled() {
+        return factionsEnabled;
     }
 }
