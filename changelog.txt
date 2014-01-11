@@ -11,6 +11,7 @@ Version 0.1.2 | Tested on CB 1.7.2-R0.2
 Version 0.1.1 | Tested on CB 1.7.2-R0.2
  + Added Brazilian Portuguese translation by KenzoBrr
  + Added Spanish translation by alpharo7
+ + Added Russian translation by Tarindair
  = Fixed arena middle location calculations
 
 Version 0.1.0 | Tested on CB 1.6.4-R2.0
