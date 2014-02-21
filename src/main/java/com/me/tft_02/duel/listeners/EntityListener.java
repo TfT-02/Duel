@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PotionSplashEvent;
+import org.bukkit.projectiles.ProjectileSource;
 
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
@@ -83,7 +84,11 @@ public class EntityListener implements Listener {
         }
 
         if (attacker instanceof Projectile) {
-            attacker = ((Projectile) attacker).getShooter();
+            ProjectileSource projectileSource = ((Projectile) attacker).getShooter();
+
+            if (projectileSource instanceof LivingEntity) {
+                attacker = (LivingEntity) projectileSource;
+            }
         }
         else if (attacker instanceof Tameable) {
             AnimalTamer animalTamer = ((Tameable) attacker).getOwner();
@@ -128,7 +133,11 @@ public class EntityListener implements Listener {
         }
 
         if (attacker instanceof Projectile) {
-            attacker = ((Projectile) attacker).getShooter();
+            ProjectileSource projectileSource = ((Projectile) attacker).getShooter();
+
+            if (projectileSource instanceof LivingEntity) {
+                attacker = (LivingEntity) projectileSource;
+            }
         }
         else if (attacker instanceof Tameable) {
             AnimalTamer animalTamer = ((Tameable) attacker).getOwner();
@@ -161,34 +170,36 @@ public class EntityListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPotionSplash(PotionSplashEvent event) {
-        LivingEntity shooter = event.getPotion().getShooter();
+        ProjectileSource projectileSource = event.getPotion().getShooter();
 
-        if (!(shooter instanceof Player)) {
+        if (!(projectileSource instanceof Player)) {
             return;
         }
 
-        Player player = (Player) shooter;
+        Player player = (Player) projectileSource;
 
         if (Misc.isNPCEntity(player)) {
             return;
         }
 
         for (LivingEntity entity : event.getAffectedEntities()) {
-            if (entity instanceof Player) {
-                Player target = (Player) entity;
+            if (!(entity instanceof Player)) {
+                continue;
+            }
 
-                if (player == target) {
-                    continue;
-                }
+            Player target = (Player) entity;
 
-                if (PlayerData.isInDuel(target)) {
-                    if (!PlayerData.areDueling(player, target)) {
-                        event.setIntensity(target, 0);
-                    }
-                }
-                else if (Config.getInstance().getPreventPVP()) {
+            if (player == target) {
+                continue;
+            }
+
+            if (PlayerData.isInDuel(target)) {
+                if (!PlayerData.areDueling(player, target)) {
                     event.setIntensity(target, 0);
                 }
+            }
+            else if (Config.getInstance().getPreventPVP()) {
+                event.setIntensity(target, 0);
             }
         }
     }
