@@ -73,7 +73,8 @@ public class PlayerData {
     public String getDuelInvite(DuelPlayer duelPlayer) {
         if (duelPlayer.getDuelInvite() != null) {
             return duelPlayer.getDuelInvite().getPlayerName();
-        } else {
+        }
+        else {
             return null;
         }
     }

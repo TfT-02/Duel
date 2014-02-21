@@ -14,12 +14,13 @@ import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 public final class UserManager {
     private final static Map<String, DuelPlayer> players = new HashMap<String, DuelPlayer>();
 
-    private UserManager() {};
+    private UserManager() {}
 
     /**
      * Add a new user.
      *
      * @param player The player to create a user record for
+     *
      * @return the player's {@link DuelPlayer} object
      */
     public static DuelPlayer addUser(Player player) {
@@ -74,6 +75,7 @@ public final class UserManager {
      * Get the DuelPlayer of a player by name.
      *
      * @param playerName The name of the player whose DuelPlayer to retrieve
+     *
      * @return the player's DuelPlayer object
      */
     public static DuelPlayer getPlayer(String playerName) {
@@ -84,6 +86,7 @@ public final class UserManager {
      * Get the DuelPlayer of a player.
      *
      * @param player The player whose DuelPlayer to retrieve
+     *
      * @return the player's DuelPlayer object
      */
     public static DuelPlayer getPlayer(OfflinePlayer player) {

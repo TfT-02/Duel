@@ -7,7 +7,7 @@ import java.util.List;
 import org.bukkit.Material;
 
 public class Config extends AutoUpdateConfigLoader {
-    private static  Config instance;
+    private static Config instance;
 
     private Config() {
         super("config.yml");

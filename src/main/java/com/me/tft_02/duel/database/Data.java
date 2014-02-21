@@ -54,7 +54,7 @@ public class Data {
         }
     }
 
-    @SuppressWarnings({ "unchecked" })
+    @SuppressWarnings({"unchecked"})
     public static void loadData() {
         File f = new File(Duel.p.getDataFolder(), "data.dat");
         if (f.exists()) {

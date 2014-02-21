@@ -18,16 +18,16 @@ import com.me.tft_02.duel.hooks.WorldGuardListener;
 import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
 import com.me.tft_02.duel.locale.LocaleLoader;
-import com.me.tft_02.duel.runnables.hooks.RegionCheckTask;
 import com.me.tft_02.duel.runnables.duels.DuelRangeTask;
+import com.me.tft_02.duel.runnables.hooks.RegionCheckTask;
 import com.me.tft_02.duel.util.LogFilter;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.UserManager;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import net.gravitydevelopment.updater.duel.Updater;
-import net.gravitydevelopment.updater.duel.Updater.UpdateType;
 import net.gravitydevelopment.updater.duel.Updater.UpdateResult;
+import net.gravitydevelopment.updater.duel.Updater.UpdateType;
 
 public class Duel extends JavaPlugin {
     public static Duel p;
