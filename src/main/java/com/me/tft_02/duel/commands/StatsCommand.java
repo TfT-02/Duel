@@ -39,10 +39,11 @@ public class StatsCommand implements CommandExecutor {
         return true;
     }
 
-    private String calculateRatio(int first, int second) {
-        double ratio = 0.0;
-        if (second > 0) {
-            ratio = first / second;
+    private String calculateRatio(int wins, int losses) {
+        double ratio = wins;
+
+        if (losses > 0) {
+            ratio = wins / (double) losses;
         }
 
         return decimal.format(ratio);
