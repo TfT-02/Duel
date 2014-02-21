@@ -36,6 +36,7 @@ public class Duel extends JavaPlugin {
 
     private boolean worldGuardEnabled = false;
     private boolean ghostsEnabled = false;
+    private boolean assassinEnabled = false;
     private boolean factionsEnabled = false;
 
     // Update Check
@@ -62,8 +63,9 @@ public class Duel extends JavaPlugin {
         registerEvents();
 
         setupWorldGuard();
-        setupFactions();
         setupGhosts();
+        setupAssassin();
+        setupFactions();
 
         setupFilePaths();
 
@@ -105,6 +107,21 @@ public class Duel extends JavaPlugin {
         }
     }
 
+    private void setupGhosts() {
+        if (getServer().getPluginManager().isPluginEnabled("Ghosts")) {
+            ghostsEnabled = true;
+            debug("Hooked into Ghosts successfully!");
+            getServer().getPluginManager().registerEvents(new GhostsListener(), this);
+        }
+    }
+
+    private void setupAssassin() {
+        if (getServer().getPluginManager().isPluginEnabled("Assassin")) {
+            assassinEnabled = true;
+            debug("Hooked into Assassin successfully!");
+        }
+    }
+
     private void setupFactions() {
         PluginManager pluginManager = getServer().getPluginManager();
 
@@ -119,14 +136,6 @@ public class Duel extends JavaPlugin {
             else {
                 debug("Duel does not support this version of Factions!");
             }
-        }
-    }
-
-    private void setupGhosts() {
-        if (getServer().getPluginManager().isPluginEnabled("Ghosts")) {
-            ghostsEnabled = true;
-            debug("Hooked into Ghosts successfully!");
-            getServer().getPluginManager().registerEvents(new GhostsListener(), this);
         }
     }
 
@@ -192,6 +201,10 @@ public class Duel extends JavaPlugin {
 
     public boolean isGhostsEnabled() {
         return ghostsEnabled;
+    }
+
+    public boolean isAssassinEnabled() {
+        return assassinEnabled;
     }
 
     public boolean isFactionsEnabled() {

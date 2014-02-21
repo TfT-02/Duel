@@ -72,12 +72,18 @@
 			<scope>compile</scope>
 			<type>jar</type>
 		</dependency>
-		<dependency>
-			<groupId>com.me.tft_02.ghosts</groupId>
-			<artifactId>Ghosts</artifactId>
-			<version>RELEASE</version>
-			<scope>compile</scope>
-		</dependency>
+        <dependency>
+            <groupId>com.me.tft_02.ghosts</groupId>
+            <artifactId>Ghosts</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.me.tft_02.assassin</groupId>
+            <artifactId>Assassin</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
             <artifactId>Factions</artifactId>

@@ -8,6 +8,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
+import com.me.tft_02.assassin.api.AssassinAPI;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.database.DatabaseManager;
@@ -58,6 +59,10 @@ public class DuelManager {
         }
 
         if (Duel.p.isWorldGuardEnabled() && !RegionUtils.canDuelHere(player.getLocation())) {
+            return false;
+        }
+
+        if (Duel.p.isAssassinEnabled() && AssassinAPI.isAssassin(player)) {
             return false;
         }
 
