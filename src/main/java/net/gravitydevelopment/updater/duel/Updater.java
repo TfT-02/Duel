@@ -23,6 +23,8 @@ import java.util.zip.ZipFile;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
+import com.me.tft_02.duel.config.Config;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -519,7 +521,10 @@ public class Updater {
                 this.plugin.getLogger().warning("If you have not recently modified your configuration and this is the first time you are seeing this message, the site may be experiencing temporary downtime.");
                 this.result = UpdateResult.FAIL_DBO;
             }
-            e.printStackTrace();
+
+            if (Config.getInstance().getVerboseLoggingEnabled()) {
+                e.printStackTrace();
+            }
             return false;
         }
     }
