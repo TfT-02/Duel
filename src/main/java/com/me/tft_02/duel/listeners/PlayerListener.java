@@ -81,7 +81,8 @@ public class PlayerListener implements Listener {
             return;
         }
 
-        UserManager.addUser(player);
+        DuelPlayer duelPlayer = UserManager.addUser(player);
+        duelPlayer.setOccupied(false);
 
         if (Permissions.updateNotifications(player) && Duel.p.updateAvailable) {
             player.sendMessage(LocaleLoader.getString("UpdateChecker.Outdated"));

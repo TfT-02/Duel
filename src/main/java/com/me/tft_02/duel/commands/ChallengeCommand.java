@@ -11,6 +11,7 @@ import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.util.CommandUtils;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.DuelManager;
+import com.me.tft_02.duel.util.player.UserManager;
 
 public class ChallengeCommand implements CommandExecutor {
 
@@ -35,6 +36,11 @@ public class ChallengeCommand implements CommandExecutor {
                 }
 
                 if (!DuelManager.canDuel(player, false)) {
+                    return true;
+                }
+
+                if (UserManager.getPlayer(target).getOccupied()) {
+                    player.sendMessage(LocaleLoader.getString("Duel.Challenge.Occupied", target.getName()));
                     return true;
                 }
 

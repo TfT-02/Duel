@@ -18,7 +18,11 @@ public class RegionUtils {
         return canDuelHere(location.getWorld()) && (Duel.p.isWorldGuardEnabled() && canDuelHere(getRegion(location)));
     }
 
-    private static boolean canDuelHere(World world) {
+    public static boolean canDuelHereWG(Location location) {
+        return Duel.p.isWorldGuardEnabled() && canDuelHere(getRegion(location));
+    }
+
+    public static boolean canDuelHere(World world) {
         boolean isWhitelist = Config.getInstance().getWorldUseAsWhitelist();
 
         if (Config.getInstance().getWorldList().contains(world.getName())) {
