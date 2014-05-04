@@ -7,7 +7,7 @@ author: TfT_02
 website: http://dev.bukkit.org/server-mods/duel/
 
 main: com.me.tft_02.duel.Duel
-softdepend: [ThisPluginDoesntExist]
+softdepend: [WorldGuard, ThisPluginDoesntExist]
 
 commands:
    duel:
