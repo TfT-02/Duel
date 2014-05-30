@@ -17,6 +17,7 @@ import org.bukkit.projectiles.ProjectileSource;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+import com.me.tft_02.duel.runnables.DamageCheckTask;
 import com.me.tft_02.duel.runnables.player.HealPlayerTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
@@ -51,10 +52,13 @@ public class EntityListener implements Listener {
             return;
         }
 
-        double playerHealth = player.getHealth();
-        double damageAmount = event.getDamage();
+        new DamageCheckTask(event, player).runTaskLater(Duel.p, 0);
+    }
 
-        if ((playerHealth - damageAmount) > 0) {
+    public static void handleDamageEvent(EntityDamageEvent event, Player player, double damage) {
+        double health =  player.getHealth();
+
+        if (health - damage > 0) {
             return;
         }
 
@@ -64,7 +68,7 @@ public class EntityListener implements Listener {
         DuelManager.endDuelResult(PlayerData.getDuelTarget(player), player);
         new HealPlayerTask(player).runTaskLater(Duel.p, 1);
     }
-    
+
     /**
      * Handle EntityDamageByEntityEvent events that involve modifying the event.
      *
