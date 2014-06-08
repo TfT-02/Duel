@@ -52,12 +52,13 @@ public class EntityListener implements Listener {
             return;
         }
 
-        new DamageCheckTask(event, player).runTaskLater(Duel.p, 0);
+        new DamageCheckTask(event, player).runTask(Duel.p);
     }
 
     public static void handleDamageEvent(EntityDamageEvent event, Player player, double damage) {
         double health =  player.getHealth();
 
+        System.out.println("Remaining health: " + (health - damage));
         if (health - damage > 0) {
             return;
         }
