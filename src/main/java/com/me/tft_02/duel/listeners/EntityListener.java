@@ -52,7 +52,7 @@ public class EntityListener implements Listener {
         }
 
         double playerHealth = player.getHealth();
-        double damageAmount = event.getDamage();
+        double damageAmount = event.getFinalDamage();
 
         if ((playerHealth - damageAmount) > 0) {
             return;
