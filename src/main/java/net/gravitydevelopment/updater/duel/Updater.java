@@ -442,14 +442,14 @@ public class Updater {
                 return true;
             }
 
-            // Check release vs. beta & dev
+            // Check release vs. beta & SNAPSHOT
             if (newTokens.length == 1 && oldTokens.length == 3 && oldVersion == newVersion) {
                 return true;
             }
 
-            // Check beta vs. dev
-            if (version.contains("dev") && title.contains("beta")) {
-                if (Integer.parseInt(oldTokens[1].substring(3)) <= Integer.parseInt(newTokens[1].substring(4))) {
+            // Check beta vs. SNAPSHOT
+            if (version.contains("SNAPSHOT") && title.contains("beta")) {
+                if (Integer.parseInt(oldTokens[1].substring(8)) <= Integer.parseInt(newTokens[1].substring(4))) {
                     return true;
                 }
 
@@ -467,7 +467,7 @@ public class Updater {
                 return false;
             }
 
-            if (oldTokens.length == 3 && !version.contains("beta") && !version.contains("dev")) {
+            if (oldTokens.length == 3 && !version.contains("beta") && !version.contains("SNAPSHOT")) {
                 plugin.getLogger().warning("Could not get information about this Duel version; perhaps you are running a custom one?");
                 result = UpdateResult.FAIL_NOVERSION;
                 return false;
@@ -525,6 +525,7 @@ public class Updater {
             if (Config.getInstance().getVerboseLoggingEnabled()) {
                 e.printStackTrace();
             }
+
             return false;
         }
     }
