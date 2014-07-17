@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.me.tft_02.duel</groupId>
 	<artifactId>Duel</artifactId>
-	<version>0.1.2</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<name>Duel</name>
 	<url>https://github.com/TfT-02/Duel</url>
 	<issueManagement>
