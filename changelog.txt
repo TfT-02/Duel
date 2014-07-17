@@ -10,6 +10,7 @@ Version 0.1.2 | Tested on CB 1.7.9-R0.3
  + Added Russian translation by Tarindair
  = Fixed win/loss ratio in /duel stats
  = Fixed bug which could cause players to be marked as occupied forever, thus being unable to duel
+ = Fixed bug where the Updater was running on the main thread.
  ! Updated to new damage event API
  ! Improved feedback when duel is cancelled
  ! Improved duel handling, countdowns can now get cancelled

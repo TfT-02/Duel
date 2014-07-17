@@ -17,7 +17,7 @@ import com.me.tft_02.duel.hooks.GhostsListener;
 import com.me.tft_02.duel.hooks.WorldGuardListener;
 import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
-import com.me.tft_02.duel.locale.LocaleLoader;
+import com.me.tft_02.duel.runnables.UpdaterResultAsyncTask;
 import com.me.tft_02.duel.runnables.duels.DuelRangeTask;
 import com.me.tft_02.duel.runnables.hooks.RegionCheckTask;
 import com.me.tft_02.duel.util.LogFilter;
@@ -25,9 +25,6 @@ import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.UserManager;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import net.gravitydevelopment.updater.duel.Updater;
-import net.gravitydevelopment.updater.duel.Updater.UpdateResult;
-import net.gravitydevelopment.updater.duel.Updater.UpdateType;
 
 public class Duel extends JavaPlugin {
     public static Duel p;
@@ -178,21 +175,11 @@ public class Duel extends JavaPlugin {
             return;
         }
 
-        Updater updater = new Updater(this, 55022, duel, UpdateType.NO_DOWNLOAD, false);
+        new UpdaterResultAsyncTask(this).runTaskAsynchronously(Duel.p);
+    }
 
-        if (updater.getResult() != UpdateResult.UPDATE_AVAILABLE) {
-            this.updateAvailable = false;
-            return;
-        }
-
-        if (updater.getLatestType().equals("beta") && !Config.getInstance().getPreferBeta()) {
-            this.updateAvailable = false;
-            return;
-        }
-
-        this.updateAvailable = true;
-        getLogger().info(LocaleLoader.getString("UpdateChecker.Outdated"));
-        getLogger().info(LocaleLoader.getString("UpdateChecker.New_Available"));
+    public void setUpdateAvailable(boolean available) {
+        this.updateAvailable = available;
     }
 
     public boolean isWorldGuardEnabled() {
