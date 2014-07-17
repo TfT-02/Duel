@@ -14,6 +14,7 @@ import com.me.tft_02.duel.config.HiddenConfig;
 import com.me.tft_02.duel.database.Data;
 import com.me.tft_02.duel.hooks.FactionsListener;
 import com.me.tft_02.duel.hooks.GhostsListener;
+import com.me.tft_02.duel.hooks.TownyListener;
 import com.me.tft_02.duel.hooks.WorldGuardListener;
 import com.me.tft_02.duel.listeners.EntityListener;
 import com.me.tft_02.duel.listeners.PlayerListener;
@@ -36,6 +37,7 @@ public class Duel extends JavaPlugin {
     private boolean ghostsEnabled = false;
     private boolean assassinEnabled = false;
     private boolean factionsEnabled = false;
+    private boolean townyEnabled = false;
 
     // Update Check
     public boolean updateAvailable;
@@ -64,6 +66,7 @@ public class Duel extends JavaPlugin {
         setupGhosts();
         setupAssassin();
         setupFactions();
+        setupTowny();
 
         setupFilePaths();
 
@@ -133,6 +136,24 @@ public class Duel extends JavaPlugin {
             }
             else {
                 debug("Duel does not support this version of Factions!");
+            }
+        }
+    }
+
+    private void setupTowny() {
+        PluginManager pluginManager = getServer().getPluginManager();
+
+        if (pluginManager.isPluginEnabled("Towny")) {
+            // Check Towny version v0.84.0.11, which has DisallowedPVPEvent
+            int version = Integer.parseInt(pluginManager.getPlugin("Towny").getDescription().getVersion().replaceAll("[.]", ""));
+
+            if (version >= 84011) {
+                townyEnabled = true;
+                debug("Hooked into Towny successfully!");
+                pluginManager.registerEvents(new TownyListener(), this);
+            }
+            else {
+                debug("Duel does not support this version of Towny!");
             }
         }
     }

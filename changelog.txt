@@ -7,6 +7,7 @@ Key:
   - Removal
 
 Version 0.2.0 | Tested on CB 1.7.10-R0.1
+ + Added Towny support! (Requires Towny v0.84.0.11+)
 
 Version 0.1.2 | Tested on CB 1.7.10-R0.1
  + Added Russian translation by Tarindair
