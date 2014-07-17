@@ -13,6 +13,8 @@ import org.bukkit.util.Vector;
 
 import com.me.tft_02.duel.Duel;
 
+import com.google.common.collect.ImmutableList;
+
 public class Misc {
     public static final int TIME_CONVERSION_FACTOR = 1000;
     public static final int TICK_CONVERSION_FACTOR = 20;
@@ -83,7 +85,7 @@ public class Misc {
     public static List<Player> getNearbyPlayers(Location location, int range) {
         List<Player> nearbyPlayers = new ArrayList<Player>();
 
-        for (Player player : Duel.p.getServer().getOnlinePlayers()) {
+        for (Player player : ImmutableList.copyOf(Duel.p.getServer().getOnlinePlayers())) {
             if (Misc.isNear(location, player.getLocation(), range)) {
                 nearbyPlayers.add(player);
             }

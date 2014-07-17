@@ -24,6 +24,7 @@ import com.me.tft_02.duel.util.LogFilter;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.UserManager;
 
+import com.google.common.collect.ImmutableList;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 public class Duel extends JavaPlugin {
@@ -72,7 +73,7 @@ public class Duel extends JavaPlugin {
 
         Data.loadData();
 
-        for (Player player : getServer().getOnlinePlayers()) {
+        for (Player player : ImmutableList.copyOf(Duel.p.getServer().getOnlinePlayers())) {
             UserManager.addUser(player); // In case of reload add all users back into UserManager
         }
 
