@@ -74,13 +74,13 @@
         <dependency>
             <groupId>com.me.tft_02.ghosts</groupId>
             <artifactId>Ghosts</artifactId>
-            <version>LATEST</version>
+            <version>0.1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.me.tft_02.assassin</groupId>
             <artifactId>Assassin</artifactId>
-            <version>RELEASE</version>
+            <version>LATEST</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
