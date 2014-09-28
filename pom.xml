@@ -60,15 +60,15 @@
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
-			<version>LATEST</version>
+            <version>1.7.10-R0.1-SNAPSHOT</version>
 			<type>jar</type>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.sk89q</groupId>
 			<artifactId>worldguard</artifactId>
 			<version>LATEST</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 			<type>jar</type>
 		</dependency>
         <dependency>
@@ -81,7 +81,7 @@
             <groupId>com.me.tft_02.assassin</groupId>
             <artifactId>Assassin</artifactId>
             <version>LATEST</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>
