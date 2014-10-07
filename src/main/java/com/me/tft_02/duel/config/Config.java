@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.bukkit.Material;
 
+import com.me.tft_02.duel.datatypes.InteractType;
+
 public class Config extends AutoUpdateConfigLoader {
     private static Config instance;
 
@@ -33,8 +35,8 @@ public class Config extends AutoUpdateConfigLoader {
         }
 
         /* Duel Settings */
-        if (!(getChallengeCommandsEnabled() || getChallengeInteractEnabled())) {
-            reason.add("Either Enable_Challenge_Commands or Enable_Challenge_Interact should be enabled!");
+        if (!getChallengeCommandsEnabled() && getChallengeInteractType() == InteractType.OFF) {
+            reason.add("Either Enable_Challenge_Commands or Challenge_Interact should be enabled!");
         }
 
         if (getDuelLength() <= 0) {
@@ -75,7 +77,8 @@ public class Config extends AutoUpdateConfigLoader {
 
     /* CHALLENGE SETTINGS */
     public boolean getChallengeCommandsEnabled() { return config.getBoolean("Challenge.Enable_Challenge_Commands", false); }
-    public boolean getChallengeInteractEnabled() { return config.getBoolean("Challenge.Enable_Challenge_Interact", true); }
+    public InteractType getChallengeInteractType() { return InteractType.getInteractType(config.getString("Challenge.Challenge_Interact")); }
+    public boolean getChallengeHoldShift() { return config.getBoolean("Challenge.Challenge_Hold_Shift", true); }
     public int getInviteTimeout() { return config.getInt("Challenge.Timeout", 20); }
 
     public HashSet<Material> getDuelWeaponItems() {

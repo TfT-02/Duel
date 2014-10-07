@@ -2,9 +2,12 @@ package com.me.tft_02.duel.util;
 
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.me.tft_02.duel.config.Config;
+import com.me.tft_02.duel.datatypes.InteractType;
 import com.me.tft_02.duel.locale.LocaleLoader;
 
 import com.google.common.collect.ImmutableList;
@@ -40,6 +43,33 @@ public final class CommandUtils {
 
         sender.sendMessage(LocaleLoader.getString("Commands.Offline"));
         return true;
+    }
+
+    public static String getControls(boolean and) {
+        return getControlsHoldShift(and) + getControlsRightLeftClick();
+    }
+
+    public static String getControlsHoldShift(boolean and) {
+        if (!Config.getInstance().getChallengeHoldShift()) {
+            return "";
+        }
+        else {
+            if (and) {
+                return LocaleLoader.getString("Duel.Challenge.Hold") + " " + LocaleLoader.getString("Duel.Challenge.Shift") + " " + LocaleLoader.getString("Duel.Challenge.And") + ChatColor.DARK_AQUA + " ";
+            }
+            else {
+                return LocaleLoader.getString("Duel.Challenge.Hold") + " " + LocaleLoader.getString("Duel.Challenge.Shift") + " + ";
+            }
+        }
+    }
+
+    public static String getControlsRightLeftClick() {
+        if (Config.getInstance().getChallengeInteractType() == InteractType.LEFT_CLICK) {
+            return LocaleLoader.getString("Duel.Challenge.LeftClick");
+        }
+        else {
+            return LocaleLoader.getString("Duel.Challenge.RightClick");
+        }
     }
 
     public static boolean shouldEnableToggle(String arg) {

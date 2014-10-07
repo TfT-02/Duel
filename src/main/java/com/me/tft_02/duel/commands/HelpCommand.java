@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.locale.LocaleLoader;
+import com.me.tft_02.duel.util.CommandUtils;
 import com.me.tft_02.duel.util.Permissions;
 
 public class HelpCommand implements CommandExecutor {
@@ -43,9 +44,9 @@ public class HelpCommand implements CommandExecutor {
             case 1:
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_0"));
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_1"));
-                sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_2"));
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_2", CommandUtils.getControls(false)));
                 sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_3"));
-                sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_4"));
+                sendHelpPage(sender, LocaleLoader.getString("Help.Page_0.Line_4", CommandUtils.getControls(false)));
                 return;
 
             case 2:

@@ -53,8 +53,11 @@ Challenge:
     # Should it be possible to challenge players to a duel using commands?
     Enable_Challenge_Commands: false
 
-    # Should it be possible to challenge players to a duel by interacting? (Right-clicking)
-    Enable_Challenge_Interact: true
+    # Should it be possible to challenge players to a duel by interacting? (RIGHT_CLICK, LEFT_CLICK, OFF)
+    Challenge_Interact: RIGHT_CLICK
+
+    # Do players have to hold shift while interacting?
+    Challenge_Hold_Shift: true
 
     # Duel challenges expire after 30 seconds by default
     Timeout: 30

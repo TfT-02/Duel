@@ -16,11 +16,14 @@ import org.bukkit.projectiles.ProjectileSource;
 
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
+import com.me.tft_02.duel.datatypes.InteractType;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
+import com.me.tft_02.duel.locale.LocaleLoader;
 import com.me.tft_02.duel.runnables.player.HealPlayerTask;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.ArenaManager;
 import com.me.tft_02.duel.util.player.DuelManager;
+import com.me.tft_02.duel.util.player.UserManager;
 
 public class EntityListener implements Listener {
 
@@ -156,8 +159,27 @@ public class EntityListener implements Listener {
 
             if (attacker instanceof Player) {
                 Player attackingPlayer = (Player) attacker;
-                if (Config.getInstance().getPreventPVP() && !PlayerData.areDueling(attackingPlayer, defendingPlayer)) {
+                if (PlayerData.areDueling(attackingPlayer, defendingPlayer)) {
+                    return;
+                }
+
+                if (Config.getInstance().getPreventPVP()) {
                     event.setCancelled(true);
+                }
+
+                if (Config.getInstance().getChallengeInteractType() == InteractType.LEFT_CLICK) {
+                    if (!DuelManager.canDuel(attackingPlayer) || !DuelManager.canDuel(defendingPlayer, false)) {
+                        return;
+                    }
+
+                    if (UserManager.getPlayer(defendingPlayer).getOccupied()) {
+                        attackingPlayer.sendMessage(LocaleLoader.getString("Duel.Challenge.Occupied", defendingPlayer.getName()));
+                        return;
+                    }
+
+                    event.setCancelled(true);
+
+                    DuelManager.handleDuelInvites(attackingPlayer, defendingPlayer);
                 }
             }
         }

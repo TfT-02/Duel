@@ -9,8 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
 import com.me.tft_02.duel.datatypes.DuelInvitationKey;
+import com.me.tft_02.duel.datatypes.InteractType;
 import com.me.tft_02.duel.datatypes.LevelAndExpKey;
 import com.me.tft_02.duel.locale.LocaleLoader;
+import com.me.tft_02.duel.util.CommandUtils;
 import com.me.tft_02.duel.util.Misc;
 import com.me.tft_02.duel.util.player.UserManager;
 
@@ -121,8 +123,8 @@ public class PlayerData {
 
         target.sendMessage(LocaleLoader.getString("Duel.Challenge.Receive.1", name));
 
-        if (Config.getInstance().getChallengeInteractEnabled()) {
-            target.sendMessage(LocaleLoader.getString("Duel.Challenge.Receive.2", name));
+        if (Config.getInstance().getChallengeInteractType() != InteractType.OFF) {
+            target.sendMessage(LocaleLoader.getString("Duel.Challenge.Receive.2", CommandUtils.getControls(true), name));
         }
         else if (Config.getInstance().getChallengeCommandsEnabled()) {
             target.sendMessage(LocaleLoader.getString("Duel.Challenge.Receive.3", name));

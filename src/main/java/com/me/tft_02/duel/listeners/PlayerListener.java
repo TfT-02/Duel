@@ -20,6 +20,7 @@ import org.bukkit.inventory.ItemStack;
 
 import com.me.tft_02.duel.Duel;
 import com.me.tft_02.duel.config.Config;
+import com.me.tft_02.duel.datatypes.InteractType;
 import com.me.tft_02.duel.datatypes.player.DuelPlayer;
 import com.me.tft_02.duel.datatypes.player.PlayerData;
 import com.me.tft_02.duel.locale.LocaleLoader;
@@ -39,7 +40,7 @@ public class PlayerListener implements Listener {
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onPlayerInteract(PlayerInteractEntityEvent event) {
-        if (!Config.getInstance().getChallengeInteractEnabled()) {
+        if (Config.getInstance().getChallengeInteractType() != InteractType.RIGHT_CLICK) {
             return;
         }
 

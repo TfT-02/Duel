@@ -44,7 +44,7 @@ public class DuelManager {
         DuelPlayer duelPlayer = UserManager.getPlayer(player);
 
         if (interact) {
-            if (!player.isSneaking()) {
+            if (Config.getInstance().getChallengeHoldShift() && !player.isSneaking()) {
                 return false;
             }
 
